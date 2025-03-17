@@ -3,13 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -18,7 +20,9 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'avatar',
         'email',
         'password',
     ];
@@ -34,6 +38,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * @var list<string>
+     */
+    protected $appends = [
+        'full_name',
+        'initials',
+    ];
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
@@ -44,5 +56,34 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * @return Attribute<string, string>
+     */
+    protected function fullName(): Attribute
+    {
+        /** @var Attribute<string, string> $fullName */
+        $fullName = new Attribute(
+            get: fn(): string => "$this->first_name $this->last_name"
+        );
+
+        return $fullName;
+    }
+
+    /**
+     * @return Attribute<string, string>
+     */
+    protected function initials(): Attribute
+    {
+        $firstNameInitial = substr($this->first_name, 0, 1);
+        $lastNameInitial = substr($this->last_name, 0, 1);
+
+        /** @var Attribute<string, string> $initials */
+        $initials = new Attribute(
+            get: fn(): string => $firstNameInitial . $lastNameInitial
+        );
+
+        return $initials;
     }
 }

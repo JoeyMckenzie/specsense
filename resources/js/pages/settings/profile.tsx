@@ -1,14 +1,14 @@
-import type { BreadcrumbItem, SharedData } from "@/types";
-import { Transition } from "@headlessui/react";
-import { Head, Link, useForm, usePage } from "@inertiajs/react";
-import type { FormEventHandler } from "react";
+import type {BreadcrumbItem, SharedData} from "@/types";
+import {Transition} from "@headlessui/react";
+import {Head, Link, useForm, usePage} from "@inertiajs/react";
+import type {FormEventHandler} from "react";
 
 import DeleteUser from "@/components/delete-user";
 import HeadingSmall from "@/components/heading-small";
 import InputError from "@/components/input-error";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {Label} from "@/components/ui/label";
 import AppLayout from "@/layouts/app-layout";
 import SettingsLayout from "@/layouts/settings/layout";
 
@@ -20,19 +20,21 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 interface ProfileForm {
-    name: string;
+    first_name: string;
+    last_name: string;
     email: string;
 }
 
 export default function Profile({
-    mustVerifyEmail,
-    status,
-}: { mustVerifyEmail: boolean; status?: string }) {
-    const { auth } = usePage<SharedData>().props;
+                                    mustVerifyEmail,
+                                    status,
+                                }: { mustVerifyEmail: boolean; status?: string }) {
+    const {auth} = usePage<SharedData>().props;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
+    const {data, setData, patch, errors, processing, recentlySuccessful} =
         useForm<Required<ProfileForm>>({
-            name: auth.user.name,
+            first_name: auth.user.first_name,
+            last_name: auth.user.last_name,
             email: auth.user.email,
         });
 
@@ -46,7 +48,7 @@ export default function Profile({
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Profile settings" />
+            <Head title="Profile settings"/>
 
             <SettingsLayout>
                 <div className="space-y-6">
@@ -56,25 +58,48 @@ export default function Profile({
                     />
 
                     <form onSubmit={submit} className="space-y-6">
-                        <div className="grid gap-2">
-                            <Label htmlFor="name">Name</Label>
+                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                            <div className="grid gap-2">
+                                <Label htmlFor="first_name">First name</Label>
 
-                            <Input
-                                id="name"
-                                className="mt-1 block w-full"
-                                value={data.name}
-                                onChange={(e) =>
-                                    setData("name", e.target.value)
-                                }
-                                required
-                                autoComplete="name"
-                                placeholder="Full name"
-                            />
+                                <Input
+                                    id="name"
+                                    className="mt-1 block w-full"
+                                    value={data.first_name}
+                                    onChange={(e) =>
+                                        setData("first_name", e.target.value)
+                                    }
+                                    required
+                                    autoComplete="name"
+                                    placeholder="First name"
+                                />
 
-                            <InputError
-                                className="mt-2"
-                                message={errors.name}
-                            />
+                                <InputError
+                                    className="mt-2"
+                                    message={errors.first_name}
+                                />
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="last_name">Last name</Label>
+
+                                <Input
+                                    id="name"
+                                    className="mt-1 block w-full"
+                                    value={data.last_name}
+                                    onChange={(e) =>
+                                        setData("last_name", e.target.value)
+                                    }
+                                    required
+                                    autoComplete="name"
+                                    placeholder="Last name"
+                                />
+
+                                <InputError
+                                    className="mt-2"
+                                    message={errors.last_name}
+                                />
+                            </div>
                         </div>
 
                         <div className="grid gap-2">
@@ -142,7 +167,7 @@ export default function Profile({
                     </form>
                 </div>
 
-                <DeleteUser />
+                <DeleteUser/>
             </SettingsLayout>
         </AppLayout>
     );
