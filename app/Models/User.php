@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @mixin IdeHelperUser
@@ -48,7 +49,26 @@ final class User extends Authenticatable
     protected $appends = [
         'full_name',
         'initials',
+        'profile_image'
     ];
+
+    /**
+     * @return Attribute<string, ?string>
+     */
+    public function profileImage(): Attribute
+    {
+        $avatar = $this->avatar !== null
+            ? Storage::url($this->avatar)
+            : null;
+
+        /** @var Attribute<string, ?string> $profileImage */
+        $profileImage = new Attribute(
+            get: fn(): ?string => $avatar
+        );
+
+
+        return $profileImage;
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -70,7 +90,7 @@ final class User extends Authenticatable
     {
         /** @var Attribute<string, string> $fullName */
         $fullName = new Attribute(
-            get: fn (): string => "$this->first_name $this->last_name"
+            get: fn(): string => "$this->first_name $this->last_name"
         );
 
         return $fullName;
@@ -86,7 +106,7 @@ final class User extends Authenticatable
 
         /** @var Attribute<string, string> $initials */
         $initials = new Attribute(
-            get: fn (): string => $firstNameInitial.$lastNameInitial
+            get: fn(): string => $firstNameInitial . $lastNameInitial
         );
 
         return $initials;

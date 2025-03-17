@@ -1,13 +1,13 @@
-import {Head, useForm} from "@inertiajs/react";
-import {LoaderCircle} from "lucide-react";
-import type {FormEventHandler} from "react";
+import { Head, useForm } from "@inertiajs/react";
+import { LoaderCircle } from "lucide-react";
+import type { FormEventHandler } from "react";
 
 import InputError from "@/components/input-error";
 import TextLink from "@/components/text-link";
-import {Button} from "@/components/ui/button";
-import {Checkbox} from "@/components/ui/checkbox";
-import {Input} from "@/components/ui/input";
-import {Label} from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import AuthLayout from "@/layouts/auth-layout";
 
 type LoginForm = {
@@ -21,8 +21,8 @@ interface LoginProps {
     canResetPassword: boolean;
 }
 
-export default function Login({status, canResetPassword}: LoginProps) {
-    const {data, setData, post, processing, errors, reset} = useForm<
+export default function Login({ status, canResetPassword }: LoginProps) {
+    const { data, setData, post, processing, errors, reset } = useForm<
         Required<LoginForm>
     >({
         email: "",
@@ -42,7 +42,7 @@ export default function Login({status, canResetPassword}: LoginProps) {
             title="Log in to your account"
             description="Enter your email and password below to log in"
         >
-            <Head title="Log in"/>
+            <Head title="Log in" />
 
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
@@ -59,7 +59,7 @@ export default function Login({status, canResetPassword}: LoginProps) {
                             onChange={(e) => setData("email", e.target.value)}
                             placeholder="email@example.com"
                         />
-                        <InputError message={errors.email}/>
+                        <InputError message={errors.email} />
                     </div>
 
                     <div className="grid gap-2">
@@ -87,7 +87,7 @@ export default function Login({status, canResetPassword}: LoginProps) {
                             }
                             placeholder="Password"
                         />
-                        <InputError message={errors.password}/>
+                        <InputError message={errors.password} />
                     </div>
 
                     <div className="flex items-center space-x-3">
@@ -108,7 +108,7 @@ export default function Login({status, canResetPassword}: LoginProps) {
                         disabled={processing}
                     >
                         {processing && (
-                            <LoaderCircle className="h-4 w-4 animate-spin"/>
+                            <LoaderCircle className="h-4 w-4 animate-spin" />
                         )}
                         Log in
                     </Button>

@@ -216,7 +216,7 @@ export function AppHeader({breadcrumbs = []}: AppHeaderProps) {
                                 >
                                     <Avatar className="size-8 overflow-hidden rounded-full">
                                         <AvatarImage
-                                            src={auth.user.avatar}
+                                            src={auth.user.profile_image}
                                             alt={auth.user.initials}
                                         />
                                         <AvatarFallback

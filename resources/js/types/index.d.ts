@@ -1,5 +1,5 @@
-import type {LucideIcon} from "lucide-react";
-import type {Config} from "ziggy-js";
+import type { LucideIcon } from "lucide-react";
+import type { Config } from "ziggy-js";
 
 export interface Auth {
     user: User;
@@ -38,7 +38,7 @@ export interface User {
     full_name: string;
     initials: string;
     email: string;
-    avatar?: string;
+    profile_image?: string;
     email_verified_at?: string | null;
     created_at: string;
     updated_at: string;
