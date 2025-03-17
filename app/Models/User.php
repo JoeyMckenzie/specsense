@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @mixin IdeHelperUser
+ */
 final class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -78,8 +81,8 @@ final class User extends Authenticatable
      */
     protected function initials(): Attribute
     {
-        $firstNameInitial = substr($this->first_name, 0, 1);
-        $lastNameInitial = substr($this->last_name, 0, 1);
+        $firstNameInitial = substr($this->first_name ?? '', 0, 1);
+        $lastNameInitial = substr($this->last_name ?? '', 0, 1);
 
         /** @var Attribute<string, string> $initials */
         $initials = new Attribute(
