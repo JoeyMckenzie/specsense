@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -9,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+final class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -65,7 +67,7 @@ class User extends Authenticatable
     {
         /** @var Attribute<string, string> $fullName */
         $fullName = new Attribute(
-            get: fn(): string => "$this->first_name $this->last_name"
+            get: fn (): string => "$this->first_name $this->last_name"
         );
 
         return $fullName;
@@ -81,7 +83,7 @@ class User extends Authenticatable
 
         /** @var Attribute<string, string> $initials */
         $initials = new Attribute(
-            get: fn(): string => $firstNameInitial . $lastNameInitial
+            get: fn (): string => $firstNameInitial.$lastNameInitial
         );
 
         return $initials;

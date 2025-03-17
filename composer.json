@@ -16,13 +16,15 @@
         "tightenco/ziggy": "^2.4"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.5",
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.18",
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^11.5.3"
+        "phpunit/phpunit": "^11.5.3",
+        "rector/rector": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -60,7 +62,14 @@
             "npm run build:ssr",
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr"
-        ]
+        ],
+        "generate:ide-helpers": [
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:models -MRW",
+            "php artisan ide-helper:meta",
+            "@fmt"
+        ],
+        "fmt": "vendor/bin/pint -vv"
     },
     "extra": {
         "laravel": {
