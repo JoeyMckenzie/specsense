@@ -23,6 +23,7 @@
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
+        "peckphp/peck": "^0.1.2",
         "phpunit/phpunit": "^11.5.3",
         "rector/rector": "^2.0"
     },
@@ -69,7 +70,10 @@
             "php artisan ide-helper:meta",
             "@fmt"
         ],
-        "fmt": "vendor/bin/pint -vv"
+        "fmt": "vendor/bin/pint -vv",
+        "refactor": "vendor/bin/rector process",
+        "refactor:test": "vendor/bin/rector process --dry-run",
+        "typos": "vendor/bin/peck"
     },
     "extra": {
         "laravel": {
