@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 
 export type Theme = "dark" | "light" | "system";
 
@@ -20,14 +20,56 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
+function setCookie(name: string, value: string, days = 365) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = `; expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value}${expires}; path=/; SameSite=Lax`;
+}
+
+function getCookie(name: string): string | null {
+    const cookieIdentifier = `${name}=`;
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        let currentCookie = cookies[i];
+        while (currentCookie.charAt(0) === " ") {
+            currentCookie = currentCookie.substring(1, currentCookie.length);
+        }
+
+        if (currentCookie.indexOf(cookieIdentifier) === 0) {
+            return currentCookie.substring(
+                cookieIdentifier.length,
+                currentCookie.length,
+            );
+        }
+    }
+
+    return null;
+}
+
+function getInitialState(defaultTheme: Theme): Theme {
+    if (typeof window === "undefined") {
+        return defaultTheme;
+    }
+
+    const cookieTheme = getCookie("appearance");
+
+    if (cookieTheme) {
+        return cookieTheme as Theme;
+    }
+
+    return defaultTheme;
+}
+
 export function ThemeProvider({
-    children,
-    defaultTheme = "system",
-    storageKey = "specsense-ui-theme",
-    ...props
-}: ThemeProviderProps) {
-    const [theme, setTheme] = useState<Theme>(
-        () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
+                                  children,
+                                  defaultTheme = "system",
+                                  storageKey = "specsense-ui-theme",
+                                  ...props
+                              }: ThemeProviderProps) {
+    const [theme, setTheme] = useState<Theme>(() =>
+        getInitialState(defaultTheme),
     );
 
     useEffect(() => {
@@ -52,7 +94,7 @@ export function ThemeProvider({
     const value = {
         theme,
         setTheme: (theme: Theme) => {
-            localStorage.setItem(storageKey, theme);
+            setCookie("appearance", theme);
             setTheme(theme);
         },
     };
