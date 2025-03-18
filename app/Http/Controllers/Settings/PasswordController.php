@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings;
 
+use App\Http\Concerns\HasVerifiedUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -15,13 +16,15 @@ use Inertia\Response;
 
 final class PasswordController extends Controller
 {
+    use HasVerifiedUser;
+
     /**
      * Show the user's password settings page.
      */
     public function edit(Request $request): Response
     {
         return Inertia::render('settings/password', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail, // @phpstan-ignore-line
             'status' => $request->session()->get('status'),
         ]);
     }
@@ -31,13 +34,17 @@ final class PasswordController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
+        /** @var array{current_password: string, password: string} $validated */
         $validated = $request->validate([
             'current_password' => ['required', 'current_password'],
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
 
-        $request->user()->update([
-            'password' => Hash::make($validated['password']),
+        /** @var string $password */
+        $password = $validated['password'];
+
+        $this->verifiedUser()->update([
+            'password' => Hash::make($password),
         ]);
 
         return back();

@@ -1,27 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Settings;
 
+use App\Http\Concerns\HasVerifiedUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ProfilePhotoController extends Controller
+final class ProfilePhotoController extends Controller
 {
+    use HasVerifiedUser;
+
     /**
      * Delete the current user's profile photo.
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $path = $request->user()->avatar;
+        $avatarPath = $this->verifiedUser()->avatar;
 
-        if ($path && Storage::disk('public')->exists($path)) {
-            Storage::disk('public')->delete($path);
+        if ($avatarPath !== null && Storage::disk('public')->exists($avatarPath)) {
+            Storage::disk('public')->delete($avatarPath);
         }
 
-        $request->user()->avatar = null;
-        $request->user()->save();
+        $this->verifiedUser()->avatar = null;
+        $this->verifiedUser()->save();
 
         return to_route('profile.edit');
     }

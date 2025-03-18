@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings;
 
+use App\Http\Concerns\HasVerifiedUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -16,13 +19,15 @@ use Inertia\Response;
 
 final class ProfileController extends Controller
 {
+    use HasVerifiedUser;
+
     /**
      * Show the user's profile settings page.
      */
     public function edit(Request $request): Response
     {
         return Inertia::render('settings/profile', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail, // @phpstan-ignore-line
             'status' => $request->session()->get('status'),
         ]);
     }
@@ -32,7 +37,7 @@ final class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $user = $request->user();
+        $user = $this->verifiedUser();
         $user->fill($request->validated());
 
         if ($user->isDirty('email')) {
@@ -44,8 +49,13 @@ final class ProfileController extends Controller
                 Storage::disk('public')->delete($user->avatar);
             }
 
-            $avatar = $request->file('profile_image')->store('avatars', 'public');
-            $user->avatar = $avatar;
+            /** @var UploadedFile $file */
+            $file = $request->file('profile_image');
+            $avatar = $file->store('avatars', 'public');
+
+            if ($avatar !== false) {
+                $user->avatar = $avatar;
+            }
         }
 
         $user->save();
@@ -62,7 +72,7 @@ final class ProfileController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $user = $request->user();
+        $user = $this->verifiedUser();
 
         Auth::logout();
 

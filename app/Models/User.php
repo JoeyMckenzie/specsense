@@ -8,6 +8,7 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
@@ -53,9 +54,17 @@ final class User extends Authenticatable
     ];
 
     /**
+     * @return HasMany<Document, covariant $this>
+     */
+    public function documents(): HasMany
+    {
+        return $this->hasMany(Document::class);
+    }
+
+    /**
      * @return Attribute<string, ?string>
      */
-    public function profileImage(): Attribute
+    protected function profileImage(): Attribute
     {
         $avatar = $this->avatar !== null
             ? Storage::url($this->avatar)

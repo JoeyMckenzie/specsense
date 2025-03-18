@@ -32,7 +32,8 @@ final class ProfileUpdateTest extends TestCase
         $response = $this
             ->actingAs($user)
             ->patch('/settings/profile', [
-                'name' => 'Test User',
+                'first_name' => 'Test',
+                'last_name' => 'User',
                 'email' => 'test@example.com',
             ]);
 
@@ -42,7 +43,7 @@ final class ProfileUpdateTest extends TestCase
 
         $user->refresh();
 
-        $this->assertSame('Test User', $user->name);
+        $this->assertSame('Test User', $user->full_name);
         $this->assertSame('test@example.com', $user->email);
         $this->assertNull($user->email_verified_at);
     }
@@ -54,7 +55,8 @@ final class ProfileUpdateTest extends TestCase
         $response = $this
             ->actingAs($user)
             ->patch('/settings/profile', [
-                'name' => 'Test User',
+                'first_name' => 'Test',
+                'last_name' => 'User',
                 'email' => $user->email,
             ]);
 
@@ -110,9 +112,10 @@ final class ProfileUpdateTest extends TestCase
         $response = $this
             ->actingAs($user)
             ->patch('/settings/profile', [
-                'name' => $user->name,
+                'first_name' => 'Test',
+                'last_name' => 'User',
                 'email' => $user->email,
-                'photo' => UploadedFile::fake()->image('photo.jpg'),
+                'profile_image' => UploadedFile::fake()->image('photo.jpg'),
             ]);
 
         $response
@@ -121,8 +124,8 @@ final class ProfileUpdateTest extends TestCase
 
         $user->refresh();
 
-        $this->assertNotNull($user->profile_photo_path);
-        $this->assertTrue(Storage::disk('public')->exists($user->profile_photo_path));
+        $this->assertNotNull($user->avatar);
+        $this->assertTrue(Storage::disk('public')->exists($user->avatar));
     }
 
     public function test_profile_photo_can_be_removed()
@@ -132,9 +135,10 @@ final class ProfileUpdateTest extends TestCase
         Storage::fake('public');
 
         $response = $this->actingAs($user)->patch('/settings/profile', [
-            'name' => $user->name,
+            'first_name' => 'Test',
+            'last_name' => 'User',
             'email' => $user->email,
-            'photo' => UploadedFile::fake()->image('photo.jpg'),
+            'profile_image' => UploadedFile::fake()->image('photo.jpg'),
         ]);
 
         $response->assertSessionHasNoErrors()
@@ -142,10 +146,10 @@ final class ProfileUpdateTest extends TestCase
 
         $user->refresh();
 
-        $this->assertNotNull($user->profile_photo_path);
-        $this->assertTrue(Storage::disk('public')->exists($user->profile_photo_path));
+        $this->assertNotNull($user->avatar);
+        $this->assertTrue(Storage::disk('public')->exists($user->avatar));
 
-        $oldPath = $user->profile_photo_path;
+        $oldPath = $user->avatar;
 
         $response = $this->actingAs($user)->delete('/settings/profile-photo');
 
@@ -153,7 +157,7 @@ final class ProfileUpdateTest extends TestCase
             ->assertRedirect('/settings/profile');
 
         $user->refresh();
-        $this->assertNull($user->profile_photo_path);
+        $this->assertNull($user->avatar);
         $this->assertFalse(Storage::disk('public')->exists($oldPath));
     }
 }
