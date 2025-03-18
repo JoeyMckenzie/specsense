@@ -1,21 +1,36 @@
-import {Breadcrumbs} from "@/components/breadcrumbs";
-import {Icon} from "@/components/icon";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {Button} from "@/components/ui/button";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Icon } from "@/components/icon";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
     NavigationMenu,
     NavigationMenuItem,
     NavigationMenuList,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,} from "@/components/ui/sheet";
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip";
-import {UserMenuContent} from "@/components/user-menu-content";
-import {cn} from "@/lib/utils";
-import type {BreadcrumbItem, NavItem, SharedData} from "@/types";
-import {Link, usePage} from "@inertiajs/react";
-import {BookOpen, Folder, LayoutGrid, Menu, Search} from "lucide-react";
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { UserMenuContent } from "@/components/user-menu-content";
+import { cn } from "@/lib/utils";
+import type { BreadcrumbItem, NavItem, SharedData } from "@/types";
+import { Link, usePage } from "@inertiajs/react";
+import { BookOpen, Folder, LayoutGrid, Menu, Search } from "lucide-react";
 import AppLogo from "./app-logo";
 import AppLogoIcon from "./app-logo-icon";
 
@@ -47,9 +62,9 @@ interface AppHeaderProps {
     breadcrumbs?: BreadcrumbItem[];
 }
 
-export function AppHeader({breadcrumbs = []}: AppHeaderProps) {
+export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
     const page = usePage<SharedData>();
-    const {auth} = page.props;
+    const { auth } = page.props;
 
     return (
         <>
@@ -64,7 +79,7 @@ export function AppHeader({breadcrumbs = []}: AppHeaderProps) {
                                     size="icon"
                                     className="mr-2 h-[34px] w-[34px]"
                                 >
-                                    <Menu className="h-5 w-5"/>
+                                    <Menu className="h-5 w-5" />
                                 </Button>
                             </SheetTrigger>
                             <SheetContent
@@ -75,7 +90,7 @@ export function AppHeader({breadcrumbs = []}: AppHeaderProps) {
                                     Navigation Menu
                                 </SheetTitle>
                                 <SheetHeader className="flex justify-start text-left">
-                                    <AppLogoIcon className="h-6 w-6 fill-current text-black dark:text-white"/>
+                                    <AppLogoIcon className="h-6 w-6 fill-current text-black dark:text-white" />
                                 </SheetHeader>
                                 <div className="flex h-full flex-1 flex-col space-y-4 p-4">
                                     <div className="flex h-full flex-col justify-between text-sm">
@@ -127,7 +142,7 @@ export function AppHeader({breadcrumbs = []}: AppHeaderProps) {
                         prefetch
                         className="flex items-center space-x-2"
                     >
-                        <AppLogo/>
+                        <AppLogo />
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -144,7 +159,7 @@ export function AppHeader({breadcrumbs = []}: AppHeaderProps) {
                                             className={cn(
                                                 navigationMenuTriggerStyle(),
                                                 page.url === item.href &&
-                                                activeItemStyles,
+                                                    activeItemStyles,
                                                 "h-9 cursor-pointer px-3",
                                             )}
                                         >
@@ -157,8 +172,7 @@ export function AppHeader({breadcrumbs = []}: AppHeaderProps) {
                                             {item.title}
                                         </Link>
                                         {page.url === item.href && (
-                                            <div
-                                                className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"/>
+                                            <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white" />
                                         )}
                                     </NavigationMenuItem>
                                 ))}
@@ -173,7 +187,7 @@ export function AppHeader({breadcrumbs = []}: AppHeaderProps) {
                                 size="icon"
                                 className="group h-9 w-9 cursor-pointer"
                             >
-                                <Search className="!size-5 opacity-80 group-hover:opacity-100"/>
+                                <Search className="!size-5 opacity-80 group-hover:opacity-100" />
                             </Button>
                             <div className="hidden lg:flex">
                                 {rightNavItems.map((item) => (
@@ -219,15 +233,14 @@ export function AppHeader({breadcrumbs = []}: AppHeaderProps) {
                                             src={auth.user.profile_image}
                                             alt={auth.user.initials}
                                         />
-                                        <AvatarFallback
-                                            className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
+                                        <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
                                             {auth.user.initials}
                                         </AvatarFallback>
                                     </Avatar>
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="w-56" align="end">
-                                <UserMenuContent user={auth.user}/>
+                                <UserMenuContent user={auth.user} />
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
@@ -235,9 +248,8 @@ export function AppHeader({breadcrumbs = []}: AppHeaderProps) {
             </div>
             {breadcrumbs.length > 1 && (
                 <div className="flex w-full border-sidebar-border/70 border-b">
-                    <div
-                        className="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl">
-                        <Breadcrumbs breadcrumbs={breadcrumbs}/>
+                    <div className="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl">
+                        <Breadcrumbs breadcrumbs={breadcrumbs} />
                     </div>
                 </div>
             )}

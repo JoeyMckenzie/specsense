@@ -1,15 +1,15 @@
-import type {BreadcrumbItem, SharedData} from "@/types";
-import {Transition} from "@headlessui/react";
-import {Head, Link, router, useForm, usePage} from "@inertiajs/react";
-import {type FormEventHandler, useRef, useState} from "react";
+import type { BreadcrumbItem, SharedData } from "@/types";
+import { Transition } from "@headlessui/react";
+import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
+import { type FormEventHandler, useRef, useState } from "react";
 
 import DeleteUser from "@/components/delete-user";
 import HeadingSmall from "@/components/heading-small";
 import InputError from "@/components/input-error";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
-import {Label} from "@/components/ui/label";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import AppLayout from "@/layouts/app-layout";
 import SettingsLayout from "@/layouts/settings/layout";
 
@@ -29,13 +29,13 @@ interface ProfileForm {
 }
 
 export default function Profile({
-                                    mustVerifyEmail,
-                                    status,
-                                }: { mustVerifyEmail: boolean; status?: string }) {
-    const {auth} = usePage<SharedData>().props;
+    mustVerifyEmail,
+    status,
+}: { mustVerifyEmail: boolean; status?: string }) {
+    const { auth } = usePage<SharedData>().props;
     const [profileImage, setProfileImage] = useState<string | null>(null);
     const photoInput = useRef<HTMLInputElement>(null);
-    const {data, setData, post, errors, processing, recentlySuccessful} =
+    const { data, setData, post, errors, processing, recentlySuccessful } =
         useForm<Required<ProfileForm>>({
             _method: "patch",
             first_name: auth.user.first_name,
@@ -90,7 +90,7 @@ export default function Profile({
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Profile settings"/>
+            <Head title="Profile settings" />
 
             <SettingsLayout>
                 <div className="space-y-6">
@@ -260,7 +260,7 @@ export default function Profile({
                     </form>
                 </div>
 
-                <DeleteUser/>
+                <DeleteUser />
             </SettingsLayout>
         </AppLayout>
     );

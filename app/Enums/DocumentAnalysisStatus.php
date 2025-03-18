@@ -22,7 +22,7 @@ enum DocumentAnalysisStatus: string implements StaticallyArrayable
     {
         /** @var string[] $statuses */
         $statuses = collect(self::cases())
-            ->map(fn(DocumentAnalysisStatus $status) => $status->value)
+            ->map(fn (DocumentAnalysisStatus $status) => $status->value)
             ->toArray();
 
         return $statuses;

@@ -1,6 +1,6 @@
-import {NavFooter} from "@/components/nav-footer";
-import {NavMain} from "@/components/nav-main";
-import {NavUser} from "@/components/nav-user";
+import { NavFooter } from "@/components/nav-footer";
+import { NavMain } from "@/components/nav-main";
+import { NavUser } from "@/components/nav-user";
 import {
     Sidebar,
     SidebarContent,
@@ -10,9 +10,9 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import type {NavItem} from "@/types";
-import {Link} from "@inertiajs/react";
-import {BookOpen, Files, Folder} from "lucide-react";
+import type { NavItem } from "@/types";
+import { Link } from "@inertiajs/react";
+import { BookOpen, Files, Folder } from "lucide-react";
 import AppLogo from "./app-logo";
 
 const mainNavItems: NavItem[] = [
@@ -44,7 +44,7 @@ export function AppSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <Link href={route("dashboard")} prefetch>
-                                <AppLogo/>
+                                <AppLogo />
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -52,12 +52,12 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems}/>
+                <NavMain items={mainNavItems} />
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto"/>
-                <NavUser/>
+                <NavFooter items={footerNavItems} className="mt-auto" />
+                <NavUser />
             </SidebarFooter>
         </Sidebar>
     );

@@ -16,7 +16,7 @@ enum DocumentType: string implements StaticallyArrayable
     {
         /** @var string[] $documents */
         $documents = collect(self::cases())
-            ->map(fn(DocumentType $type) => $type->value)
+            ->map(fn (DocumentType $type) => $type->value)
             ->toArray();
 
         return $documents;

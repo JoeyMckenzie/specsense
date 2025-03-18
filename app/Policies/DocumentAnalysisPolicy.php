@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\Models\DocumentAnalysis;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
-class DocumentAnalysisPolicy
+final class DocumentAnalysisPolicy
 {
     /**
      * Determine whether the user can view any models.

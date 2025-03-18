@@ -50,7 +50,7 @@ final class User extends Authenticatable
     protected $appends = [
         'full_name',
         'initials',
-        'profile_image'
+        'profile_image',
     ];
 
     /**
@@ -72,9 +72,8 @@ final class User extends Authenticatable
 
         /** @var Attribute<string, ?string> $profileImage */
         $profileImage = new Attribute(
-            get: fn(): ?string => $avatar
+            get: fn (): ?string => $avatar
         );
-
 
         return $profileImage;
     }
@@ -99,7 +98,7 @@ final class User extends Authenticatable
     {
         /** @var Attribute<string, string> $fullName */
         $fullName = new Attribute(
-            get: fn(): string => "$this->first_name $this->last_name"
+            get: fn (): string => "$this->first_name $this->last_name"
         );
 
         return $fullName;
@@ -115,7 +114,7 @@ final class User extends Authenticatable
 
         /** @var Attribute<string, string> $initials */
         $initials = new Attribute(
-            get: fn(): string => $firstNameInitial . $lastNameInitial
+            get: fn (): string => $firstNameInitial.$lastNameInitial
         );
 
         return $initials;

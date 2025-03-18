@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useState} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export type Theme = "dark" | "light" | "system";
 
@@ -63,11 +63,11 @@ function getInitialState(defaultTheme: Theme): Theme {
 }
 
 export function ThemeProvider({
-                                  children,
-                                  defaultTheme = "system",
-                                  storageKey = "specsense-ui-theme",
-                                  ...props
-                              }: ThemeProviderProps) {
+    children,
+    defaultTheme = "system",
+    storageKey = "specsense-ui-theme",
+    ...props
+}: ThemeProviderProps) {
     const [theme, setTheme] = useState<Theme>(() =>
         getInitialState(defaultTheme),
     );

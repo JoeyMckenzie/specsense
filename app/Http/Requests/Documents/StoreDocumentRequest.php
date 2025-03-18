@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Documents;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDocumentRequest extends FormRequest
+final class StoreDocumentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
