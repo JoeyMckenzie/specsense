@@ -6,8 +6,8 @@ use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-describe('Profile updates', function () {
-    it('should ensure the profile page is displayed', function () {
+describe('Profile updates', function (): void {
+    it('should ensure the profile page is displayed', function (): void {
         $user = User::factory()->create();
 
         $response = $this
@@ -17,7 +17,7 @@ describe('Profile updates', function () {
         $response->assertOk();
     });
 
-    it('ensures the profile information can be updated', function () {
+    it('ensures the profile information can be updated', function (): void {
         $user = User::factory()->create();
 
         $response = $this
@@ -39,7 +39,7 @@ describe('Profile updates', function () {
         expect($user->email_verified_at)->toBeNull();
     });
 
-    it('ensures email verification status is unchanged when the email address is unchanged', function () {
+    it('ensures email verification status is unchanged when the email address is unchanged', function (): void {
         $user = User::factory()->create();
 
         $response = $this
@@ -57,7 +57,7 @@ describe('Profile updates', function () {
         expect($user->refresh()->email_verified_at)->not->toBeNull();
     });
 
-    it('ensures user can delete their account', function () {
+    it('ensures user can delete their account', function (): void {
         $user = User::factory()->create();
 
         $response = $this
@@ -74,7 +74,7 @@ describe('Profile updates', function () {
         expect($user->fresh())->toBeNull();
     });
 
-    it('ensures correct password must be provided to delete account', function () {
+    it('ensures correct password must be provided to delete account', function (): void {
         $user = User::factory()->create();
 
         $response = $this
@@ -91,7 +91,7 @@ describe('Profile updates', function () {
         expect($user->fresh())->not->toBeNull();
     });
 
-    it('ensures profile photo can be uploaded', function () {
+    it('ensures profile photo can be uploaded', function (): void {
         $user = User::factory()->create();
 
         Storage::fake('public');
@@ -115,7 +115,7 @@ describe('Profile updates', function () {
         expect(Storage::disk('public')->exists($user->avatar))->toBeTrue();
     });
 
-    it('ensures profile photo can be removed', function () {
+    it('ensures profile photo can be removed', function (): void {
         $user = User::factory()->create();
 
         Storage::fake('public');

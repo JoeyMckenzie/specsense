@@ -90,7 +90,7 @@
         ],
         "fix": [
             "@fmt",
-            "refactor"
+            "@refactor"
         ],
         "ci": [
             "@lint",
