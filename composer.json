@@ -71,6 +71,7 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr"
         ],
+        "prepare": "git config core.hookspath .githooks",
         "generate:ide-helpers": [
             "php artisan ide-helper:generate",
             "php artisan ide-helper:models -MRW",
@@ -78,6 +79,7 @@
             "@fmt"
         ],
         "fmt": "vendor/bin/pint -vv",
+        "fmt:test": "vendor/bin/pint --test",
         "refactor": "vendor/bin/rector process",
         "refactor:test": "vendor/bin/rector process --dry-run",
         "typos": "vendor/bin/peck",
@@ -85,6 +87,17 @@
         "test": [
             "vendor/bin/phpunit",
             "vendor/bin/pest"
+        ],
+        "fix": [
+            "@fmt",
+            "refactor"
+        ],
+        "ci": [
+            "@lint",
+            "@fmt:test",
+            "@refactor:test",
+            "@test",
+            "@typos"
         ]
     },
     "extra": {
