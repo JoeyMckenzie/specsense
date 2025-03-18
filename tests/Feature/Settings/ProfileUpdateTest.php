@@ -2,20 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Settings;
-
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 
-final class ProfileUpdateTest extends TestCase
-{
-    use RefreshDatabase;
-
-    public function test_profile_page_is_displayed(): void
-    {
+describe('Profile updates', function () {
+    it('should ensure the profile page is displayed', function () {
         $user = User::factory()->create();
 
         $response = $this
@@ -23,10 +15,9 @@ final class ProfileUpdateTest extends TestCase
             ->get('/settings/profile');
 
         $response->assertOk();
-    }
+    });
 
-    public function test_profile_information_can_be_updated(): void
-    {
+    it('ensures the profile information can be updated', function () {
         $user = User::factory()->create();
 
         $response = $this
@@ -43,13 +34,12 @@ final class ProfileUpdateTest extends TestCase
 
         $user->refresh();
 
-        $this->assertSame('Test User', $user->full_name);
-        $this->assertSame('test@example.com', $user->email);
-        $this->assertNull($user->email_verified_at);
-    }
+        expect($user->full_name)->toBe('Test User');
+        expect($user->email)->toBe('test@example.com');
+        expect($user->email_verified_at)->toBeNull();
+    });
 
-    public function test_email_verification_status_is_unchanged_when_the_email_address_is_unchanged(): void
-    {
+    it('ensures email verification status is unchanged when the email address is unchanged', function () {
         $user = User::factory()->create();
 
         $response = $this
@@ -64,11 +54,10 @@ final class ProfileUpdateTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect('/settings/profile');
 
-        $this->assertNotNull($user->refresh()->email_verified_at);
-    }
+        expect($user->refresh()->email_verified_at)->not->toBeNull();
+    });
 
-    public function test_user_can_delete_their_account(): void
-    {
+    it('ensures user can delete their account', function () {
         $user = User::factory()->create();
 
         $response = $this
@@ -81,12 +70,11 @@ final class ProfileUpdateTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect('/');
 
-        $this->assertGuest();
-        $this->assertNull($user->fresh());
-    }
+        expect($this->isAuthenticated())->toBeFalse();
+        expect($user->fresh())->toBeNull();
+    });
 
-    public function test_correct_password_must_be_provided_to_delete_account(): void
-    {
+    it('ensures correct password must be provided to delete account', function () {
         $user = User::factory()->create();
 
         $response = $this
@@ -100,11 +88,10 @@ final class ProfileUpdateTest extends TestCase
             ->assertSessionHasErrors('password')
             ->assertRedirect('/settings/profile');
 
-        $this->assertNotNull($user->fresh());
-    }
+        expect($user->fresh())->not->toBeNull();
+    });
 
-    public function test_profile_photo_can_be_uploaded(): void
-    {
+    it('ensures profile photo can be uploaded', function () {
         $user = User::factory()->create();
 
         Storage::fake('public');
@@ -124,12 +111,11 @@ final class ProfileUpdateTest extends TestCase
 
         $user->refresh();
 
-        $this->assertNotNull($user->avatar);
-        $this->assertTrue(Storage::disk('public')->exists($user->avatar));
-    }
+        expect($user->avatar)->not->toBeNull();
+        expect(Storage::disk('public')->exists($user->avatar))->toBeTrue();
+    });
 
-    public function test_profile_photo_can_be_removed(): void
-    {
+    it('ensures profile photo can be removed', function () {
         $user = User::factory()->create();
 
         Storage::fake('public');
@@ -145,7 +131,6 @@ final class ProfileUpdateTest extends TestCase
             ->assertRedirect('/settings/profile');
 
         $user->refresh();
-
         $this->assertNotNull($user->avatar);
         $this->assertTrue(Storage::disk('public')->exists($user->avatar));
 
@@ -159,5 +144,5 @@ final class ProfileUpdateTest extends TestCase
         $user->refresh();
         $this->assertNull($user->avatar);
         $this->assertFalse(Storage::disk('public')->exists($oldPath));
-    }
-}
+    });
+});

@@ -1,30 +1,35 @@
 import AppLogoIcon from "@/components/app-logo-icon";
-import {Badge} from "@/components/ui/badge";
-import {Button} from "@/components/ui/button";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card";
-import type {SharedData} from "@/types";
-import {Head, Link, usePage} from "@inertiajs/react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import type { SharedData } from "@/types";
+import { Head, Link, usePage } from "@inertiajs/react";
 
 export default function Welcome() {
-    const {auth} = usePage<SharedData>().props;
+    const { auth } = usePage<SharedData>().props;
 
     return (
         <>
             <Head title="Specsense - Intelligent Construction Document Analysis">
-                <link rel="preconnect" href="https://fonts.bunny.net"/>
+                <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link
                     href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
                     rel="stylesheet"
                 />
             </Head>
-            <div
-                className="min-h-screen bg-gradient-to-b from-background to-muted/30 dark:from-background dark:to-background/80">
+            <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 dark:from-background dark:to-background/80">
                 {/* Navigation */}
                 <header className="container mx-auto py-4">
                     <nav className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary">
-                                <AppLogoIcon className="h-6 w-6 text-primary-foreground"/>
+                                <AppLogoIcon className="h-6 w-6 text-primary-foreground" />
                             </div>
                             <span className="font-bold text-xl">Specsense</span>
                         </div>
@@ -99,14 +104,12 @@ export default function Welcome() {
                                 </Button>
                             </div>
                         </div>
-                        <div
-                            className="relative flex items-center justify-center rounded-lg bg-muted/50 p-8 dark:bg-muted/20">
-                            <div
-                                className="relative z-10 rounded-lg border bg-background/80 p-6 shadow-lg backdrop-blur-sm">
+                        <div className="relative flex items-center justify-center rounded-lg bg-muted/50 p-8 dark:bg-muted/20">
+                            <div className="relative z-10 rounded-lg border bg-background/80 p-6 shadow-lg backdrop-blur-sm">
                                 <div className="space-y-2">
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
-                                            <div className="h-3 w-3 rounded-full bg-green-500"/>
+                                            <div className="h-3 w-3 rounded-full bg-green-500" />
                                             <span className="font-medium text-sm">
                                                 Document Analysis
                                             </span>
@@ -116,13 +119,12 @@ export default function Welcome() {
                                         </Badge>
                                     </div>
                                     <div className="h-2 w-full rounded-full bg-muted">
-                                        <div className="h-full w-2/3 rounded-full bg-primary"/>
+                                        <div className="h-full w-2/3 rounded-full bg-primary" />
                                     </div>
                                 </div>
                                 <div className="mt-6 space-y-4">
                                     <div className="flex items-center gap-3 rounded-md border p-3">
-                                        <div
-                                            className="flex h-8 w-8 items-center justify-center rounded bg-primary/10 text-primary">
+                                        <div className="flex h-8 w-8 items-center justify-center rounded bg-primary/10 text-primary">
                                             <svg
                                                 width="16"
                                                 height="16"
@@ -151,8 +153,7 @@ export default function Welcome() {
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3 rounded-md border p-3">
-                                        <div
-                                            className="flex h-8 w-8 items-center justify-center rounded bg-primary/10 text-primary">
+                                        <div className="flex h-8 w-8 items-center justify-center rounded bg-primary/10 text-primary">
                                             <svg
                                                 width="16"
                                                 height="16"
@@ -199,8 +200,7 @@ export default function Welcome() {
                     <div className="mt-16 grid gap-8 md:grid-cols-3">
                         <Card>
                             <CardHeader>
-                                <div
-                                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                                     <svg
                                         width="24"
                                         height="24"
@@ -234,8 +234,7 @@ export default function Welcome() {
                         </Card>
                         <Card>
                             <CardHeader>
-                                <div
-                                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                                     <svg
                                         width="24"
                                         height="24"
@@ -270,8 +269,7 @@ export default function Welcome() {
                         </Card>
                         <Card>
                             <CardHeader>
-                                <div
-                                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                                     <svg
                                         width="24"
                                         height="24"
@@ -334,7 +332,7 @@ export default function Welcome() {
                         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
                             <div className="flex items-center gap-2">
                                 <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
-                                    <AppLogoIcon className="h-5 w-5 text-primary-foreground"/>
+                                    <AppLogoIcon className="h-5 w-5 text-primary-foreground" />
                                 </div>
                                 <span className="font-semibold text-sm">
                                     Specsense
