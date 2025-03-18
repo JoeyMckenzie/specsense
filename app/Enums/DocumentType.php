@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Enums;
 
 use App\Contracts\StaticallyArrayable;
+use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
+#[TypeScript]
 enum DocumentType: string implements StaticallyArrayable
 {
     case SPECIAL_PROVISIONS = 'Special Provisions';
