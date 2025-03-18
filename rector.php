@@ -22,7 +22,7 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         PrivatizeFinalClassMethodRector::class => [
-            __DIR__.'/app/Models/Document.php',
+            __DIR__.'/app/Models/*.php',
         ],
     ])
     ->withPreparedSets(

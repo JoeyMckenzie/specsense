@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('document_analyses', function (Blueprint $table) {
+        Schema::create('document_analyses', function (Blueprint $table): void {
             $table->id();
             $table->string('context')->nullable();
             $table->text('parsed_content')->nullable();
