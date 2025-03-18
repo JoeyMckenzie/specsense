@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,23 +16,10 @@ use Illuminate\Support\Facades\Storage;
 /**
  * @mixin IdeHelperUser
  */
-final class User extends Authenticatable
+final class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'avatar',
-        'email',
-        'password',
-    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -62,7 +49,7 @@ final class User extends Authenticatable
     }
 
     /**
-     * @return Attribute<string, ?string>
+     * @return Attribute<string, string>
      */
     protected function profileImage(): Attribute
     {
@@ -70,12 +57,7 @@ final class User extends Authenticatable
             ? Storage::url($this->avatar)
             : null;
 
-        /** @var Attribute<string, ?string> $profileImage */
-        $profileImage = new Attribute(
-            get: fn (): ?string => $avatar
-        );
-
-        return $profileImage;
+        return Attribute::make(fn (): ?string => $avatar);
     }
 
     /**
@@ -96,12 +78,7 @@ final class User extends Authenticatable
      */
     protected function fullName(): Attribute
     {
-        /** @var Attribute<string, string> $fullName */
-        $fullName = new Attribute(
-            get: fn (): string => "$this->first_name $this->last_name"
-        );
-
-        return $fullName;
+        return Attribute::make(fn (): string => "$this->first_name $this->last_name");
     }
 
     /**
@@ -112,11 +89,6 @@ final class User extends Authenticatable
         $firstNameInitial = substr($this->first_name ?? '', 0, 1);
         $lastNameInitial = substr($this->last_name ?? '', 0, 1);
 
-        /** @var Attribute<string, string> $initials */
-        $initials = new Attribute(
-            get: fn (): string => $firstNameInitial.$lastNameInitial
-        );
-
-        return $initials;
+        return Attribute::make(fn (): string => $firstNameInitial.$lastNameInitial);
     }
 }

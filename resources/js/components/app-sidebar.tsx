@@ -18,7 +18,7 @@ import AppLogo from "./app-logo";
 const mainNavItems: NavItem[] = [
     {
         title: "Documents",
-        href: "/dashboard",
+        href: "/documents",
         icon: Files,
     },
 ];
@@ -43,7 +43,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href={route("dashboard")} prefetch>
+                            <Link href={route("documents.index")} prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>

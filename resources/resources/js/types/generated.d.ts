@@ -1,6 +1,11 @@
 declare namespace App.Data.Documents {
-    export type DashboardDocument = {};
+    export type DocumentSummary = {
+        id: number;
+        name: string;
+        createdAt: string;
+    };
 }
+
 declare namespace App.Enums {
     export type DocumentAnalysisStatus =
         | "Not Started"

@@ -2,24 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Auth;
-
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
-final class RegistrationTest extends TestCase
-{
-    use RefreshDatabase;
-
-    public function test_registration_screen_can_be_rendered(): void
-    {
+describe('Registration', function (): void {
+    it('ensures registration screen can be rendered', function (): void {
         $response = $this->get('/register');
 
         $response->assertStatus(200);
-    }
+    });
 
-    public function test_new_users_can_register(): void
-    {
+    it('ensures new users can register', function (): void {
         $response = $this->post('/register', [
             'first_name' => 'Test',
             'last_name' => 'User',
@@ -29,6 +19,6 @@ final class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
-    }
-}
+        $response->assertRedirect(route('documents.index', absolute: false));
+    });
+});

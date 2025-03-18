@@ -4,19 +4,32 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Documents;
 
+use App\Data\Documents\DocumentSummary;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Documents\StoreDocumentRequest;
 use App\Http\Requests\Documents\UpdateDocumentRequest;
 use App\Models\Document;
+use Inertia\Inertia;
+use Inertia\Response;
 
 final class DocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): void
+    public function index(): Response
     {
-        //
+        $documents = Document::query()
+            ->get([
+                'id',
+                'name',
+                'created_at',
+                'size',
+            ]);
+
+        return Inertia::render('documents/index', [
+            'documents' => DocumentSummary::collect($documents),
+        ]);
     }
 
     /**

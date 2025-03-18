@@ -30,15 +30,15 @@ import { UserMenuContent } from "@/components/user-menu-content";
 import { cn } from "@/lib/utils";
 import type { BreadcrumbItem, NavItem, SharedData } from "@/types";
 import { Link, usePage } from "@inertiajs/react";
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from "lucide-react";
+import { BookOpen, Files, Folder, Menu, Search } from "lucide-react";
 import AppLogo from "./app-logo";
 import AppLogoIcon from "./app-logo-icon";
 
 const mainNavItems: NavItem[] = [
     {
-        title: "Dashboard",
-        href: "/dashboard",
-        icon: LayoutGrid,
+        title: "Documents",
+        href: "/Documents",
+        icon: Files,
     },
 ];
 
@@ -138,7 +138,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                     </div>
 
                     <Link
-                        href={route("dashboard")}
+                        href={route("documents.index")}
                         prefetch
                         className="flex items-center space-x-2"
                     >

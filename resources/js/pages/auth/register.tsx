@@ -10,7 +10,8 @@ import { Label } from "@/components/ui/label";
 import AuthLayout from "@/layouts/auth-layout";
 
 type RegisterForm = {
-    name: string;
+    first_name: string;
+    last_name: string;
     email: string;
     password: string;
     password_confirmation: string;
@@ -20,7 +21,8 @@ export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm<
         Required<RegisterForm>
     >({
-        name: "",
+        first_name: "",
+        last_name: "",
         email: "",
         password: "",
         password_confirmation: "",
@@ -42,20 +44,47 @@ export default function Register() {
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
                     <div className="grid gap-2">
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="first_name">First name</Label>
                         <Input
-                            id="name"
+                            id="first_name"
                             type="text"
                             required
                             autoFocus
                             tabIndex={0}
-                            autoComplete="name"
-                            value={data.name}
-                            onChange={(e) => setData("name", e.target.value)}
+                            autoComplete="first_name"
+                            value={data.first_name}
+                            onChange={(e) =>
+                                setData("first_name", e.target.value)
+                            }
                             disabled={processing}
-                            placeholder="Full name"
+                            placeholder="First name"
                         />
-                        <InputError message={errors.name} className="mt-2" />
+                        <InputError
+                            message={errors.first_name}
+                            className="mt-2"
+                        />
+                    </div>
+
+                    <div className="grid gap-2">
+                        <Label htmlFor="last_name">Last name</Label>
+                        <Input
+                            id="last_name"
+                            type="text"
+                            required
+                            autoFocus
+                            tabIndex={0}
+                            autoComplete="last_name"
+                            value={data.last_name}
+                            onChange={(e) =>
+                                setData("last_name", e.target.value)
+                            }
+                            disabled={processing}
+                            placeholder="Last name"
+                        />
+                        <InputError
+                            message={errors.last_name}
+                            className="mt-2"
+                        />
                     </div>
 
                     <div className="grid gap-2">

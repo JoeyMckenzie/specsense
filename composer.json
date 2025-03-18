@@ -34,7 +34,6 @@
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-strict-rules": "^2.0",
-        "phpunit/phpunit": "^11.5",
         "rector/rector": "^2.0"
     },
     "autoload": {
@@ -87,10 +86,7 @@
         "refactor:test": "vendor/bin/rector process --dry-run",
         "typos": "vendor/bin/peck",
         "lint": "XDEBUG_MODE=off vendor/bin/phpstan analyze",
-        "test": [
-            "vendor/bin/phpunit",
-            "vendor/bin/pest"
-        ],
+        "test": "vendor/bin/pest",
         "fix": [
             "@fmt",
             "@refactor"

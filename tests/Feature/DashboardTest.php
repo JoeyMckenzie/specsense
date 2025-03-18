@@ -8,12 +8,12 @@ use App\Models\User;
 
 describe('Dashboard', function (): void {
     it('ensures guests are redirected to the login page', function (): void {
-        $this->get('/dashboard')->assertRedirect('/login');
+        $this->get('/documents')->assertRedirect('/login');
     });
 
     it('allows authenticated users to visit the dashboard', function (): void {
-        $this->actingAs($user = User::factory()->create());
+        $this->actingAs(User::factory()->create());
 
-        $this->get('/dashboard')->assertOk();
+        $this->get('/documents')->assertOk();
     });
 });

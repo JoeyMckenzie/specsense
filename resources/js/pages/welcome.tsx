@@ -36,7 +36,7 @@ export default function Welcome() {
                         <div className="flex items-center gap-4">
                             {auth.user ? (
                                 <Button asChild variant="default">
-                                    <Link href={route("dashboard")}>
+                                    <Link href={route("documents.index")}>
                                         Dashboard
                                     </Link>
                                 </Button>
