@@ -26,12 +26,12 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "peckphp/peck": "^0.1.2",
+        "pestphp/pest": "^3.7",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-strict-rules": "^2.0",
-        "phpunit/phpunit": "^11.5.3",
+        "phpunit/phpunit": "^11.5",
         "rector/rector": "^2.0"
     },
     "autoload": {
@@ -81,7 +81,11 @@
         "refactor": "vendor/bin/rector process",
         "refactor:test": "vendor/bin/rector process --dry-run",
         "typos": "vendor/bin/peck",
-        "lint": "XDEBUG_MODE=off vendor/bin/phpstan analyze"
+        "lint": "XDEBUG_MODE=off vendor/bin/phpstan analyze",
+        "test": [
+            "vendor/bin/phpunit",
+            "vendor/bin/pest"
+        ]
     },
     "extra": {
         "laravel": {
