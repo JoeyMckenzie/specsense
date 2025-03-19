@@ -56,7 +56,7 @@ export default function Show({
     return (
         <AppLayout breadcrumbs={breadcrumbs(document.name)}>
             <Head title={`${document.name} - Document Details`} />
-            <div className="container mx-auto py-8">
+            <div className="container mx-auto p-8">
                 <div className="mb-8 flex items-center justify-between">
                     <div>
                         <h1 className="font-bold text-3xl tracking-tight">
@@ -77,7 +77,12 @@ export default function Show({
                             onOpenChange={setIsDeleteDialogOpen}
                         >
                             <DialogTrigger asChild>
-                                <Button variant="destructive">Delete</Button>
+                                <Button
+                                    variant="destructive"
+                                    className="cursor-pointer"
+                                >
+                                    Delete
+                                </Button>
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>

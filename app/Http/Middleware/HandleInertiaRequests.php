@@ -51,7 +51,7 @@ final class HandleInertiaRequests extends Middleware
         [$message, $author] = str($randomQuote)->explode('-');
 
         $user = $request->user();
-        $userData = $user
+        $userData = $user !== null
             ? UserSummaryData::from($user)
             : null;
 
