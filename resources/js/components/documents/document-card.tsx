@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import {
     Card,
     CardContent,
@@ -8,33 +7,17 @@ import {
 import { formatBytes, formatDate } from "@/lib/utils";
 import { FileText } from "lucide-react";
 
-interface DocumentCardProps {
-    id: number;
-    name: string;
-    description?: string | null;
-    size: string;
-    created_at: string;
-    // @ts-ignore
-    analysis_status: App.Enums.DocumentAnalysisStatus;
-    thumbnail_url?: string;
-}
-
 export function DocumentCard({
-    name,
-    description,
-    size,
-    created_at,
-    analysis_status,
-    thumbnail_url,
-}: DocumentCardProps) {
+    document,
+}: { document: App.Data.DocumentSummaryData }) {
     return (
         <Card className="group relative overflow-hidden transition-all hover:shadow-md">
             <CardHeader className="p-0">
                 <div className="relative aspect-square w-full overflow-hidden bg-muted">
-                    {thumbnail_url ? (
+                    {document.thumbnail ? (
                         <img
-                            src={thumbnail_url}
-                            alt={name}
+                            src={document.thumbnail}
+                            alt={document.name}
                             className="h-full w-full object-cover transition-transform group-hover:scale-105"
                         />
                     ) : (
@@ -45,32 +28,34 @@ export function DocumentCard({
                 </div>
             </CardHeader>
             <CardContent className="p-3">
-                <h3 className="line-clamp-1 font-semibold text-base">{name}</h3>
-                {description && (
+                <h3 className="line-clamp-1 font-semibold text-base">
+                    {document.name}
+                </h3>
+                {document.description && (
                     <p className="mt-1 line-clamp-1 text-muted-foreground text-xs">
-                        {description}
+                        {document.description}
                     </p>
                 )}
                 <div className="mt-2 flex items-center justify-between text-muted-foreground text-xs">
                     <div className="flex items-center gap-2">
-                        <Badge
-                            variant="secondary"
-                            className={`${
-                                analysis_status === "Completed"
-                                    ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
-                                    : analysis_status === "In Progress"
-                                      ? "bg-blue-500/10 text-blue-500 hover:bg-blue-500/20"
-                                      : analysis_status === "Failed"
-                                        ? "bg-red-500/10 text-red-500 hover:bg-red-500/20"
-                                        : "bg-gray-500/10 text-gray-500 hover:bg-gray-500/20"
-                            }`}
-                        >
-                            {analysis_status}
-                        </Badge>
+                        {/*<Badge*/}
+                        {/*    variant="secondary"*/}
+                        {/*    className={`${*/}
+                        {/*        analysis_status === "Completed"*/}
+                        {/*            ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"*/}
+                        {/*            : analysis_status === "In Progress"*/}
+                        {/*                ? "bg-blue-500/10 text-blue-500 hover:bg-blue-500/20"*/}
+                        {/*                : analysis_status === "Failed"*/}
+                        {/*                    ? "bg-red-500/10 text-red-500 hover:bg-red-500/20"*/}
+                        {/*                    : "bg-gray-500/10 text-gray-500 hover:bg-gray-500/20"*/}
+                        {/*    }`}*/}
+                        {/*>*/}
+                        {/*    {analysis_status}*/}
+                        {/*</Badge>*/}
                     </div>
                     <div className="flex items-center gap-2">
-                        <span>{formatBytes(Number.parseInt(size))}</span>
-                        <span>{formatDate(created_at)}</span>
+                        <span>{formatBytes(document.size)}</span>
+                        <span>{formatDate(document.createdAt)}</span>
                     </div>
                 </div>
             </CardContent>

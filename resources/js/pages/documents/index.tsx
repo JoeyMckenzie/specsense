@@ -12,47 +12,14 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Index() {
-    // TODO: Replace with actual data from the backend
-    const documents1 = [];
-
-    // TODO: Replace with actual data from the backend
-    const documents2 = [
-        {
-            id: 1,
-            name: "Project A Special Provisions",
-            description:
-                "Special provisions document for Project A construction",
-            size: "2500000",
-            created_at: "2024-03-20T10:00:00Z",
-            analysis_status: "Completed",
-            thumbnail_url: undefined,
-        },
-        {
-            id: 2,
-            name: "Project B Requirements",
-            description: "Construction requirements and specifications",
-            size: "1500000",
-            created_at: "2024-03-19T15:30:00Z",
-            analysis_status: "In Progress",
-            thumbnail_url: undefined,
-        },
-        {
-            id: 3,
-            name: "Project C Documents",
-            description: "Project documentation and specifications",
-            size: "3500000",
-            created_at: "2024-03-18T09:15:00Z",
-            analysis_status: "Not Started",
-            thumbnail_url: undefined,
-        },
-    ];
-
+export default function Index({
+    documents,
+}: { documents: App.Data.DocumentSummaryData[] }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Documents" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                {documents1.length > 0 ? (
+                {documents.length > 0 ? (
                     <>
                         <div className="flex items-center justify-between">
                             <h1 className="font-semibold text-2xl">
@@ -64,8 +31,11 @@ export default function Index() {
                             </Button>
                         </div>
                         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                            {documents1.map((document) => (
-                                <DocumentCard key={document.id} {...document} />
+                            {documents.map((document) => (
+                                <DocumentCard
+                                    key={document.id}
+                                    document={document}
+                                />
                             ))}
                         </div>
                     </>

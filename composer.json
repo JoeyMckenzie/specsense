@@ -98,7 +98,7 @@
             "@test",
             "@typos"
         ],
-        "transform": "php artisan typescript:transform --output=resources/js/types/generated.d.ts --format"
+        "transform": "php artisan typescript:transform --format"
     },
     "extra": {
         "laravel": {

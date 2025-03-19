@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Documents;
 
+use App\Data\DocumentSummaryData;
 use App\Http\Concerns\HasVerifiedUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Documents\StoreDocumentRequest;
@@ -24,11 +25,13 @@ final class DocumentController extends Controller
      */
     public function index(): Response
     {
+        $documents = Document::query()
+            ->where('user_id', $this->verifiedUser()->id)
+            ->latest()
+            ->get();
+
         return Inertia::render('documents/index', [
-            'documents' => Document::query()
-                ->where('user_id', $this->verifiedUser()->id)
-                ->latest()
-                ->get(),
+            'documents' => DocumentSummaryData::collect($documents),
         ]);
     }
 
@@ -71,8 +74,8 @@ final class DocumentController extends Controller
      */
     public function show(Document $document): Response
     {
-        return Inertia::render('Documents/Show', [
-            'document' => $document,
+        return Inertia::render('documents/show', [
+            'document' => DocumentSummaryData::from($document),
         ]);
     }
 

@@ -2,7 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import type { Config } from "ziggy-js";
 
 export interface Auth {
-    user: User;
+    user: App.Data.UserSummaryData;
 }
 
 export interface BreadcrumbItem {
@@ -27,21 +27,6 @@ export interface SharedData {
     quote: { message: string; author: string };
     auth: Auth;
     ziggy: Config & { location: string };
-
-    [key: string]: unknown;
-}
-
-export interface User {
-    id: number;
-    first_name: string;
-    last_name: string;
-    full_name: string;
-    initials: string;
-    email: string;
-    profile_image?: string;
-    email_verified_at?: string | null;
-    created_at: string;
-    updated_at: string;
 
     [key: string]: unknown;
 }

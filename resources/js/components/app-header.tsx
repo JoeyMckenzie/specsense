@@ -230,7 +230,10 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                 >
                                     <Avatar className="size-8 overflow-hidden rounded-full">
                                         <AvatarImage
-                                            src={auth.user.profile_image}
+                                            src={
+                                                auth.user.profileImage ??
+                                                undefined
+                                            }
                                             alt={auth.user.initials}
                                         />
                                         <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">

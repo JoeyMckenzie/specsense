@@ -1,0 +1,94 @@
+/* FilePond Custom Styles */
+.filepond--root {
+    @apply border-2 border-dashed border-muted-foreground/25 rounded-lg transition-colors;
+    margin-bottom: 0;
+}
+
+.filepond--root:hover {
+    @apply border-primary bg-primary/5;
+}
+
+.filepond--root.filepond--hopper {
+    @apply border-primary bg-primary/5;
+}
+
+.filepond--drop-label {
+    @apply text-muted-foreground;
+}
+
+.filepond--label-action {
+    @apply text-primary hover:text-primary/80 underline;
+}
+
+.filepond--panel-root {
+    @apply bg-transparent border-transparent;
+}
+
+.filepond--item {
+    @apply bg-muted/50 border-muted-foreground/25 rounded-md;
+}
+
+.filepond--item-panel {
+    @apply bg-transparent border-transparent;
+}
+
+.filepond--drip-blob {
+    @apply bg-primary/20;
+}
+
+.filepond--file-status {
+    @apply text-muted-foreground;
+}
+
+.filepond--file {
+    @apply text-foreground;
+}
+
+.filepond--file-action-button {
+    @apply text-muted-foreground hover:text-foreground;
+}
+
+.filepond--file-action-button:hover {
+    @apply bg-muted;
+}
+
+.filepond--file-action-button[data-align*="center"] {
+    @apply text-destructive hover:text-destructive;
+}
+
+.filepond--file-action-button[data-align*="center"]:hover {
+    @apply bg-destructive/10;
+}
+
+.filepond--progress-indicator {
+    @apply bg-primary;
+}
+
+.filepond--progress-indicator svg {
+    @apply text-primary;
+}
+
+.filepond--file-wrapper {
+    @apply bg-muted/50;
+}
+
+.filepond--file-info {
+    @apply text-muted-foreground;
+}
+
+.filepond--browser {
+    @apply text-primary hover:text-primary/80;
+}
+
+/* Dark mode adjustments */
+.dark .filepond--root {
+    @apply border-muted-foreground/25;
+}
+
+.dark .filepond--item {
+    @apply bg-muted/30;
+}
+
+.dark .filepond--file-wrapper {
+    @apply bg-muted/30;
+}

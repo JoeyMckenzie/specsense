@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $original_filename
  * @property string $filename
  * @property string $path
+ * @property string|null $thumbnail_path
  * @property int $size
  * @property string $type
  * @property \Illuminate\Support\Carbon|null $created_at

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use App\Data\UserSummaryData;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -58,7 +59,7 @@ final class HandleInertiaRequests extends Middleware
                 'author' => trim($author),
             ],
             'auth' => [
-                'user' => $request->user(),
+                'user' => UserSummaryData::from($request->user()),
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),
