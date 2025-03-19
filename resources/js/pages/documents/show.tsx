@@ -44,10 +44,15 @@ export default function Show({
                             Uploaded on {formatDate(document.createdAt)}
                         </p>
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex gap-2">
                         <Button variant="outline" asChild>
                             <Link href={route("documents.edit", document.id)}>
-                                Edit Document
+                                Edit
+                            </Link>
+                        </Button>
+                        <Button variant="destructive" asChild>
+                            <Link href={route("documents.edit", document.id)}>
+                                Delete
                             </Link>
                         </Button>
                         <Button asChild>

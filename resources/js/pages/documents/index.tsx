@@ -34,10 +34,12 @@ export default function Index({
                         </div>
                         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             {documents.map((document) => (
-                                <DocumentCard
+                                <Link
                                     key={document.id}
-                                    document={document}
-                                />
+                                    href={route("documents.show", document.id)}
+                                >
+                                    <DocumentCard document={document} />
+                                </Link>
                             ))}
                         </div>
                     </>

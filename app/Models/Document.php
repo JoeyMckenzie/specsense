@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Storage;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $user_id
+ * @property-read string|null $preview_image
  * @property-read User $user
  *
  * @method static \Database\Factories\DocumentFactory factory($count = null, $state = [])
@@ -38,6 +39,7 @@ use Illuminate\Support\Facades\Storage;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereOriginalFilename($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Document wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereThumbnail($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereUserId($value)
