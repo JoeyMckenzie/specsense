@@ -6,4 +6,4 @@ composer run ci
 composer audit
 
 npm run check
-npm run audit
+npm audit
