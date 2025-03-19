@@ -6,5 +6,5 @@ use App\Http\Controllers\Documents\DocumentController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function (): void {
-    Route::get('documents', [DocumentController::class, 'index'])->name('documents.index');
+    Route::resource('documents', DocumentController::class);
 });

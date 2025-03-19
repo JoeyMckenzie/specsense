@@ -2,7 +2,7 @@ import { DocumentCard } from "@/components/documents/document-card";
 import { Button } from "@/components/ui/button";
 import AppLayout from "@/layouts/app-layout";
 import type { BreadcrumbItem } from "@/types";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { FileText, Upload } from "lucide-react";
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -83,10 +83,16 @@ export default function Index() {
                                 document analysis
                             </p>
                         </div>
-                        <Button size="lg" className="gap-2">
-                            <Upload className="h-4 w-4" />
-                            Upload Document
-                        </Button>
+                        <Link href={route("documents.create")}>
+                            <Button
+                                size="lg"
+                                className="gap-2"
+                                variant="outline"
+                            >
+                                <Upload className="h-4 w-4" />
+                                Upload Document
+                            </Button>
+                        </Link>
                     </div>
                 )}
             </div>
