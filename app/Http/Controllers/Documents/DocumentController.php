@@ -4,24 +4,29 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Documents;
 
+use App\Http\Concerns\HasVerifiedUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Documents\StoreDocumentRequest;
 use App\Http\Requests\Documents\UpdateDocumentRequest;
 use App\Models\Document;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 use Inertia\Response;
 
 final class DocumentController extends Controller
 {
+    use HasVerifiedUser;
+
     /**
      * Display a listing of the resource.
      */
     public function index(): Response
     {
-        return inertia('documents/index', [
+        return Inertia::render('documents/index', [
             'documents' => Document::query()
-                ->where('user_id', auth()->id())
+                ->where('user_id', $this->verifiedUser()->id)
                 ->latest()
                 ->get(),
         ]);
@@ -32,6 +37,7 @@ final class DocumentController extends Controller
      */
     public function store(StoreDocumentRequest $request): RedirectResponse
     {
+        /** @var UploadedFile $file */
         $file = $request->file('file');
         $filename = $file->hashName();
         $path = $file->storeAs('documents', $filename);
@@ -42,9 +48,9 @@ final class DocumentController extends Controller
             'original_filename' => $file->getClientOriginalName(),
             'filename' => $filename,
             'path' => $path,
-            'size' => (string) $file->getSize(),
+            'size' => $file->getSize(),
             'type' => 'Special Provisions',
-            'user_id' => auth()->id(),
+            'user_id' => $this->verifiedUser()->id,
         ]);
 
         return redirect()
@@ -57,7 +63,7 @@ final class DocumentController extends Controller
      */
     public function create(): Response
     {
-        return inertia('documents/create');
+        return Inertia::render('documents/create');
     }
 
     /**
@@ -65,7 +71,7 @@ final class DocumentController extends Controller
      */
     public function show(Document $document): Response
     {
-        return inertia('Documents/Show', [
+        return Inertia::render('Documents/Show', [
             'document' => $document,
         ]);
     }
@@ -75,7 +81,7 @@ final class DocumentController extends Controller
      */
     public function edit(Document $document): Response
     {
-        return inertia('Documents/Edit', [
+        return Inertia::render('Documents/Edit', [
             'document' => $document,
         ]);
     }
