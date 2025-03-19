@@ -47,7 +47,9 @@ export default function Show({
     const handleDelete = () => {
         destroy(route("documents.destroy", document.id), {
             preserveScroll: true,
-            onSuccess: () => setIsDeleteDialogOpen(false),
+            onSuccess: () => {
+                setIsDeleteDialogOpen(false);
+            },
         });
     };
 

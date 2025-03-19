@@ -22,11 +22,21 @@ export interface NavItem {
     isActive?: boolean;
 }
 
+interface FlashMessage {
+    success?: string;
+    error?: string;
+    warning?: string;
+    info?: string;
+}
+
+type FlashMessageType = "success" | "error" | "warning" | "info";
+
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
     ziggy: Config & { location: string };
+    flash: FlashMessage;
 
     [key: string]: unknown;
 }
