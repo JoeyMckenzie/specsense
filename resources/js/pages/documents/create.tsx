@@ -6,8 +6,15 @@ import { Textarea } from "@/components/ui/textarea";
 import AppLayout from "@/layouts/app-layout";
 import type { BreadcrumbItem } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
-import { Upload } from "lucide-react";
-import { useState } from "react";
+import type { FilePondFile } from "filepond";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+// Register the plugins
+registerPlugin(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -26,41 +33,6 @@ export default function Create() {
         description: "",
         file: null as File | null,
     });
-
-    const [dragActive, setDragActive] = useState(false);
-
-    const handleDrag = (e: React.DragEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-    };
-
-    const handleDragIn = (e: React.DragEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setDragActive(true);
-    };
-
-    const handleDragOut = (e: React.DragEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setDragActive(false);
-    };
-
-    const handleDrop = (e: React.DragEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setDragActive(false);
-
-        if (e.dataTransfer.files?.[0]) {
-            setData("file", e.dataTransfer.files[0]);
-        }
-    };
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files?.[0]) {
-            setData("file", e.target.files[0]);
-        }
-    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -81,8 +53,8 @@ export default function Create() {
                         </p>
                     </div>
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="grid gap-8 md:grid-cols-2">
+                    <form onSubmit={handleSubmit} className="mx-auto max-w-2xl">
+                        <div className="grid grid-cols-1 gap-8">
                             <div className="space-y-6">
                                 <div className="grid gap-2">
                                     <Label htmlFor="name">Title</Label>
@@ -121,42 +93,24 @@ export default function Create() {
                             <div className="space-y-6">
                                 <div className="grid gap-2">
                                     <Label>Document File</Label>
-                                    <div
-                                        className={`relative flex h-full min-h-[200px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed transition-colors ${
-                                            dragActive
-                                                ? "border-primary bg-primary/5"
-                                                : "border-muted-foreground/25"
-                                        }`}
-                                        onDragEnter={handleDragIn}
-                                        onDragLeave={handleDragOut}
-                                        onDragOver={handleDrag}
-                                        onDrop={handleDrop}
-                                        onClick={() =>
-                                            document
-                                                .getElementById("file")
-                                                ?.click()
-                                        }
-                                        onKeyUp={() =>
-                                            document
-                                                .getElementById("file")
-                                                ?.click()
-                                        }
-                                    >
-                                        <input
-                                            id="file"
-                                            type="file"
-                                            className="hidden"
-                                            onChange={handleFileChange}
-                                            accept=".pdf"
-                                            required
-                                        />
-                                        <Upload className="mb-3 h-8 w-8 text-muted-foreground" />
-                                        <p className="text-muted-foreground text-sm">
-                                            {data.file
-                                                ? data.file.name
-                                                : "Drag and drop your file here, or click to select"}
-                                        </p>
-                                    </div>
+                                    <FilePond
+                                        files={data.file ? [data.file] : []}
+                                        onupdatefiles={(
+                                            files: FilePondFile[],
+                                        ) => {
+                                            setData(
+                                                "file",
+                                                (files[0]?.file as File) ??
+                                                    null,
+                                            );
+                                        }}
+                                        acceptedFileTypes={["application/pdf"]}
+                                        maxFiles={1}
+                                        labelIdle="Drag and drop your PDF here, or click to browse"
+                                        labelFileTypeNotAllowed="File is of invalid type"
+                                        allowMultiple={false}
+                                        className="filepond"
+                                    />
                                     <InputError message={errors.file} />
                                 </div>
                             </div>
