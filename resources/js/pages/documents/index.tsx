@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import AppLayout from "@/layouts/app-layout";
 import type { BreadcrumbItem } from "@/types";
 import { Head } from "@inertiajs/react";
-import { Plus } from "lucide-react";
+import { FileText, Upload } from "lucide-react";
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -14,7 +14,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Index() {
     // TODO: Replace with actual data from the backend
-    const documents = [
+    const documents1 = [];
+
+    // TODO: Replace with actual data from the backend
+    const documents2 = [
         {
             id: 1,
             name: "Project A Special Provisions",
@@ -47,20 +50,45 @@ export default function Index() {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Dashboard" />
+            <Head title="Documents" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                <div className="flex items-center justify-between">
-                    <h1 className="font-semibold text-2xl">Your Documents</h1>
-                    <Button>
-                        <Plus className="mr-2 h-4 w-4" />
-                        Upload Document
-                    </Button>
-                </div>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {documents.map((document) => (
-                        <DocumentCard key={document.id} {...document} />
-                    ))}
-                </div>
+                {documents1.length > 0 ? (
+                    <>
+                        <div className="flex items-center justify-between">
+                            <h1 className="font-semibold text-2xl">
+                                Your Documents
+                            </h1>
+                            <Button>
+                                <Upload className="mr-2 h-4 w-4" />
+                                Upload Document
+                            </Button>
+                        </div>
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            {documents1.map((document) => (
+                                <DocumentCard key={document.id} {...document} />
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    <div className="flex h-full flex-1 flex-col items-center justify-center gap-6 rounded-xl border border-dashed p-8 text-center">
+                        <div className="rounded-full bg-primary/10 p-4">
+                            <FileText className="h-8 w-8 text-primary" />
+                        </div>
+                        <div className="space-y-2">
+                            <h2 className="font-semibold text-xl">
+                                No documents yet
+                            </h2>
+                            <p className="text-muted-foreground text-sm">
+                                Upload your first document to get started with
+                                document analysis
+                            </p>
+                        </div>
+                        <Button size="lg" className="gap-2">
+                            <Upload className="h-4 w-4" />
+                            Upload Document
+                        </Button>
+                    </div>
+                )}
             </div>
         </AppLayout>
     );
