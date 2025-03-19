@@ -110,9 +110,11 @@ final class DocumentController extends Controller
     public function destroy(Document $document): RedirectResponse
     {
         Storage::delete($document->path);
-        if ($document->thumbnail_path) {
-            Storage::delete($document->thumbnail_path);
+
+        if ($document->thumbnail !== null) {
+            Storage::delete($document->thumbnail);
         }
+
         $document->delete();
 
         return redirect()
