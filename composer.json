@@ -76,7 +76,7 @@
         "prepare": "git config core.hookspath .githooks",
         "generate:ide-helpers": [
             "php artisan ide-helper:generate",
-            "php artisan ide-helper:models -MRW",
+            "php artisan ide-helper:models -RW",
             "php artisan ide-helper:meta",
             "@fmt"
         ],
