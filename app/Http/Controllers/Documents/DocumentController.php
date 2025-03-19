@@ -55,11 +55,14 @@ final class DocumentController extends Controller
             $thumbnailFilename = pathinfo($filename, PATHINFO_FILENAME).'_thumb.jpg';
             $thumbnailPath = 'thumbnails/'.$thumbnailFilename;
 
+            // Ensure the thumbnails directory exists
+            Storage::disk('public')->makeDirectory('thumbnails');
+
             // Generate thumbnail at 300x300 pixels
             $pdf->selectPage(1)
                 ->resolution(300)
                 ->thumbnailSize(300, 300)
-                ->save(Storage::path($thumbnailPath));
+                ->save(Storage::disk('public')->path($thumbnailPath));
         } catch (Exception $e) {
             // Log the error but don't fail the upload
             Log::error('Failed to generate thumbnail: '.$e->getMessage());
