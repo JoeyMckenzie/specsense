@@ -42,7 +42,17 @@ export function DocumentCard({
                             <FileText className="h-8 w-8 text-muted-foreground" />
                         </div>
                     )}
-                    <div className="absolute top-2 right-2">
+                </div>
+            </CardHeader>
+            <CardContent className="p-3">
+                <h3 className="line-clamp-1 font-semibold text-base">{name}</h3>
+                {description && (
+                    <p className="mt-1 line-clamp-1 text-muted-foreground text-xs">
+                        {description}
+                    </p>
+                )}
+                <div className="mt-2 flex items-center justify-between text-muted-foreground text-xs">
+                    <div className="flex items-center gap-2">
                         <Badge
                             variant="secondary"
                             className={`${
@@ -58,18 +68,10 @@ export function DocumentCard({
                             {analysis_status}
                         </Badge>
                     </div>
-                </div>
-            </CardHeader>
-            <CardContent className="p-3">
-                <h3 className="line-clamp-1 font-semibold text-base">{name}</h3>
-                {description && (
-                    <p className="mt-1 line-clamp-1 text-muted-foreground text-xs">
-                        {description}
-                    </p>
-                )}
-                <div className="mt-2 flex items-center justify-between text-muted-foreground text-xs">
-                    <span>{formatBytes(Number.parseInt(size))}</span>
-                    <span>{formatDate(created_at)}</span>
+                    <div className="flex items-center gap-2">
+                        <span>{formatBytes(Number.parseInt(size))}</span>
+                        <span>{formatDate(created_at)}</span>
+                    </div>
                 </div>
             </CardContent>
             <CardFooter className="p-3 pt-0">
