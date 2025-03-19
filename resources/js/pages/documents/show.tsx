@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/card";
 import AppLayout from "@/layouts/app-layout";
 import { formatBytes, formatDate } from "@/lib/utils";
-import type { BreadcrumbItem } from "@/types";
-import { Head, Link } from "@inertiajs/react";
+import type { BreadcrumbItem, SharedData } from "@/types";
+import { Head, Link, usePage } from "@inertiajs/react";
 import { FileText, FileType, HardDrive, Upload, User } from "lucide-react";
 
 const breadcrumbs = (title: string): BreadcrumbItem[] => [
@@ -27,29 +27,10 @@ const breadcrumbs = (title: string): BreadcrumbItem[] => [
     },
 ];
 
-interface Document {
-    id: number;
-    name: string;
-    description: string | null;
-    original_filename: string;
-    filename: string;
-    path: string;
-    size: number;
-    type: string;
-    created_at: string;
-    updated_at: string;
-    user: {
-        id: number;
-        first_name: string;
-        last_name: string;
-    };
-}
-
-interface Props {
-    document: Document;
-}
-
-export default function Show({ document }: Props) {
+export default function Show({
+    document,
+}: { document: App.Data.DocumentSummaryData }) {
+    const { user } = usePage<SharedData>().props.auth;
     return (
         <AppLayout breadcrumbs={breadcrumbs(document.name)}>
             <Head title={`${document.name} - Document Details`} />
@@ -60,7 +41,7 @@ export default function Show({ document }: Props) {
                             {document.name}
                         </h1>
                         <p className="mt-2 text-muted-foreground">
-                            Uploaded on {formatDate(document.created_at)}
+                            Uploaded on {formatDate(document.createdAt)}
                         </p>
                     </div>
                     <div className="flex gap-4">
@@ -90,10 +71,10 @@ export default function Show({ document }: Props) {
                                 <FileText className="h-5 w-5 text-muted-foreground" />
                                 <div>
                                     <p className="font-medium text-sm">
-                                        Original Filename
+                                        Filename
                                     </p>
                                     <p className="text-muted-foreground text-sm">
-                                        {document.original_filename}
+                                        {document.name}
                                     </p>
                                 </div>
                             </div>
@@ -137,8 +118,7 @@ export default function Show({ document }: Props) {
                                         Uploaded By
                                     </p>
                                     <p className="text-muted-foreground text-sm">
-                                        {document.user.first_name}{" "}
-                                        {document.user.last_name}
+                                        {user.fullName}
                                     </p>
                                 </div>
                             </div>
@@ -149,7 +129,7 @@ export default function Show({ document }: Props) {
                                         Upload Date
                                     </p>
                                     <p className="text-muted-foreground text-sm">
-                                        {formatDate(document.created_at)}
+                                        {formatDate(document.createdAt)}
                                     </p>
                                 </div>
                             </div>
@@ -160,7 +140,7 @@ export default function Show({ document }: Props) {
                                         Last Updated
                                     </p>
                                     <p className="text-muted-foreground text-sm">
-                                        {formatDate(document.updated_at)}
+                                        {formatDate(document.updatedAt)}
                                     </p>
                                 </div>
                             </div>

@@ -10,11 +10,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Documents\StoreDocumentRequest;
 use App\Http\Requests\Documents\UpdateDocumentRequest;
 use App\Models\Document;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
+use Log;
+use Spatie\PdfToImage\Pdf;
 
 final class DocumentController extends Controller
 {
@@ -45,12 +48,30 @@ final class DocumentController extends Controller
         $filename = $file->hashName();
         $path = $file->storeAs('documents', $filename);
 
+        // Generate thumbnail from first page of PDF
+        $thumbnailPath = null;
+        try {
+            $pdf = new Pdf(Storage::path($path));
+            $thumbnailFilename = pathinfo($filename, PATHINFO_FILENAME).'_thumb.jpg';
+            $thumbnailPath = 'thumbnails/'.$thumbnailFilename;
+
+            // Generate thumbnail at 300x300 pixels
+            $pdf->selectPage(1)
+                ->resolution(300)
+                ->thumbnailSize(300, 300)
+                ->save(Storage::path($thumbnailPath));
+        } catch (Exception $e) {
+            // Log the error but don't fail the upload
+            Log::error('Failed to generate thumbnail: '.$e->getMessage());
+        }
+
         $document = Document::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'original_filename' => $file->getClientOriginalName(),
             'filename' => $filename,
             'path' => $path,
+            'thumbnail' => $thumbnailPath,
             'size' => $file->getSize(),
             'type' => 'Special Provisions',
             'user_id' => $this->verifiedUser()->id,
@@ -107,6 +128,9 @@ final class DocumentController extends Controller
     public function destroy(Document $document): RedirectResponse
     {
         Storage::delete($document->path);
+        if ($document->thumbnail_path) {
+            Storage::delete($document->thumbnail_path);
+        }
         $document->delete();
 
         return redirect()

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('original_filename');
             $table->string('filename');
             $table->string('path');
+            $table->string('thumbnail')->nullable();
             $table->integer('size');
             $table->enum('type', DocumentType::toArray());
             $table->timestamps();

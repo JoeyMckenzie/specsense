@@ -25,10 +25,12 @@ export default function Index({
                             <h1 className="font-semibold text-2xl">
                                 Your Documents
                             </h1>
-                            <Button>
-                                <Upload className="mr-2 h-4 w-4" />
-                                Upload Document
-                            </Button>
+                            <Link href={route("documents.create")} as="button">
+                                <Button>
+                                    <Upload className="mr-2 h-4 w-4" />
+                                    Upload Document
+                                </Button>
+                            </Link>
                         </div>
                         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             {documents.map((document) => (

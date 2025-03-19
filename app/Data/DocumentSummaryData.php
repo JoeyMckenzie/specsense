@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Data;
 
+use App\Enums\DocumentType;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -18,9 +19,13 @@ final class DocumentSummaryData extends Data
 
     public string $createdAt;
 
+    public string $updatedAt;
+
     public int $size;
 
     public UserSummaryData $user;
 
-    public ?string $thumbnail = null;
+    public ?string $previewImage = null;
+
+    public DocumentType $type;
 }

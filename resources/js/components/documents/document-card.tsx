@@ -14,9 +14,9 @@ export function DocumentCard({
         <Card className="group relative overflow-hidden transition-all hover:shadow-md">
             <CardHeader className="p-0">
                 <div className="relative aspect-square w-full overflow-hidden bg-muted">
-                    {document.thumbnail ? (
+                    {document.previewImage ? (
                         <img
-                            src={document.thumbnail}
+                            src={document.previewImage}
                             alt={document.name}
                             className="h-full w-full object-cover transition-transform group-hover:scale-105"
                         />

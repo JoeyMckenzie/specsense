@@ -4,9 +4,11 @@ declare namespace App.Data {
         name: string;
         description: string;
         createdAt: string;
+        updatedAt: string;
         size: number;
         user: App.Data.UserSummaryData;
-        thumbnail: string | null;
+        previewImage: string | null;
+        type: App.Enums.DocumentType;
     };
     export type UserSummaryData = {
         id: number;

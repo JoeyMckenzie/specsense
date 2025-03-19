@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Database\Factories\DocumentFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property int $id
@@ -16,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $original_filename
  * @property string $filename
  * @property string $path
- * @property string|null $thumbnail_path
+ * @property string|null $thumbnail
  * @property int $size
  * @property string $type
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -48,10 +50,29 @@ final class Document extends Model
     use HasFactory;
 
     /**
+     * @var list{string}
+     */
+    protected $appends = [
+        'preview_image',
+    ];
+
+    /**
      * @return BelongsTo<User, covariant $this>
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return Attribute<string, string>
+     */
+    protected function previewImage(): Attribute
+    {
+        $thumbnail = $this->thumbnail !== null
+            ? Storage::url($this->thumbnail)
+            : null;
+
+        return Attribute::make(fn (): ?string => $thumbnail);
     }
 }

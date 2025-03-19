@@ -39,6 +39,11 @@ export default function Create() {
         post("/documents");
     };
 
+    const handleFileUpdate = (files: FilePondFile[]) => {
+        const file = files[0]?.file as File;
+        setData("file", file ?? null);
+    };
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Upload Document" />
@@ -95,15 +100,7 @@ export default function Create() {
                                     <Label>Document File</Label>
                                     <FilePond
                                         files={data.file ? [data.file] : []}
-                                        onupdatefiles={(
-                                            files: FilePondFile[],
-                                        ) => {
-                                            setData(
-                                                "file",
-                                                (files[0]?.file as File) ??
-                                                    null,
-                                            );
-                                        }}
+                                        onupdatefiles={handleFileUpdate}
                                         acceptedFileTypes={["application/pdf"]}
                                         maxFiles={1}
                                         labelIdle="Drag and drop your PDF here, or click to browse"
