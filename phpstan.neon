@@ -8,7 +8,5 @@ parameters:
         - bootstrap/providers.php
     reportUnmatchedIgnoredErrors: true
     ignoreErrors:
-        - message: '#PHPDoc tag @mixin contains unknown class App\\Models\\IdeHelper[a-zA-Z]+#'
-          path: app/Models/*.php
         - message: '#Dynamic call to static method Illuminate\\Http\\Request::validate\(\).#'
           path: app/Http/Controllers/**/*.php
