@@ -10,6 +10,7 @@ use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Spatie\PdfToImage\Pdf;
+use Throwable;
 
 final class GenerateDocumentThumbnail implements ShouldQueue
 {
@@ -47,8 +48,9 @@ final class GenerateDocumentThumbnail implements ShouldQueue
         $this->document->save();
     }
 
-    public function fail($exception = null): void
+    public function fail(?Throwable $exception = null): void
     {
-        Log::error('Failed to generate thumbnail: '.$exception?->getMessage());
+        $message = $exception?->getMessage() ?? 'Unknown error';
+        Log::error('Failed to generate thumbnail: '.$message);
     }
 }

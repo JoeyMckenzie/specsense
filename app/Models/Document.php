@@ -52,7 +52,7 @@ final class Document extends Model
     use HasFactory;
 
     /**
-     * @var list{string}
+     * @var list<string>
      */
     protected $appends = [
         'preview_image',
