@@ -50,6 +50,11 @@ final class HandleInertiaRequests extends Middleware
         /** @var string $author */
         [$message, $author] = str($randomQuote)->explode('-');
 
+        $user = $request->user();
+        $userData = $user
+            ? UserSummaryData::from($user)
+            : null;
+
         /** @var array<string, mixed> $sharedData */
         $sharedData = [
             ...parent::share($request),
@@ -59,7 +64,7 @@ final class HandleInertiaRequests extends Middleware
                 'author' => trim($author),
             ],
             'auth' => [
-                'user' => UserSummaryData::from($request->user()),
+                'user' => $userData,
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),
