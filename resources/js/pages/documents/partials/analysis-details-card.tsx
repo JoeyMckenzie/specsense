@@ -14,6 +14,7 @@ import {
     Hash,
     MapPin,
     Target,
+    TextSearch,
 } from "lucide-react";
 
 export function AnalysisDetailsCard({
@@ -79,6 +80,21 @@ export function AnalysisDetailsCard({
                     Information extracted from the document analysis
                 </p>
             </div>
+
+            <Card>
+                <CardHeader className="flex flex-row items-center justify-between">
+                    <CardTitle className="font-medium text-sm">
+                        Summary
+                    </CardTitle>
+                    <TextSearch className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                    <p className="text-muted-foreground text-sm">
+                        {analysis.documentSummary || "Not specified"}
+                    </p>
+                </CardContent>
+            </Card>
+
             <div className="grid gap-4 sm:grid-cols-4">
                 {details.map((detail) => (
                     <Card key={detail.label}>

@@ -13,6 +13,8 @@ final class DocumentAnalysisSummaryData extends Data
 {
     public DocumentAnalysisStatus $status;
 
+    public ?string $documentSummary = null;
+
     public ?string $contractNumber = null;
 
     public ?string $projectId = null;

@@ -1,6 +1,7 @@
 declare namespace App.Data {
     export type DocumentAnalysisSummaryData = {
         status: App.Enums.DocumentAnalysisStatus;
+        documentSummary: string | null;
         contractNumber: string | null;
         projectId: string | null;
         engineersEstimate: string | null;
