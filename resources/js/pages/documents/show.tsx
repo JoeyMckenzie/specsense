@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import AppLayout from "@/layouts/app-layout";
 import { formatBytes, formatDate } from "@/lib/utils";
+import { AnalysisDetailsCard } from "@/pages/documents/partials/analysis-details-card";
 import { AnalysisFormModal } from "@/pages/documents/partials/analysis-form-modal";
 import { AnalysisStatusBadge } from "@/pages/documents/partials/analysis-status-badge";
 import { DeleteFormModal } from "@/pages/documents/partials/delete-form-modal";
@@ -155,6 +156,10 @@ export default function Show({
                             </div>
                         </CardContent>
                     </Card>
+
+                    {document.analysis && (
+                        <AnalysisDetailsCard analysis={document.analysis} />
+                    )}
 
                     {document.description && (
                         <Card className="md:col-span-2">

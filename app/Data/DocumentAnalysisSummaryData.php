@@ -12,4 +12,20 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 final class DocumentAnalysisSummaryData extends Data
 {
     public DocumentAnalysisStatus $status;
+
+    public ?string $contractNumber = null;
+
+    public ?string $projectId = null;
+
+    public ?string $engineersEstimate = null;
+
+    public ?string $bidDueDate = null;
+
+    public ?string $numberOfWorkingDays = null;
+
+    public ?string $dbeGoal = null;
+
+    public ?string $dirNumber = null;
+
+    public ?string $jobLocation = null;
 }
