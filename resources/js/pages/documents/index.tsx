@@ -23,7 +23,7 @@ export default function Index({
                     <>
                         <div className="flex items-center justify-between">
                             <h1 className="font-semibold text-2xl">
-                                Your Documents
+                                My Documents
                             </h1>
                             <Link href={route("documents.create")} as="button">
                                 <Button>
