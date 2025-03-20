@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Concerns\HasVerifiedUser;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 final class EmailVerificationNotificationController
 {
@@ -21,6 +20,7 @@ final class EmailVerificationNotificationController
             return redirect()->intended(route('documents.index', absolute: false));
         }
         $this->verifiedUser()->sendEmailVerificationNotification();
+
         return back()->with('status', 'verification-link-sent');
     }
 }

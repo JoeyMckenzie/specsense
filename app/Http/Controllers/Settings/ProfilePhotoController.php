@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Concerns\HasVerifiedUser;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 final class ProfilePhotoController
@@ -24,6 +23,7 @@ final class ProfilePhotoController
         }
         $this->verifiedUser()->avatar = null;
         $this->verifiedUser()->save();
+
         return to_route('profile.edit');
     }
 }

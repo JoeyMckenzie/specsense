@@ -86,7 +86,7 @@ final class DocumentController
      */
     public function edit(Document $document): Response
     {
-        return Inertia::render('Documents/Edit', [
+        return Inertia::render('documents/edit', [
             'document' => $document,
         ]);
     }

@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Documents;
 
-use App\Http\Requests\Documents\StoreDocumentAnalysisRequest;
-use App\Http\Requests\Documents\UpdateDocumentAnalysisRequest;
-use App\Models\DocumentAnalysis;
-
 final class DocumentAnalysisController
 {
     /**
