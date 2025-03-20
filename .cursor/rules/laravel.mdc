@@ -3,34 +3,80 @@ description:
 globs: 
 alwaysApply: true
 ---
-You are a highly skilled Laravel application developer tasked with creating a new package. Your goal is to provide a detailed plan and code structure for the package based on the given project description and specific requirements.
+You are an expert in PHP, Laravel, React, Inertia, Blade, Pest, and Tailwind.
 
-1. Development Guidelines:
-  
-  - Use PHP 8.3+ features where appropriate
-  - Follow Laravel conventions and best practices
-  - Use the `pint.json` configuration at the project root for styling
-  - Verify code is properly fixed for linting errors with PHPStan 2.0
-  - You can run `composer run lint` to check for current linting errors
-  - Focus on creating code that provides excellent developer experience (DX), better autocompletion, type safety, and comprehensive docblocks
+1. Coding Standards
 
-2. Coding Standards and Conventions:
-  
-  - File names: Use kebab-case (e.g., my-class-file.php)
-  - Class and Enum names: Use PascalCase (e.g., MyClass)
-  - Method names: Use camelCase (e.g., myMethod)
-  - Variable and Properties names: Use snake_case (e.g., my_variable)
-  - Constants and Enum Cases names: Use SCREAMING_SNAKE_CASE (e.g., MY_CONSTANT)
+- Utilize the latest PHP v8.4 features.
+- Utilize TypeScript and always prefer strict typing
+- Adhere to coding standards defined in `pint.json`.
+- Enforce strict type safety, including `array` shapes using PHPStan.
+- Follow Laravel conventions and best practices
+- Use the `pint.json` configuration at the project root for styling
+- Verify code is properly fixed for linting errors with PHPStan 2.0
+- You can run `composer run lint` to check for current linting errors for PHP code
+- You can run `npm run lint` to check for TypeScript/React linting errors
+- Focus on creating code that provides excellent developer experience (DX), better autocompletion, type safety, and comprehensive docblocks
 
-3. Package Structure and File Organization:
-  
-  - Outline the directory structure for the package
-  - Describe the purpose of each main directory and key files
-  - Explain how the package will be integrated into a Laravel application
+2. Project Structure & Architecture
 
-4. Testing and Documentation:
-  
-  - Provide an overview of the testing strategy (e.g., unit tests, feature tests)
-  - Outline the documentation structure, including README.md, usage examples, and API references
+- Remove the existing `.gitkeep` file when creating a new file.
+- Follow the existing project structure; do not create additional folders.
+- Do not use the `DB::` facade directly—always use `Model::query()`.
+- Do not add, update, or delete dependencies without prior approval.
 
-Remember to adhere to the specified coding standards, development guidelines, and Laravel best practices throughout your plan and code samples. Ensure that your response is detailed, well-structured, and provides a clear roadmap for developing the Laravel package based on the given project description and requirements.
+2.1 Directory Conventions
+
+`app/Http/Controllers` - Controllers
+- Do not use abstract `Controller.php` or any base controller.
+
+`app/Http/Requests` - Form Requests
+- Always use FormRequest for validation.
+- Use `Create`, `Update`, and `Delete` verbs in naming.
+
+`app/Actions` - Business Logic
+- Follow the Actions pattern.
+- Use `Create`, `Update`, and `Delete` verbs in naming.
+- Example Implementation:
+
+```php
+public function store(CreateTodoRequest $request, CreateTodoAction $action)
+{
+    /** @var User $user */
+    $user = $request->user();
+
+    $action->handle($user, $request->validated());
+    
+    // ...
+}
+```
+
+app/Models - Eloquent Models
+- Do not use `fillable` in models.
+
+3. Testing
+
+- All tests must be written using PEST PHP.
+- Run `composer run lint` after creating or modifying a file.
+- Run `composer run test` before finalizing any changes to ensure tests pass.
+- Always confirm with approval before removing a test.
+- Ensure all new code is covered by tests.
+- When creating models, always generate a `{Model}Factory`.
+
+3.1 Test Directory Structure
+
+- Commands: tests/Feature/Console
+- Controllers: tests/Feature/Http
+- Actions: tests/Unit/Actions
+- Models: tests/Unit/Models
+- Jobs: tests/Unit/Jobs
+
+4. Styling & UI
+
+- Tailwind CSS with ShadCN UI must be used for styling.
+- Maintain a minimal UI design.
+
+5. Task Completion Requirements
+
+- Recompile assets after making frontend-related changes.
+- Ensure compliance with all above guidelines before marking a task as complete.

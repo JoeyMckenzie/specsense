@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Documents;
 
 use App\Data\DocumentSummaryData;
 use App\Http\Concerns\HasVerifiedUser;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Documents\StoreDocumentRequest;
 use App\Http\Requests\Documents\UpdateDocumentRequest;
 use App\Jobs\GenerateDocumentThumbnail;
@@ -17,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
-final class DocumentController extends Controller
+final class DocumentController
 {
     use HasVerifiedUser;
 

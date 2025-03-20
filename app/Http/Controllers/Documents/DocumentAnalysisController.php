@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Documents;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Documents\StoreDocumentAnalysisRequest;
 use App\Http\Requests\Documents\UpdateDocumentAnalysisRequest;
 use App\Models\DocumentAnalysis;
 
-final class DocumentAnalysisController extends Controller
+final class DocumentAnalysisController
 {
     /**
      * Display a listing of the resource.
@@ -30,7 +29,7 @@ final class DocumentAnalysisController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDocumentAnalysisRequest $request): void
+    public function store(): void
     {
         //
     }
@@ -38,7 +37,7 @@ final class DocumentAnalysisController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DocumentAnalysis $documentAnalysis): void
+    public function show(): void
     {
         //
     }
@@ -46,7 +45,7 @@ final class DocumentAnalysisController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DocumentAnalysis $documentAnalysis): void
+    public function edit(): void
     {
         //
     }
@@ -54,7 +53,7 @@ final class DocumentAnalysisController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDocumentAnalysisRequest $request, DocumentAnalysis $documentAnalysis): void
+    public function update(): void
     {
         //
     }
@@ -62,7 +61,7 @@ final class DocumentAnalysisController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DocumentAnalysis $documentAnalysis): void
+    public function destroy(): void
     {
         //
     }
