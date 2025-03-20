@@ -28,10 +28,6 @@ const breadcrumbs = (title: string): BreadcrumbItem[] => [
         href: "/documents",
     },
     {
-        title: "Document Details",
-        href: "#",
-    },
-    {
         title,
         href: "#",
     },
@@ -56,13 +52,13 @@ export default function Show({
     return (
         <AppLayout breadcrumbs={breadcrumbs(document.name)}>
             <Head title={`${document.name} - Document Details`} />
-            <div className="container mx-auto p-8">
-                <div className="mb-8 flex items-center justify-between">
-                    <div>
-                        <h1 className="font-bold text-3xl tracking-tight">
+            <div className="container mx-auto p-4">
+                <div className="mb-8 flex flex-col justify-between sm:flex-row sm:items-center">
+                    <div className="pb-4 sm:pb-0">
+                        <h1 className="font-bold text-2xl tracking-tight">
                             {document.name}
                         </h1>
-                        <p className="mt-2 text-muted-foreground">
+                        <p className="mt-2 text-muted-foreground text-sm">
                             Uploaded on {formatDate(document.createdAt)}
                         </p>
                     </div>
