@@ -30,4 +30,9 @@ final class DocumentAnalysisSummaryData extends Data
     public ?string $dirNumber = null;
 
     public ?string $jobLocation = null;
+
+    /**
+     * @var WorkScopeSummaryData[]
+     */
+    public array $workScopes;
 }

@@ -21,13 +21,13 @@ interface AnalysisFormModalProps {
 
 export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [scopes, setScopes] = useState<string[]>([]);
+    const [workScopes, setWorkScopes] = useState<string[]>([]);
     const [currentScope, setCurrentScope] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const { data, setData, post, processing, reset } = useForm({
         context: "",
-        scopes: [] as string[],
+        work_scopes: [] as string[],
         document_id: documentId,
     });
 
@@ -35,23 +35,23 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
         if (
             e.key === "Enter" &&
             currentScope.trim() &&
-            scopes.length < 5 &&
+            workScopes.length < 5 &&
             currentScope.length <= 30
         ) {
             e.preventDefault();
-            if (scopes.includes(currentScope.trim())) {
+            if (workScopes.includes(currentScope.trim())) {
                 setErrorMessage("This scope has already been added.");
             } else {
-                setScopes([...scopes, currentScope.trim()]);
+                setWorkScopes([...workScopes, currentScope.trim()]);
                 setCurrentScope("");
                 setErrorMessage(""); // Clear error message
             }
         } else if (
             e.key === "Backspace" &&
             !currentScope &&
-            scopes.length > 0
+            workScopes.length > 0
         ) {
-            setScopes(scopes.slice(0, -1));
+            setWorkScopes(workScopes.slice(0, -1));
         }
     };
 
@@ -63,16 +63,21 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
     };
 
     const removeScope = (index: number) => {
-        setScopes(scopes.filter((_, i) => i !== index));
+        setWorkScopes(workScopes.filter((_, i) => i !== index));
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (workScopes.length > 0) {
+            data.work_scopes = [...workScopes];
+        }
+
         post(route("document-analysis.store", documentId), {
             onSuccess: () => {
                 setIsOpen(false);
                 reset();
-                setScopes([]);
+                setWorkScopes([]);
             },
         });
     };
@@ -80,7 +85,7 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
     useEffect(() => {
         if (!isOpen) {
             reset();
-            setScopes([]);
+            setWorkScopes([]);
         }
     }, [isOpen, reset]);
 
@@ -139,7 +144,7 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
                                 </p>
                             )}
                             <div className="flex flex-wrap gap-2">
-                                {scopes.map((scope, index) => (
+                                {workScopes.map((scope, index) => (
                                     <Badge
                                         key={scope}
                                         variant="secondary"
@@ -156,11 +161,6 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
                                     </Badge>
                                 ))}
                             </div>
-                            <input
-                                type="hidden"
-                                name="scopes"
-                                value={JSON.stringify(scopes)}
-                            />
                         </div>
                     </div>
                     <DialogFooter>

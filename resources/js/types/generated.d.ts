@@ -10,6 +10,7 @@ declare namespace App.Data {
         dbeGoal: string | null;
         dirNumber: string | null;
         jobLocation: string | null;
+        workScopes: Array<App.Data.WorkScopeSummaryData>;
     };
     export type DocumentSummaryData = {
         id: number;
@@ -34,6 +35,11 @@ declare namespace App.Data {
         emailVerifiedAt: string | null;
         createdAt: string;
         updatedAt: string;
+    };
+    export type WorkScopeSummaryData = {
+        id: number;
+        name: string;
+        analysis: string | null;
     };
 }
 declare namespace App.Enums {

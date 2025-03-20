@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import {
     Calendar,
+    ClipboardList,
     Clock,
     DollarSign,
     FileCheck,
@@ -115,6 +116,36 @@ export function AnalysisDetailsCard({
                     </Card>
                 ))}
             </div>
+
+            {analysis.workScopes && analysis.workScopes.length > 0 && (
+                <div className="space-y-4">
+                    <div>
+                        <h2 className="font-semibold text-lg">Work Scopes</h2>
+                        <p className="text-muted-foreground text-sm">
+                            Identified work scopes and their analysis
+                        </p>
+                    </div>
+
+                    <div className="grid gap-4">
+                        {analysis.workScopes.map((workScope) => (
+                            <Card key={workScope.id}>
+                                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                    <CardTitle className="font-medium text-sm">
+                                        {workScope.name}
+                                    </CardTitle>
+                                    <ClipboardList className="h-4 w-4 text-muted-foreground" />
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="whitespace-pre-wrap text-muted-foreground text-sm">
+                                        {workScope.analysis ||
+                                            "No analysis available"}
+                                    </p>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

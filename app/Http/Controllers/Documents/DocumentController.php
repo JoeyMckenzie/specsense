@@ -77,8 +77,12 @@ final class DocumentController
      */
     public function show(Document $document): Response
     {
+        $documentData = $document
+            ->load('analysis')
+            ->load('analysis.workScopes');
+
         return Inertia::render('documents/show', [
-            'document' => DocumentSummaryData::from($document->load('analysis')),
+            'document' => DocumentSummaryData::from($documentData),
         ]);
     }
 
