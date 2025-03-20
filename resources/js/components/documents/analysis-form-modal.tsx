@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "@inertiajs/react";
 import { X } from "lucide-react";
-import { type KeyboardEvent, useState } from "react";
+import { type KeyboardEvent, useEffect, useState } from "react";
 
 interface AnalysisFormModalProps {
     documentId: number;
@@ -27,6 +27,7 @@ export function AnalysisFormModal({
     const [isOpen, setIsOpen] = useState(false);
     const [scopes, setScopes] = useState<string[]>([]);
     const [currentScope, setCurrentScope] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const { data, setData, post, processing, reset } = useForm({
         context: "",
         scopes: [] as string[],
@@ -40,8 +41,13 @@ export function AnalysisFormModal({
             currentScope.length <= 30
         ) {
             e.preventDefault();
-            setScopes([...scopes, currentScope.trim()]);
-            setCurrentScope("");
+            if (scopes.includes(currentScope.trim())) {
+                setErrorMessage("This scope has already been added.");
+            } else {
+                setScopes([...scopes, currentScope.trim()]);
+                setCurrentScope("");
+                setErrorMessage(""); // Clear error message
+            }
         } else if (
             e.key === "Backspace" &&
             !currentScope &&
@@ -73,16 +79,26 @@ export function AnalysisFormModal({
         });
     };
 
+    useEffect(() => {
+        if (!isOpen) {
+            reset();
+            setScopes([]);
+        }
+    }, [isOpen, reset]);
+
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>{trigger}</DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <form onSubmit={handleSubmit}>
                     <DialogHeader>
-                        <DialogTitle>Begin Document Analysis</DialogTitle>
+                        <DialogTitle>Begin document analysis?</DialogTitle>
                         <DialogDescription>
-                            Provide additional context and specific scopes of
-                            work you'd like to analyze.
+                            Document analysis can take several minutes. Don't
+                            worry, we'll notify you once the analysis is
+                            complete. Additionally, feel free to provide any
+                            context and specific scopes of work you'd like to us
+                            to focus on during the analysis.
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
@@ -117,6 +133,11 @@ export function AnalysisFormModal({
                                 onKeyDown={handleKeyDown}
                                 placeholder="Type a scope and press Enter"
                             />
+                            {errorMessage && (
+                                <p className="text-red-500 text-sm">
+                                    {errorMessage}
+                                </p>
+                            )}
                             <div className="flex flex-wrap gap-2">
                                 {scopes.map((scope, index) => (
                                     <Badge
