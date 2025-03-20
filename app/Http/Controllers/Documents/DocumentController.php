@@ -28,6 +28,7 @@ final class DocumentController
         $documents = Document::query()
             ->where('user_id', $this->verifiedUser()->id)
             ->latest()
+            ->with('analysis')
             ->get();
 
         return Inertia::render('documents/index', [
