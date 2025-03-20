@@ -14,13 +14,17 @@ import type { BreadcrumbItem } from "@/types";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { ArrowLeft } from "lucide-react";
 
-const breadcrumbs = (title: string): BreadcrumbItem[] => [
+const breadcrumbs = (title: string, id: number): BreadcrumbItem[] => [
     {
         title: "Documents",
         href: "/documents",
     },
     {
-        title: `Editing ${title}`,
+        title,
+        href: `/documents/${id}`,
+    },
+    {
+        title: "Edit",
         href: "#",
     },
 ];
@@ -44,7 +48,7 @@ export default function Edit({
     };
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs(document.name)}>
+        <AppLayout breadcrumbs={breadcrumbs(document.name, document.id)}>
             <Head title={`Edit ${document.name}`} />
             <div className="container mx-auto p-4">
                 <div>
