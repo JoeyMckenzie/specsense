@@ -1,3 +1,4 @@
+import { AnalysisFormModal } from "@/components/documents/analysis-form-modal";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -109,11 +110,10 @@ export default function Show({
                                 </DialogFooter>
                             </DialogContent>
                         </Dialog>
-                        <Button asChild>
-                            <Link href={route("documents.index", document.id)}>
-                                Begin Analysis
-                            </Link>
-                        </Button>
+                        <AnalysisFormModal
+                            documentId={document.id}
+                            trigger={<Button>Begin Analysis</Button>}
+                        />
                     </div>
                 </div>
 

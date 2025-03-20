@@ -22,36 +22,28 @@ export function DocumentCard({
                 )}
             </div>
             <CardContent className="flex-1 p-3">
-                <h3 className="line-clamp-1 font-semibold text-base">
-                    {document.name}
-                </h3>
-                {document.description && (
-                    <p className="mt-1 line-clamp-1 text-muted-foreground text-xs">
-                        {document.description}
-                    </p>
-                )}
+                <div className="flex items-center justify-between gap-2">
+                    <h3 className="line-clamp-1 flex-1 font-semibold text-base">
+                        {document.name}
+                    </h3>
+                    <Badge
+                        variant="secondary"
+                        className={`${
+                            document.analysis?.status === "Completed"
+                                ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
+                                : document.analysis?.status === "In Progress"
+                                  ? "bg-blue-500/10 text-blue-500 hover:bg-blue-500/20"
+                                  : document.analysis?.status === "Failed"
+                                    ? "bg-red-500/10 text-red-500 hover:bg-red-500/20"
+                                    : "bg-gray-500/10 text-gray-500 hover:bg-gray-500/20"
+                        }`}
+                    >
+                        {document.analysis?.status ?? "Not Started"}
+                    </Badge>
+                </div>
                 <div className="mt-2 flex items-center justify-between text-muted-foreground text-xs">
-                    <div className="flex items-center gap-2">
-                        <Badge
-                            variant="secondary"
-                            className={`${
-                                document.analysis?.status === "Completed"
-                                    ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
-                                    : document.analysis?.status ===
-                                        "In Progress"
-                                      ? "bg-blue-500/10 text-blue-500 hover:bg-blue-500/20"
-                                      : document.analysis?.status === "Failed"
-                                        ? "bg-red-500/10 text-red-500 hover:bg-red-500/20"
-                                        : "bg-gray-500/10 text-gray-500 hover:bg-gray-500/20"
-                            }`}
-                        >
-                            {document.analysis?.status ?? "Not Started"}
-                        </Badge>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <span>{formatBytes(document.size)}</span>
-                        <span>{formatDate(document.createdAt)}</span>
-                    </div>
+                    <span>{formatBytes(document.size)}</span>
+                    <span>{formatDate(document.createdAt)}</span>
                 </div>
             </CardContent>
             <CardFooter className="p-3 pt-0">

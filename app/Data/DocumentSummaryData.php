@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Data;
 
 use App\Enums\DocumentType;
+use Carbon\CarbonImmutable;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -17,9 +18,9 @@ final class DocumentSummaryData extends Data
 
     public string $description;
 
-    public string $createdAt;
+    public CarbonImmutable $createdAt;
 
-    public string $updatedAt;
+    public CarbonImmutable $updatedAt;
 
     public int $size;
 
