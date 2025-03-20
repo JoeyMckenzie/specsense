@@ -5,7 +5,8 @@
             "php",
             "biome",
             "dbe",
-            "llm"
+            "llm",
+            "nullish"
         ]
     }
 }
