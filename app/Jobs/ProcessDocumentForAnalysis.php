@@ -159,13 +159,11 @@ final class ProcessDocumentForAnalysis implements ShouldQueue
         foreach ($mappedWorkScopes as $workScope) {
             $this->documentAnalysis
                 ->workScopes
-                ->firstWhere('scope', $workScope['scope'])
+                ->firstWhere('name', $workScope['scope'])
                 ?->update([
                     'analysis' => $workScope['summary'],
                 ]);
         }
-
-        $this->documentAnalysis->save();
     }
 
     private function handleError(Throwable $e): void

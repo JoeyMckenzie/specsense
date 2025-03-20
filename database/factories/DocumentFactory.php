@@ -22,7 +22,7 @@ final class DocumentFactory extends Factory
      */
     public function definition(): array
     {
-        $fs = Storage::fake('public');
+        $fs = Storage::fake('local');
         $filename = fake()->uuid().'.pdf';
 
         /** @var string $contents */

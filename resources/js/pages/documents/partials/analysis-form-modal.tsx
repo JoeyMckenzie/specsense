@@ -35,7 +35,7 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
         if (
             e.key === "Enter" &&
             currentScope.trim() &&
-            workScopes.length < 5 &&
+            workScopes.length < 3 &&
             currentScope.length <= 30
         ) {
             e.preventDefault();
