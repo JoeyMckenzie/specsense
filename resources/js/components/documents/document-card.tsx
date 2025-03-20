@@ -1,9 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { formatBytes, formatDate } from "@/lib/utils";
 import { FileText } from "lucide-react";
 
@@ -11,22 +6,20 @@ export function DocumentCard({
     document,
 }: { document: App.Data.DocumentSummaryData }) {
     return (
-        <Card className="group relative overflow-hidden transition-all hover:shadow-md">
-            <CardHeader className="p-0">
-                <div className="relative aspect-square w-full overflow-hidden bg-muted">
-                    {document.previewImage ? (
-                        <img
-                            src={document.previewImage}
-                            alt={document.name}
-                            className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                        />
-                    ) : (
-                        <div className="flex h-full w-full items-center justify-center">
-                            <FileText className="h-8 w-8 text-muted-foreground" />
-                        </div>
-                    )}
-                </div>
-            </CardHeader>
+        <Card className="group relative overflow-hidden p-0 transition-all hover:shadow-md">
+            <div className="-mt-[1px] relative h-48 w-full overflow-hidden bg-muted">
+                {document.previewImage ? (
+                    <img
+                        src={document.previewImage}
+                        alt={document.name}
+                        className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                    />
+                ) : (
+                    <div className="flex h-full w-full items-center justify-center">
+                        <FileText className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                )}
+            </div>
             <CardContent className="p-3">
                 <h3 className="line-clamp-1 font-semibold text-base">
                     {document.name}
