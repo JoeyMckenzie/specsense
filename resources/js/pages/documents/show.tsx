@@ -51,7 +51,9 @@ export default function Show({
                             </Link>
                         </Button>
                         <DeleteFormModal documentId={document.id} />
-                        <AnalysisFormModal documentId={document.id} />
+                        {!document.analysis && (
+                            <AnalysisFormModal documentId={document.id} />
+                        )}
                     </div>
                 </div>
 

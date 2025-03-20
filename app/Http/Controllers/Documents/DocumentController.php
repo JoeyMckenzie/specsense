@@ -77,7 +77,7 @@ final class DocumentController
     public function show(Document $document): Response
     {
         return Inertia::render('documents/show', [
-            'document' => DocumentSummaryData::from($document),
+            'document' => DocumentSummaryData::from($document->load('analysis')),
         ]);
     }
 
@@ -96,7 +96,10 @@ final class DocumentController
      */
     public function update(UpdateDocumentRequest $request, Document $document): RedirectResponse
     {
-        $document->update($request->validated());
+        $document->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+        ]);
 
         return redirect()
             ->route('documents.show', $document)
