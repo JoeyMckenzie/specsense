@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Documents;
 
+use App\Http\Requests\Documents\StoreDocumentAnalysisRequest;
+use App\Models\Document;
+use Illuminate\Http\RedirectResponse;
+
 final class DocumentAnalysisController
 {
     /**
@@ -25,9 +29,11 @@ final class DocumentAnalysisController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(): void
+    public function store(): RedirectResponse
     {
-        //
+        return redirect()
+            ->back()
+            ->with('success', 'Document analysis will begin shortly. You will receive a notification when it is complete.');
     }
 
     /**

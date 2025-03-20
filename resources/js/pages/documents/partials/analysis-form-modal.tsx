@@ -24,9 +24,11 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
     const [scopes, setScopes] = useState<string[]>([]);
     const [currentScope, setCurrentScope] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+
     const { data, setData, post, processing, reset } = useForm({
         context: "",
         scopes: [] as string[],
+        document_id: documentId,
     });
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -66,7 +68,7 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        post(route("documents.analyze", documentId), {
+        post(route("document-analysis.store", documentId), {
             onSuccess: () => {
                 setIsOpen(false);
                 reset();

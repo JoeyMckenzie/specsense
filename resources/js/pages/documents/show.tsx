@@ -9,6 +9,7 @@ import {
 import AppLayout from "@/layouts/app-layout";
 import { formatBytes, formatDate } from "@/lib/utils";
 import { AnalysisFormModal } from "@/pages/documents/partials/analysis-form-modal";
+import { AnalysisStatusBadge } from "@/pages/documents/partials/analysis-status-badge";
 import { DeleteFormModal } from "@/pages/documents/partials/delete-form-modal";
 import type { BreadcrumbItem, SharedData } from "@/types";
 import { Head, Link, usePage } from "@inertiajs/react";
@@ -94,6 +95,16 @@ export default function Show({
                                     <p className="text-muted-foreground text-sm">
                                         {formatBytes(document.size)}
                                     </p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <div>
+                                    <p className="font-medium text-sm">
+                                        Analysis Status
+                                    </p>
+                                    <AnalysisStatusBadge
+                                        status={document.analysis?.status}
+                                    />
                                 </div>
                             </div>
                         </CardContent>

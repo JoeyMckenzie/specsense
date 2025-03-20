@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Database\Factories\DocumentAnalysisFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -23,37 +29,46 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $dbe_goal
  * @property string|null $dir_number
  * @property string|null $job_location
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property int $document_id
+ * @property-read Collection<int, WorkScope> $workScopes
  *
- * @method static \Database\Factories\DocumentAnalysisFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereBidDueDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereContext($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereContractNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereDbeGoal($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereDirNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereDocumentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereDocumentSummary($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereEngineersEstimate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereFailureReason($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereJobLocation($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereLlmResponse($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereNumberOfWorkingDays($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereParsedContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereProjectId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DocumentAnalysis whereUpdatedAt($value)
+ * @method static DocumentAnalysisFactory factory($count = null, $state = [])
+ * @method static Builder<static>|DocumentAnalysis newModelQuery()
+ * @method static Builder<static>|DocumentAnalysis newQuery()
+ * @method static Builder<static>|DocumentAnalysis query()
+ * @method static Builder<static>|DocumentAnalysis whereBidDueDate($value)
+ * @method static Builder<static>|DocumentAnalysis whereContext($value)
+ * @method static Builder<static>|DocumentAnalysis whereContractNumber($value)
+ * @method static Builder<static>|DocumentAnalysis whereCreatedAt($value)
+ * @method static Builder<static>|DocumentAnalysis whereDbeGoal($value)
+ * @method static Builder<static>|DocumentAnalysis whereDirNumber($value)
+ * @method static Builder<static>|DocumentAnalysis whereDocumentId($value)
+ * @method static Builder<static>|DocumentAnalysis whereDocumentSummary($value)
+ * @method static Builder<static>|DocumentAnalysis whereEngineersEstimate($value)
+ * @method static Builder<static>|DocumentAnalysis whereFailureReason($value)
+ * @method static Builder<static>|DocumentAnalysis whereId($value)
+ * @method static Builder<static>|DocumentAnalysis whereJobLocation($value)
+ * @method static Builder<static>|DocumentAnalysis whereLlmResponse($value)
+ * @method static Builder<static>|DocumentAnalysis whereNumberOfWorkingDays($value)
+ * @method static Builder<static>|DocumentAnalysis whereParsedContent($value)
+ * @method static Builder<static>|DocumentAnalysis whereProjectId($value)
+ * @method static Builder<static>|DocumentAnalysis whereStatus($value)
+ * @method static Builder<static>|DocumentAnalysis whereUpdatedAt($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 final class DocumentAnalysis extends Model
 {
-    /** @use HasFactory<\Database\Factories\DocumentAnalysisFactory> */
+    /** @use HasFactory<DocumentAnalysisFactory> */
     use HasFactory;
+
+    /**
+     * @return HasMany<WorkScope, $this>
+     */
+    public function workScopes(): HasMany
+    {
+        return $this->hasMany(WorkScope::class);
+    }
 }
