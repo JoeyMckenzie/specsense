@@ -17,13 +17,9 @@ import { type KeyboardEvent, useEffect, useState } from "react";
 
 interface AnalysisFormModalProps {
     documentId: number;
-    trigger: React.ReactNode;
 }
 
-export function AnalysisFormModal({
-    documentId,
-    trigger,
-}: AnalysisFormModalProps) {
+export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [scopes, setScopes] = useState<string[]>([]);
     const [currentScope, setCurrentScope] = useState("");
@@ -88,7 +84,9 @@ export function AnalysisFormModal({
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogTrigger asChild>{trigger}</DialogTrigger>
+            <DialogTrigger asChild>
+                <Button>Begin Analysis</Button>
+            </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <form onSubmit={handleSubmit}>
                     <DialogHeader>

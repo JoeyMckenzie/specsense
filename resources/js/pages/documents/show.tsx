@@ -1,4 +1,3 @@
-import { AnalysisFormModal } from "@/components/documents/analysis-form-modal";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -7,21 +6,13 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
 import AppLayout from "@/layouts/app-layout";
 import { formatBytes, formatDate } from "@/lib/utils";
+import { AnalysisFormModal } from "@/pages/documents/partials/analysis-form-modal";
+import { DeleteFormModal } from "@/pages/documents/partials/delete-form-modal";
 import type { BreadcrumbItem, SharedData } from "@/types";
-import { Head, Link, useForm, usePage } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import { FileText, FileType, HardDrive, Upload, User } from "lucide-react";
-import { useState } from "react";
 
 const breadcrumbs = (title: string): BreadcrumbItem[] => [
     {
@@ -38,17 +29,6 @@ export default function Show({
     document,
 }: { document: App.Data.DocumentSummaryData }) {
     const { user } = usePage<SharedData>().props.auth;
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const { delete: destroy, processing } = useForm();
-
-    const handleDelete = () => {
-        destroy(route("documents.destroy", document.id), {
-            preserveScroll: true,
-            onSuccess: () => {
-                setIsDeleteDialogOpen(false);
-            },
-        });
-    };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs(document.name)}>
@@ -69,51 +49,8 @@ export default function Show({
                                 Edit
                             </Link>
                         </Button>
-                        <Dialog
-                            open={isDeleteDialogOpen}
-                            onOpenChange={setIsDeleteDialogOpen}
-                        >
-                            <DialogTrigger asChild>
-                                <Button
-                                    variant="destructive"
-                                    className="cursor-pointer"
-                                >
-                                    Delete
-                                </Button>
-                            </DialogTrigger>
-                            <DialogContent>
-                                <DialogHeader>
-                                    <DialogTitle>Delete Document</DialogTitle>
-                                    <DialogDescription>
-                                        Are you sure you want to delete this
-                                        document? This action cannot be undone.
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <DialogFooter className="gap-2">
-                                    <Button
-                                        variant="secondary"
-                                        onClick={() =>
-                                            setIsDeleteDialogOpen(false)
-                                        }
-                                    >
-                                        Cancel
-                                    </Button>
-                                    <Button
-                                        variant="destructive"
-                                        onClick={handleDelete}
-                                        disabled={processing}
-                                    >
-                                        {processing
-                                            ? "Deleting..."
-                                            : "Confirm Delete"}
-                                    </Button>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
-                        <AnalysisFormModal
-                            documentId={document.id}
-                            trigger={<Button>Begin Analysis</Button>}
-                        />
+                        <DeleteFormModal documentId={document.id} />
+                        <AnalysisFormModal documentId={document.id} />
                     </div>
                 </div>
 

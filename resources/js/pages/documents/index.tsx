@@ -1,6 +1,6 @@
-import { DocumentCard } from "@/components/documents/document-card";
 import { Button } from "@/components/ui/button";
 import AppLayout from "@/layouts/app-layout";
+import { DocumentCard } from "@/pages/documents/partials/document-card";
 import type { BreadcrumbItem } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import { FileText, Upload } from "lucide-react";
