@@ -57,7 +57,7 @@ final class DocumentController extends Controller
             'user_id' => $this->verifiedUser()->id,
         ]);
 
-        GenerateDocumentThumbnail::dispatch($document);
+        GenerateDocumentThumbnail::dispatchAfterResponse($document);
 
         return redirect()
             ->route('documents.show', $document)

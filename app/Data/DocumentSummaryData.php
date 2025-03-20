@@ -28,4 +28,6 @@ final class DocumentSummaryData extends Data
     public ?string $previewImage = null;
 
     public DocumentType $type;
+
+    public ?DocumentAnalysisSummaryData $analysis = null;
 }

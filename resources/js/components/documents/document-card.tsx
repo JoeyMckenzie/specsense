@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { formatBytes, formatDate } from "@/lib/utils";
 import { FileText } from "lucide-react";
@@ -6,8 +7,8 @@ export function DocumentCard({
     document,
 }: { document: App.Data.DocumentSummaryData }) {
     return (
-        <Card className="group relative overflow-hidden p-0 transition-all hover:shadow-md">
-            <div className="-mt-[1px] relative h-48 w-full overflow-hidden bg-muted">
+        <Card className="group relative flex h-full flex-col overflow-hidden p-0 transition-all hover:shadow-md">
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                 {document.previewImage ? (
                     <img
                         src={document.previewImage}
@@ -20,7 +21,7 @@ export function DocumentCard({
                     </div>
                 )}
             </div>
-            <CardContent className="p-3">
+            <CardContent className="flex-1 p-3">
                 <h3 className="line-clamp-1 font-semibold text-base">
                     {document.name}
                 </h3>
@@ -31,20 +32,21 @@ export function DocumentCard({
                 )}
                 <div className="mt-2 flex items-center justify-between text-muted-foreground text-xs">
                     <div className="flex items-center gap-2">
-                        {/*<Badge*/}
-                        {/*    variant="secondary"*/}
-                        {/*    className={`${*/}
-                        {/*        analysis_status === "Completed"*/}
-                        {/*            ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"*/}
-                        {/*            : analysis_status === "In Progress"*/}
-                        {/*                ? "bg-blue-500/10 text-blue-500 hover:bg-blue-500/20"*/}
-                        {/*                : analysis_status === "Failed"*/}
-                        {/*                    ? "bg-red-500/10 text-red-500 hover:bg-red-500/20"*/}
-                        {/*                    : "bg-gray-500/10 text-gray-500 hover:bg-gray-500/20"*/}
-                        {/*    }`}*/}
-                        {/*>*/}
-                        {/*    {analysis_status}*/}
-                        {/*</Badge>*/}
+                        <Badge
+                            variant="secondary"
+                            className={`${
+                                document.analysis?.status === "Completed"
+                                    ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
+                                    : document.analysis?.status ===
+                                        "In Progress"
+                                      ? "bg-blue-500/10 text-blue-500 hover:bg-blue-500/20"
+                                      : document.analysis?.status === "Failed"
+                                        ? "bg-red-500/10 text-red-500 hover:bg-red-500/20"
+                                        : "bg-gray-500/10 text-gray-500 hover:bg-gray-500/20"
+                            }`}
+                        >
+                            {document.analysis?.status ?? "Not Started"}
+                        </Badge>
                     </div>
                     <div className="flex items-center gap-2">
                         <span>{formatBytes(document.size)}</span>

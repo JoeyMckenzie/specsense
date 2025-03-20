@@ -1,6 +1,6 @@
 /* FilePond Custom Styles */
 .filepond--root {
-    @apply border-2 border-dashed border-muted-foreground/25 rounded-lg transition-colors;
+    @apply border-2 border-dashed border-muted-foreground/25 rounded-lg transition-colors bg-background;
     margin-bottom: 0;
 }
 
@@ -82,13 +82,73 @@
 
 /* Dark mode adjustments */
 .dark .filepond--root {
-    @apply border-muted-foreground/25;
+    @apply border-muted-foreground/25 bg-background/95;
+}
+
+.dark .filepond--root:hover {
+    @apply border-primary/80 bg-primary/10;
+}
+
+.dark .filepond--root.filepond--hopper {
+    @apply border-primary/80 bg-primary/10;
+}
+
+.dark .filepond--drop-label {
+    @apply text-muted-foreground/80;
+}
+
+.dark .filepond--label-action {
+    @apply text-primary/90 hover:text-primary;
 }
 
 .dark .filepond--item {
-    @apply bg-muted/30;
+    @apply bg-muted/30 border-muted-foreground/20;
+}
+
+.dark .filepond--drip-blob {
+    @apply bg-primary/30;
+}
+
+.dark .filepond--file-status {
+    @apply text-muted-foreground/80;
+}
+
+.dark .filepond--file {
+    @apply text-foreground/90;
+}
+
+.dark .filepond--file-action-button {
+    @apply text-muted-foreground/80 hover:text-foreground/90;
+}
+
+.dark .filepond--file-action-button:hover {
+    @apply bg-muted/50;
+}
+
+.dark .filepond--file-action-button[data-align*="center"] {
+    @apply text-destructive/90 hover:text-destructive;
+}
+
+.dark .filepond--file-action-button[data-align*="center"]:hover {
+    @apply bg-destructive/20;
+}
+
+.dark .filepond--progress-indicator {
+    @apply bg-primary/90;
+}
+
+.dark .filepond--progress-indicator svg {
+    @apply text-primary/90;
 }
 
 .dark .filepond--file-wrapper {
     @apply bg-muted/30;
+}
+
+.dark .filepond--file-info {
+    @apply text-muted-foreground/80;
+}
+
+.dark .filepond--browser {
+    @apply text-primary/90 hover:text-primary;
 }

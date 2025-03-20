@@ -25,7 +25,7 @@ export default function Index({
                             <h1 className="font-semibold text-2xl">
                                 My Documents
                             </h1>
-                            <Link href={route("documents.create")} as="button">
+                            <Link href={route("documents.create")}>
                                 <Button>
                                     <Upload />
                                     Upload Document

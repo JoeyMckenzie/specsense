@@ -1,4 +1,7 @@
 declare namespace App.Data {
+    export type DocumentAnalysisSummaryData = {
+        status: App.Enums.DocumentAnalysisStatus;
+    };
     export type DocumentSummaryData = {
         id: number;
         name: string;
@@ -9,6 +12,7 @@ declare namespace App.Data {
         user: App.Data.UserSummaryData;
         previewImage: string | null;
         type: App.Enums.DocumentType;
+        analysis: App.Data.DocumentAnalysisSummaryData | null;
     };
     export type UserSummaryData = {
         id: number;
