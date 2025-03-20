@@ -14,7 +14,15 @@ import { AnalysisStatusBadge } from "@/pages/documents/partials/analysis-status-
 import { DeleteFormModal } from "@/pages/documents/partials/delete-form-modal";
 import type { BreadcrumbItem, SharedData } from "@/types";
 import { Head, Link, usePage } from "@inertiajs/react";
-import { FileText, FileType, HardDrive, Upload, User } from "lucide-react";
+import {
+    Activity,
+    FileText,
+    FileType,
+    HardDrive,
+    Text,
+    Upload,
+    User,
+} from "lucide-react";
 
 const breadcrumbs = (title: string): BreadcrumbItem[] => [
     {
@@ -101,13 +109,15 @@ export default function Show({
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
+                                <Text className="h-5 w-5 text-muted-foreground" />
                                 <div>
                                     <p className="font-medium text-sm">
-                                        Analysis Status
+                                        Description
                                     </p>
-                                    <AnalysisStatusBadge
-                                        status={document.analysis?.status}
-                                    />
+                                    <p className="text-muted-foreground text-sm">
+                                        {document.description ??
+                                            "No description"}
+                                    </p>
                                 </div>
                             </div>
                         </CardContent>
@@ -154,27 +164,24 @@ export default function Show({
                                     </p>
                                 </div>
                             </div>
+                            <div className="flex items-center gap-4">
+                                <Activity className="h-5 w-5 text-muted-foreground" />
+                                <div>
+                                    <p className="font-medium text-sm">
+                                        Analysis Status
+                                    </p>
+                                    <p className="text-muted-foreground text-sm">
+                                        <AnalysisStatusBadge
+                                            status={document.analysis?.status}
+                                        />
+                                    </p>
+                                </div>
+                            </div>
                         </CardContent>
                     </Card>
 
                     {document.analysis && (
                         <AnalysisDetailsCard analysis={document.analysis} />
-                    )}
-
-                    {document.description && (
-                        <Card className="md:col-span-2">
-                            <CardHeader>
-                                <CardTitle>Description</CardTitle>
-                                <CardDescription>
-                                    Additional information about the document
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="whitespace-pre-wrap text-muted-foreground">
-                                    {document.description}
-                                </p>
-                            </CardContent>
-                        </Card>
                     )}
                 </div>
             </div>
