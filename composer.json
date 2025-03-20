@@ -18,6 +18,7 @@
         "spatie/laravel-data": "^4.14",
         "spatie/laravel-typescript-transformer": "^2.5",
         "spatie/pdf-to-image": "^3.1",
+        "spatie/pdf-to-text": "^1.54",
         "spatie/typescript-transformer": "^2.4",
         "tightenco/ziggy": "^2.4"
     },
@@ -101,7 +102,11 @@
             "@test",
             "@typos"
         ],
-        "transform": "php artisan typescript:transform --format"
+        "transform": "php artisan typescript:transform --format",
+        "reschema": [
+            "php artisan migrate:fresh --seed",
+            "@generate:ide-helpers"
+        ]
     },
     "extra": {
         "laravel": {

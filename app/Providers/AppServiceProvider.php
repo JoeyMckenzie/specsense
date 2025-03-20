@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Contracts\DocumentAnalyzerContract;
+use App\Contracts\LlmConnectorContract;
+use App\Services\OpenAIConnector;
+use App\Services\OpenAIDocumentAnalyzer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
@@ -18,7 +22,8 @@ final class AppServiceProvider extends ServiceProvider
     #[Override]
     public function register(): void
     {
-        //
+        $this->app->bind(DocumentAnalyzerContract::class, OpenAIDocumentAnalyzer::class);
+        $this->app->bind(LlmConnectorContract::class, OpenAIConnector::class);
     }
 
     /**

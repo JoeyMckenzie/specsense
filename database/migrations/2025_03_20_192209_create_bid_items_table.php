@@ -14,10 +14,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('work_scopes', function (Blueprint $table): void {
+        Schema::create('bid_items', function (Blueprint $table): void {
             $table->id();
-            $table->string('name');
-            $table->text('analysis')->nullable();
+            $table->string('item_number')->nullable();
+            $table->string('item_code')->nullable();
+            $table->string('item_description')->nullable();
+            $table->string('unit_of_measure')->nullable();
+            $table->string('estimated_quantity')->nullable();
             $table->timestamps();
 
             $table->foreignIdFor(DocumentAnalysis::class)->constrained()->cascadeOnDelete();
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('work_scopes');
+        Schema::dropIfExists('bid_items');
     }
 };

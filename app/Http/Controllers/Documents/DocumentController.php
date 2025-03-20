@@ -56,7 +56,7 @@ final class DocumentController
             'user_id' => $this->verifiedUser()->id,
         ]);
 
-        GenerateDocumentThumbnail::dispatchAfterResponse($document);
+        GenerateDocumentThumbnail::dispatch($document);
 
         return redirect()
             ->route('documents.show', $document)

@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Documents;
 use App\Enums\DocumentAnalysisStatus;
 use App\Http\Concerns\HasVerifiedUser;
 use App\Http\Requests\Documents\StoreDocumentAnalysisRequest;
+use App\Jobs\ProcessDocumentForAnalysis;
 use App\Models\Document;
 use Illuminate\Http\RedirectResponse;
 
@@ -27,10 +28,12 @@ final class DocumentAnalysisController
      */
     public function store(StoreDocumentAnalysisRequest $request, Document $document): RedirectResponse
     {
-        $document->analysis()->create([
+        $analysis = $document->analysis()->create([
             'status' => DocumentAnalysisStatus::IN_PROGRESS,
             'document_id' => $document->id,
         ]);
+
+        ProcessDocumentForAnalysis::dispatch($analysis);
 
         return redirect()
             ->back()

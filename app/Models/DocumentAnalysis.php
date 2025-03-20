@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
@@ -32,9 +33,13 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int $document_id
+ * @property-read Collection<int, BidItem> $bidItems
+ * @property-read int|null $bid_items_count
+ * @property-read Document $document
  * @property-read Collection<int, WorkScope> $workScopes
+ * @property-read int|null $work_scopes_count
  *
- * @method static DocumentAnalysisFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\DocumentAnalysisFactory factory($count = null, $state = [])
  * @method static Builder<static>|DocumentAnalysis newModelQuery()
  * @method static Builder<static>|DocumentAnalysis newQuery()
  * @method static Builder<static>|DocumentAnalysis query()
@@ -70,5 +75,21 @@ final class DocumentAnalysis extends Model
     public function workScopes(): HasMany
     {
         return $this->hasMany(WorkScope::class);
+    }
+
+    /**
+     * @return HasMany<BidItem, $this>
+     */
+    public function bidItems(): HasMany
+    {
+        return $this->hasMany(BidItem::class);
+    }
+
+    /**
+     * @return BelongsTo<Document, $this>
+     */
+    public function document(): BelongsTo
+    {
+        return $this->belongsTo(Document::class);
     }
 }
