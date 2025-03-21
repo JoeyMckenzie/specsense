@@ -1,4 +1,12 @@
 declare namespace App.Data {
+    export type BidItemSummaryData = {
+        id: number;
+        itemNumber: string | null;
+        itemCode: string | null;
+        itemDescription: string | null;
+        unitOfMeasure: string | null;
+        estimatedQuantity: string | null;
+    };
     export type DocumentAnalysisSummaryData = {
         status: App.Enums.DocumentAnalysisStatus;
         documentSummary: string | null;
@@ -11,6 +19,7 @@ declare namespace App.Data {
         dirNumber: string | null;
         jobLocation: string | null;
         workScopes: Array<App.Data.WorkScopeSummaryData>;
+        bidItems: Array<App.Data.BidItemSummaryData>;
     };
     export type DocumentSummaryData = {
         id: number;

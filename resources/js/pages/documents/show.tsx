@@ -11,6 +11,7 @@ import { formatBytes, formatDate } from "@/lib/utils";
 import { AnalysisDetailsCard } from "@/pages/documents/partials/analysis-details-card";
 import { AnalysisFormModal } from "@/pages/documents/partials/analysis-form-modal";
 import { AnalysisStatusBadge } from "@/pages/documents/partials/analysis-status-badge";
+import { BidItemsTable } from "@/pages/documents/partials/bid-items-table";
 import { DeleteFormModal } from "@/pages/documents/partials/delete-form-modal";
 import type { BreadcrumbItem, SharedData } from "@/types";
 import { Head, Link, usePage } from "@inertiajs/react";
@@ -182,6 +183,23 @@ export default function Show({
 
                     {document.analysis && (
                         <AnalysisDetailsCard analysis={document.analysis} />
+                    )}
+
+                    {document.analysis?.bidItems && (
+                        <Card className="md:col-span-2">
+                            <CardHeader>
+                                <CardTitle>Bid Items</CardTitle>
+                                <CardDescription>
+                                    List of bid items extracted from the
+                                    document
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <BidItemsTable
+                                    bidItems={document.analysis.bidItems}
+                                />
+                            </CardContent>
+                        </Card>
                     )}
                 </div>
             </div>
