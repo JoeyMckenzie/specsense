@@ -35,4 +35,9 @@ final class DocumentAnalysisSummaryData extends Data
      * @var WorkScopeSummaryData[]
      */
     public array $workScopes;
+
+    /**
+     * @var BidItemSummaryData[]
+     */
+    public array $bidItems;
 }

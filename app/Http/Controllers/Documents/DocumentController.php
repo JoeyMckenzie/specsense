@@ -79,7 +79,8 @@ final class DocumentController
     {
         $documentData = $document
             ->load('analysis')
-            ->load('analysis.workScopes');
+            ->load('analysis.workScopes')
+            ->load('analysis.bidItems');
 
         return Inertia::render('documents/show', [
             'document' => DocumentSummaryData::from($documentData),
