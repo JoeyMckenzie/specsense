@@ -1,14 +1,16 @@
+import { ToastProvider } from "@/components/toast-provider";
 import AuthLayoutTemplate from "@/layouts/auth/auth-split-layout";
+import type { ReactNode } from "react";
 
 export default function AuthLayout({
     children,
     title,
     description,
     ...props
-}: { children: React.ReactNode; title: string; description: string }) {
+}: { children: ReactNode; title: string; description: string }) {
     return (
         <AuthLayoutTemplate title={title} description={description} {...props}>
-            {children}
+            <ToastProvider>{children}</ToastProvider>
         </AuthLayoutTemplate>
     );
 }

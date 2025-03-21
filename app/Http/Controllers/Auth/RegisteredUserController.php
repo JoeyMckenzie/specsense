@@ -22,28 +22,11 @@ final class RegisteredUserController
      *
      * @throws ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(): RedirectResponse
     {
-        /** @var array{first_name: string, last_name: string, email: string, password: string} $validated */
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = User::create([
-            'first_name' => $validated['first_name'],
-            'last_name' => $validated['last_name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return to_route('documents.index');
+        return redirect()
+            ->back()
+            ->with('warning', 'Registration is currently disabled.');
     }
 
     /**

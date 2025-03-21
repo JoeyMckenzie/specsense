@@ -23,7 +23,7 @@ export default function Welcome() {
                     rel="stylesheet"
                 />
             </Head>
-            <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 dark:from-background dark:to-background/80">
+            <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 px-4 dark:from-background dark:to-background/80">
                 {/* Navigation */}
                 <header className="container mx-auto py-4">
                     <nav className="flex items-center justify-between">
