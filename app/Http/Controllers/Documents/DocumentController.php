@@ -78,9 +78,11 @@ final class DocumentController
     public function show(Document $document): Response
     {
         $documentData = $document
-            ->load('analysis')
-            ->load('analysis.workScopes')
-            ->load('analysis.bidItems');
+            ->load([
+                'analysis',
+                'analysis.workScopes',
+                'analysis.bidItems',
+            ]);
 
         return Inertia::render('documents/show', [
             'document' => DocumentSummaryData::from($documentData),
