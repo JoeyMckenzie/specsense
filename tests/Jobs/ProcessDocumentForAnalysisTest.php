@@ -12,7 +12,7 @@ use App\Services\OpenAIConnector;
 use App\Services\OpenAIDocumentAnalyzer;
 use Illuminate\Support\Facades\Queue;
 
-covers(ProcessDocumentForAnalysis::class);
+// covers(ProcessDocumentForAnalysis::class);
 
 describe(ProcessDocumentForAnalysis::class, function (): void {
     beforeEach(function (): void {

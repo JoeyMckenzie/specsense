@@ -35,6 +35,7 @@
         "nunomaduro/collision": "^8.6",
         "peckphp/peck": "^0.1.2",
         "pestphp/pest": "^3.7",
+        "pestphp/pest-plugin-type-coverage": "^3.4",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
@@ -100,7 +101,18 @@
         "refactor:test": "vendor/bin/rector process --dry-run",
         "typos": "vendor/bin/peck",
         "lint": "XDEBUG_MODE=off vendor/bin/phpstan analyze",
-        "test": "vendor/bin/pest",
+        "test:unit": "vendor/bin/pest --parallel",
+        "test:uwatch": "vendor/bin/pest --parallel --watch",
+        "test:coverage": "vendor/bin/pest --coverage --parallel",
+        "test:watch": "vendor/bin/pest --watch --parallel --mutate",
+        "test:types": "vendor/bin/pest --type-coverage --min=100 --parallel",
+        "test:mutate": "vendor/bin/pest --mutate --min=100 --parallel",
+        "test:mutate:cache-clear": "vendor/bin/pest --mutate --min=100 --parallel --clear-cache",
+        "test:ci": "vendor/bin/pest --mutate --min=100 --parallel --ci",
+        "test": [
+            "@test:mutate",
+            "@test:types"
+        ],
         "fix": [
             "@fmt",
             "@refactor"
