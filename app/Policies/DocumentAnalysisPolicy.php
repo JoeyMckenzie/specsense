@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
+use App\Models\Document;
 use App\Models\User;
 
 final class DocumentAnalysisPolicy
@@ -27,9 +28,9 @@ final class DocumentAnalysisPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(): bool
+    public function create(User $user, Document $document): bool
     {
-        return false;
+        return $user->hasVerifiedEmail() && $user->id === $document->user_id;
     }
 
     /**

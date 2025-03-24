@@ -26,14 +26,13 @@ final class CreateDocumentAnalysisRequest extends FormRequest
         $this->route('document');
 
         return [
-            'additional_info' => ['nullable', 'max:255'],
+            'context' => ['required', 'string', 'max:255'],
             'work_scopes' => [
                 'nullable',
                 'array',
                 'max:5',
-                'distinct',
             ],
-            'work_scopes.*' => ['string', 'max:30'],
+            'work_scopes.*' => ['string', 'max:30', 'distinct'],
             'document_id' => [
                 'required',
                 Rule::unique('document_analyses')->where(fn (Builder $query) => $query->where('document_id', $this['document_id'])),
