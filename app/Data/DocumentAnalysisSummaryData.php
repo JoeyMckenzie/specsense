@@ -11,6 +11,8 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[TypeScript]
 final class DocumentAnalysisSummaryData extends Data
 {
+    public int $id;
+
     public DocumentAnalysisStatus $status;
 
     public ?string $documentSummary = null;

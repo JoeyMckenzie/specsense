@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Controllers;
 
+use App\Enums\DocumentAnalysisStatus;
 use App\Http\Controllers\Documents\DocumentController;
+use App\Jobs\GenerateDocumentThumbnail;
 use App\Models\Document;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
-use App\Enums\DocumentAnalysisStatus;
-use App\Jobs\GenerateDocumentThumbnail;
 
 covers(DocumentController::class);
 
@@ -33,7 +33,7 @@ describe(DocumentController::class, function (): void {
 
         $response->assertOk();
         $response->assertInertia(
-            fn($page) => $page
+            fn ($page) => $page
                 ->component('documents/index')
                 ->has('documents', 3)
                 ->where('documents.0.id', $documents[0]->id)
@@ -49,7 +49,7 @@ describe(DocumentController::class, function (): void {
 
         $response->assertOk();
         $response->assertInertia(
-            fn($page) => $page
+            fn ($page) => $page
                 ->component('documents/create')
         );
     });
@@ -87,7 +87,7 @@ describe(DocumentController::class, function (): void {
 
         $response->assertOk();
         $response->assertInertia(
-            fn($page) => $page
+            fn ($page) => $page
                 ->component('documents/show')
                 ->has('document')
                 ->where('document.id', $document->id)
@@ -104,7 +104,7 @@ describe(DocumentController::class, function (): void {
 
         $response->assertOk();
         $response->assertInertia(
-            fn($page) => $page
+            fn ($page) => $page
                 ->component('documents/show')
                 ->has('document')
                 ->where('document.id', $document->id)
@@ -138,7 +138,7 @@ describe(DocumentController::class, function (): void {
 
         $response->assertOk();
         $response->assertInertia(
-            fn($page) => $page
+            fn ($page) => $page
                 ->component('documents/show')
                 ->has('document')
                 ->where('document.id', $document->id)
@@ -162,7 +162,7 @@ describe(DocumentController::class, function (): void {
 
         $response->assertOk();
         $response->assertInertia(
-            fn($page) => $page
+            fn ($page) => $page
                 ->component('documents/show')
                 ->has('document')
                 ->where('document.id', $document->id)
@@ -195,13 +195,11 @@ describe(DocumentController::class, function (): void {
             ->where('id', $document->id)
             ->first();
 
-        $response = $this->actingAs($user)
-            ->withoutExceptionHandling()
-            ->get("/documents/{$documentWithoutRelations->id}");
+        $response = $this->actingAs($user)->get("/documents/$documentWithoutRelations->id");
 
         $response->assertOk();
         $response->assertInertia(
-            fn($page) => $page
+            fn ($page) => $page
                 ->component('documents/show')
                 ->has('document')
                 ->where('document.id', $document->id)
@@ -229,7 +227,7 @@ describe(DocumentController::class, function (): void {
     it('deletes document thumbnail when deleting a document', function (): void {
         $user = User::factory()->create();
         $document = Document::factory()->for($user)->create([
-            'thumbnail' => 'thumbnails/test.jpg'
+            'thumbnail' => 'thumbnails/test.jpg',
         ]);
         Storage::put('thumbnails/test.jpg', 'fake thumbnail content');
 
@@ -262,7 +260,7 @@ describe(DocumentController::class, function (): void {
 
         $response->assertOk();
         $response->assertInertia(
-            fn($page) => $page
+            fn ($page) => $page
                 ->component('documents/edit')
                 ->has('document')
                 ->where('document.id', $document->id)
@@ -310,5 +308,23 @@ describe(DocumentController::class, function (): void {
         $response = $this->actingAs($user1)->delete("/documents/{$document->id}");
 
         $response->assertNotFound();
+    });
+
+    it('shows a document with complete analysis relationships', function (): void {
+        $user = User::factory()->create();
+        $document = Document::factory()->for($user)->create();
+        $analysis = $document->analysis()->create(['status' => DocumentAnalysisStatus::COMPLETED->value]);
+
+        $response = $this->actingAs($user)->get("/documents/$document->id");
+
+        $response->assertOk();
+        $response->assertInertia(
+            fn ($page) => $page
+                ->component('documents/show')
+                ->has('document')
+                ->where('document.id', $document->id)
+                ->has('document.analysis')
+                ->where('document.analysis.id', $analysis->id)
+        );
     });
 });

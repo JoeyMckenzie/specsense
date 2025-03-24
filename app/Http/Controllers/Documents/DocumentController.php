@@ -82,7 +82,6 @@ final class DocumentController
 
         $documentData = $document
             ->load([
-                'analysis',
                 'analysis.workScopes',
                 'analysis.bidItems',
             ]);
