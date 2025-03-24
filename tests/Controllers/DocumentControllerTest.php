@@ -57,7 +57,7 @@ describe(DocumentController::class, function (): void {
         // Assert
         $response->assertOk();
         $response->assertInertia(
-            fn (AssertableInertia $page): \Inertia\Testing\AssertableInertia => $page
+            fn (AssertableInertia $page): AssertableInertia => $page
                 ->component('documents/create')
         );
     });
