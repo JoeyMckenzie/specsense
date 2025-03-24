@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Documents;
 
 use App\Data\DocumentSummaryData;
 use App\Http\Concerns\HasVerifiedUser;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Documents\StoreDocumentRequest;
 use App\Http\Requests\Documents\UpdateDocumentRequest;
 use App\Jobs\GenerateDocumentThumbnail;
@@ -15,11 +16,15 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
-use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
-final class DocumentController
+final class DocumentController extends Controller
 {
     use HasVerifiedUser;
+
+    public function __construct()
+    {
+        $this->authorizeResource(Document::class, 'document');
+    }
 
     /**
      * Display a listing of the resource.
@@ -78,8 +83,6 @@ final class DocumentController
      */
     public function show(Document $document): Response
     {
-        abort_if($document->user_id !== $this->verifiedUser()->id, HttpStatus::HTTP_NOT_FOUND);
-
         $documentData = $document
             ->load([
                 'analysis.workScopes',
@@ -96,8 +99,6 @@ final class DocumentController
      */
     public function edit(Document $document): Response
     {
-        abort_if($document->user_id !== $this->verifiedUser()->id, HttpStatus::HTTP_NOT_FOUND);
-
         return Inertia::render('documents/edit', [
             'document' => DocumentSummaryData::from($document->load('analysis')),
         ]);
@@ -108,8 +109,6 @@ final class DocumentController
      */
     public function update(UpdateDocumentRequest $request, Document $document): RedirectResponse
     {
-        abort_if($document->user_id !== $this->verifiedUser()->id, HttpStatus::HTTP_NOT_FOUND);
-
         $document->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -125,8 +124,6 @@ final class DocumentController
      */
     public function destroy(Document $document): RedirectResponse
     {
-        abort_if($document->user_id !== $this->verifiedUser()->id, HttpStatus::HTTP_NOT_FOUND);
-
         Storage::delete($document->path);
 
         if ($document->thumbnail !== null) {
