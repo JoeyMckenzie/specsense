@@ -9,7 +9,6 @@ use App\Http\Controllers\Documents\DocumentAnalysisController;
 use App\Jobs\ProcessDocumentForAnalysis;
 use App\Models\Document;
 use App\Models\User;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Queue;
 
 covers(DocumentAnalysisController::class);
@@ -22,20 +21,23 @@ describe(DocumentAnalysisController::class, function (): void {
     it('ensures guests are redirected to the login page when creating analysis', function (): void {
         // Arrange & Act & Assert
         $document = Document::factory()->create();
-        $this->post("/documents/{$document->id}/analysis")->assertRedirect('/login');
+        $this->post("/documents/$document->id/analysis")->assertRedirect('/login');
     });
 
     it('creates a document analysis without work scopes', function (): void {
         // Arrange
-        /** @var User&Authenticatable $user */
         $user = User::factory()->create();
         $document = Document::factory()->for($user)->create();
 
+        expect($document->analysis)->toBeNull();
+
         // Act
-        $response = $this->actingAs($user)->post("/documents/{$document->id}/analysis", [
+        $response = $this->actingAs($user)->post("/documents/$document->id/analysis", [
             'document_id' => $document->id,
             'context' => 'Test context',
         ]);
+
+        $document->refresh();
 
         // Assert
         $response->assertRedirect();
@@ -43,31 +45,35 @@ describe(DocumentAnalysisController::class, function (): void {
 
         expect($document->analysis)
             ->not->toBeNull()
-            ->getRawOriginal('status')->toBe(DocumentAnalysisStatus::IN_PROGRESS->value)
-            ->document_id->toBe($document->id);
+            ->and($document->analysis->status)->toBe(DocumentAnalysisStatus::IN_PROGRESS->value)
+            ->and($document->analysis->context)->toBe('Test context')
+            ->and($document->analysis->document_id)->toBe($document->id);
 
         Queue::assertPushed(ProcessDocumentForAnalysis::class);
     });
 
     it('creates a document analysis with work scopes', function (): void {
         // Arrange
-        /** @var User&Authenticatable $user */
         $user = User::factory()->create();
         $document = Document::factory()->for($user)->create();
         $workScopes = ['Scope 1', 'Scope 2'];
 
+        expect($document->analysis)->toBeNull();
+
         // Act
-        $response = $this->actingAs($user)->post("/documents/{$document->id}/analysis", [
+        $response = $this->actingAs($user)->post("/documents/$document->id/analysis", [
             'document_id' => $document->id,
             'context' => 'Test context',
             'work_scopes' => $workScopes,
         ]);
 
+        $document->refresh();
+
         // Assert
         $response->assertRedirect();
         $response->assertSessionHas('success', 'Document analysis will begin shortly. You will receive a notification when it is complete.');
 
-        $analysis = $document->analysis->refresh()->load('workScopes');
+        $analysis = $document->analysis->load('workScopes');
         expect($analysis)
             ->not->toBeNull()
             ->getRawOriginal('status')->toBe(DocumentAnalysisStatus::IN_PROGRESS->value)
@@ -84,14 +90,12 @@ describe(DocumentAnalysisController::class, function (): void {
 
     it('prevents users from creating analysis for other users documents', function (): void {
         // Arrange
-        /** @var User&Authenticatable $user1 */
         $user1 = User::factory()->create();
-        /** @var User&Authenticatable $user2 */
         $user2 = User::factory()->create();
         $document = Document::factory()->for($user2)->create();
 
         // Act
-        $response = $this->actingAs($user1)->post("/documents/{$document->id}/analysis", [
+        $response = $this->actingAs($user1)->post("/documents/$document->id/analysis", [
             'document_id' => $document->id,
             'context' => 'Test context',
         ]);
@@ -103,13 +107,12 @@ describe(DocumentAnalysisController::class, function (): void {
 
     it('validates work scopes array size', function (): void {
         // Arrange
-        /** @var User&Authenticatable $user */
         $user = User::factory()->create();
         $document = Document::factory()->for($user)->create();
         $workScopes = array_fill(0, 6, 'Scope'); // Create array with 6 scopes
 
         // Act
-        $response = $this->actingAs($user)->post("/documents/{$document->id}/analysis", [
+        $response = $this->actingAs($user)->post("/documents/$document->id/analysis", [
             'document_id' => $document->id,
             'context' => 'Test context',
             'work_scopes' => $workScopes,
@@ -122,13 +125,12 @@ describe(DocumentAnalysisController::class, function (): void {
 
     it('validates work scope string length', function (): void {
         // Arrange
-        /** @var User&Authenticatable $user */
         $user = User::factory()->create();
         $document = Document::factory()->for($user)->create();
         $workScopes = [str_repeat('a', 31)]; // Create string longer than 30 characters
 
         // Act
-        $response = $this->actingAs($user)->post("/documents/{$document->id}/analysis", [
+        $response = $this->actingAs($user)->post("/documents/$document->id/analysis", [
             'document_id' => $document->id,
             'context' => 'Test context',
             'work_scopes' => $workScopes,

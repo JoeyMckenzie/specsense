@@ -35,6 +35,8 @@ final class CreateDocumentAnalysisRequest extends FormRequest
             'work_scopes.*' => ['string', 'max:30', 'distinct'],
             'document_id' => [
                 'required',
+                'integer',
+                'exists:documents,id',
                 Rule::unique('document_analyses')->where(fn (Builder $query) => $query->where('document_id', $this['document_id'])),
             ],
         ];
