@@ -31,7 +31,7 @@ final class DocumentAnalysisController
             $scopes = $request->input('work_scopes');
 
             foreach ($scopes as $scope) {
-                $document->analysis->workscopes()->create([
+                $analysis->workscopes()->create([
                     'name' => Str::trim($scope),
                 ]);
             }
