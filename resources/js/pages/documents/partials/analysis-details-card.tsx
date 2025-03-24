@@ -1,10 +1,11 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
     Calendar,
     ClipboardList,
@@ -99,20 +100,26 @@ export function AnalysisDetailsCard({
             <div className="grid gap-4 sm:grid-cols-4">
                 {details.map((detail) => (
                     <Card key={detail.label}>
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="font-medium text-sm">
-                                {detail.label}
-                            </CardTitle>
-                            <detail.icon className="h-4 w-4 text-muted-foreground" />
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0">
+                            <CardTitle>{detail.label}</CardTitle>
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Button variant="outline">
+                                            <detail.icon className="h-4 w-4 text-muted-foreground" />
+                                        </Button>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        {detail.description}
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
                         </CardHeader>
                         <CardContent>
-                            <div className="font-bold">
+                            <div className="text-sm">
                                 {detail.value || "Not specified"}
                             </div>
                         </CardContent>
-                        <CardFooter className="text-muted-foreground text-xs">
-                            {detail.description}
-                        </CardFooter>
                     </Card>
                 ))}
             </div>
