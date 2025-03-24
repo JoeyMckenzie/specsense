@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
+use App\Contracts\Actions\GeneratesThumbnailAction;
 use App\Models\Document;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Spatie\PdfToImage\Pdf;
 use Throwable;
 
 final class GenerateDocumentThumbnail implements ShouldQueue
@@ -20,31 +19,19 @@ final class GenerateDocumentThumbnail implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        private readonly Document $document
-    ) {}
+        private readonly Document $document,
+    ) {
+        //
+    }
 
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(GeneratesThumbnailAction $action): void
     {
         $path = $this->document->path;
         $filename = $this->document->filename;
-
-        $pdf = new Pdf(Storage::path($path));
-        $thumbnailFilename = pathinfo($filename, PATHINFO_FILENAME).'_thumb.jpg';
-        $thumbnailPath = 'thumbnails/'.$thumbnailFilename;
-
-        // Ensure the thumbnails directory exists
-        Storage::disk('public')->makeDirectory('thumbnails');
-
-        // Generate thumbnail at 300x300 pixels
-        $pdf->selectPage(1)
-            ->resolution(300)
-            ->thumbnailSize(300, 300)
-            ->save(Storage::disk('public')->path($thumbnailPath));
-
-        $this->document->thumbnail = $thumbnailPath;
+        $this->document->thumbnail = $action->handle($path, $filename);
         $this->document->save();
     }
 

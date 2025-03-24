@@ -7,7 +7,7 @@ namespace App\Http\Requests\Documents;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-final class StoreDocumentRequest extends FormRequest
+final class CreateDocumentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Contracts\DocumentAnalyzerContract;
-use App\Contracts\LlmConnectorContract;
+use App\Contracts\Services\DocumentAnalyzerContract;
+use App\Contracts\Services\LlmConnectorContract;
 use App\Models\DocumentAnalysis;
 use App\Models\WorkScope;
 use App\Support\PromptParser;

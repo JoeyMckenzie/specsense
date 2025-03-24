@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Documents;
 use App\Data\DocumentSummaryData;
 use App\Http\Concerns\HasVerifiedUser;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Documents\StoreDocumentRequest;
+use App\Http\Requests\Documents\CreateDocumentRequest;
 use App\Http\Requests\Documents\UpdateDocumentRequest;
 use App\Jobs\GenerateDocumentThumbnail;
 use App\Models\Document;
@@ -45,7 +45,7 @@ final class DocumentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDocumentRequest $request): RedirectResponse
+    public function store(CreateDocumentRequest $request): RedirectResponse
     {
         /** @var UploadedFile $file */
         $file = $request->file('file');

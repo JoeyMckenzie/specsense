@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Contracts\DocumentAnalyzerContract;
-use App\Contracts\LlmConnectorContract;
-use App\Models\Document;
-use App\Policies\DocumentPolicy;
+use App\Actions\GenerateThumbnailAction;
+use App\Contracts\Actions\GeneratesThumbnailAction;
+use App\Contracts\Services\DocumentAnalyzerContract;
+use App\Contracts\Services\LlmConnectorContract;
 use App\Services\OpenAIConnector;
 use App\Services\OpenAIDocumentAnalyzer;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -37,7 +36,7 @@ final class AppServiceProvider extends ServiceProvider
         self::configureModels();
         self::configureVite();
         self::configureSchema();
-        self::configurePolicies();
+        self::configureActions();
     }
 
     private function configureModels(): void
@@ -58,8 +57,8 @@ final class AppServiceProvider extends ServiceProvider
         }
     }
 
-    private function configurePolicies(): void
+    private function configureActions(): void
     {
-        Gate::policy(Document::class, DocumentPolicy::class);
+        $this->app->bind(GeneratesThumbnailAction::class, GenerateThumbnailAction::class);
     }
 }

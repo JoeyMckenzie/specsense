@@ -43,7 +43,7 @@ export default function Show({
 
     return (
         <AppLayout breadcrumbs={breadcrumbs(document.name)}>
-            <Head title={`${document.name} - Document Details`} />
+            <Head title={`${document.name} | Document Details`} />
             <div className="container mx-auto p-4">
                 <div className="mb-8 flex flex-col justify-between sm:flex-row sm:items-center">
                     <div className="pb-4 sm:pb-0">

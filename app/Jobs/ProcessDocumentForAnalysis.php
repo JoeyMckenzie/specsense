@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
-use App\Contracts\DocumentAnalyzerContract;
+use App\Contracts\Services\DocumentAnalyzerContract;
 use App\Enums\DocumentAnalysisStatus;
 use App\Models\DocumentAnalysis;
 use App\ValueObjects\DocumentMetadata;

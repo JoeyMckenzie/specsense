@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Contracts\LlmConnectorContract;
+use App\Contracts\Services\LlmConnectorContract;
 use App\Support\PromptParser;
 use App\ValueObjects\DocumentMetadata;
 use Illuminate\Support\Facades\Config;
