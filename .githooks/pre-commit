@@ -1,5 +1,12 @@
 #!/bin/sh
 
-set -x
+set -xe
 
-php artisan app:run-pre-commit
+composer run fix
+npm run check
+
+if [ -n "$(git diff --name-only)" ]; then
+    git add .
+fi
+
+exit 0

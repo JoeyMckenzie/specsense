@@ -30,7 +30,8 @@ jobs:
           npm ci
 
       - name: Run CI checks
-        run: php artisan app:run-ci
+        run: bin/ci
+        working-directory: ${{ github.workspace }}
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -eo pipefail
+
+echo "Running backend CI checks..."
+
+composer run ci
+
+echo "Auditing composer dependencies..."
+
+composer audit
+
+echo "Running frontend CI checks..."
+
+npm run check
+
+echo "Auditing npm dependencies..."
+
+npm audit
+
+echo "CI successful!"
+
+exit 0

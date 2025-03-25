@@ -95,3 +95,5 @@ else
 fi
 
 validate_commit_message "$commit_msg"
+
+exit 0

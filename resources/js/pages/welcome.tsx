@@ -28,8 +28,8 @@ export default function Welcome() {
                 <header className="container mx-auto py-4">
                     <nav className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary">
-                                <AppLogoIcon className="h-6 w-6 text-primary-foreground" />
+                            <div className="flex h-10 w-10 items-center justify-center rounded-md">
+                                <AppLogoIcon className="h-6 w-6" />
                             </div>
                             <span className="font-bold text-xl">Specsense</span>
                         </div>
