@@ -21,10 +21,10 @@ interface EditBidItemModalProps {
 }
 
 export function EditBidItemModal({
-                                     bidItem,
-                                     open,
-                                     onOpenChange,
-                                 }: EditBidItemModalProps) {
+    bidItem,
+    open,
+    onOpenChange,
+}: EditBidItemModalProps) {
     const {
         data,
         setData,
@@ -41,7 +41,7 @@ export function EditBidItemModal({
         estimated_quantity: bidItem.estimatedQuantity,
     });
 
-    const {document} = useDocument();
+    const { document } = useDocument();
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

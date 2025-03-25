@@ -1,4 +1,10 @@
-import {createContext, type JSX, useContext, useEffect, useState,} from "react";
+import {
+    type JSX,
+    createContext,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 
 type DocumentState = {
     document?: App.Data.DocumentSummaryData | null;
@@ -7,14 +13,13 @@ type DocumentState = {
 
 const DocumentProviderContext = createContext<DocumentState>({
     document: null,
-    setDocument: () => {
-    },
+    setDocument: () => {},
 });
 
 export function DocumentProvider({
-                                     children,
-                                     currentDocument,
-                                 }: {
+    children,
+    currentDocument,
+}: {
     children: JSX.Element;
     currentDocument?: App.Data.DocumentSummaryData | null;
 }) {

@@ -18,10 +18,10 @@ import { type FormEvent, useState } from "react";
 
 export function AddBidItemFormModal() {
     const [open, setOpen] = useState(false);
-    const {document} = useDocument();
+    const { document } = useDocument();
     const documentId = document?.id;
     const documentAnalysisId = document?.analysis?.id;
-    const {post, data, setData, errors, reset, processing} = useForm({
+    const { post, data, setData, errors, reset, processing } = useForm({
         item_number: "",
         item_code: "",
         item_description: "",
@@ -55,7 +55,7 @@ export function AddBidItemFormModal() {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button>
-                    <Plus className="mr-2 h-4 w-4"/>
+                    <Plus className="mr-2 h-4 w-4" />
                     Add Item
                 </Button>
             </DialogTrigger>
@@ -76,7 +76,7 @@ export function AddBidItemFormModal() {
                                 setData("item_number", e.target.value)
                             }
                         />
-                        <InputError message={errors.item_number}/>
+                        <InputError message={errors.item_number} />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="item_code">Item Code</Label>
@@ -87,7 +87,7 @@ export function AddBidItemFormModal() {
                                 setData("item_code", e.target.value)
                             }
                         />
-                        <InputError message={errors.item_code}/>
+                        <InputError message={errors.item_code} />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="item_description">Description</Label>
@@ -98,7 +98,7 @@ export function AddBidItemFormModal() {
                                 setData("item_description", e.target.value)
                             }
                         />
-                        <InputError message={errors.item_description}/>
+                        <InputError message={errors.item_description} />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="unit_of_measure">Unit of Measure</Label>
@@ -109,7 +109,7 @@ export function AddBidItemFormModal() {
                                 setData("unit_of_measure", e.target.value)
                             }
                         />
-                        <InputError message={errors.unit_of_measure}/>
+                        <InputError message={errors.unit_of_measure} />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="estimated_quantity">
@@ -122,7 +122,7 @@ export function AddBidItemFormModal() {
                                 setData("estimated_quantity", e.target.value)
                             }
                         />
-                        <InputError message={errors.estimated_quantity}/>
+                        <InputError message={errors.estimated_quantity} />
                     </div>
                     <DialogFooter>
                         <Button disabled={processing} type="submit">

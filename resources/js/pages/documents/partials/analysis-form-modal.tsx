@@ -14,16 +14,22 @@ import { Textarea } from "@/components/ui/textarea";
 import { useDocument } from "@/pages/documents/partials/document-provider";
 import { useForm } from "@inertiajs/react";
 import { X } from "lucide-react";
-import { type ChangeEvent, type FormEvent, type KeyboardEvent, useEffect, useState, } from "react";
+import {
+    type ChangeEvent,
+    type FormEvent,
+    type KeyboardEvent,
+    useEffect,
+    useState,
+} from "react";
 
 export function AnalysisFormModal() {
     const [isOpen, setIsOpen] = useState(false);
-    const {document} = useDocument();
+    const { document } = useDocument();
     const [workScopes, setWorkScopes] = useState<string[]>([]);
     const [currentScope, setCurrentScope] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    const {data, setData, post, processing, reset} = useForm({
+    const { data, setData, post, processing, reset } = useForm({
         context: "",
         work_scopes: [] as string[],
         document_id: document?.id,
@@ -154,7 +160,7 @@ export function AnalysisFormModal() {
                                             onClick={() => removeScope(index)}
                                             className="ml-1 hover:text-destructive"
                                         >
-                                            <X className="h-3 w-3"/>
+                                            <X className="h-3 w-3" />
                                         </button>
                                     </Badge>
                                 ))}

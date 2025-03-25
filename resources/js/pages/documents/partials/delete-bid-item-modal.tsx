@@ -18,12 +18,12 @@ interface DeleteBidItemModalProps {
 }
 
 export function DeleteBidItemModal({
-                                       bidItem,
-                                       open,
-                                       onOpenChange,
-                                   }: DeleteBidItemModalProps) {
-    const {delete: destroy, processing} = useForm();
-    const {document} = useDocument();
+    bidItem,
+    open,
+    onOpenChange,
+}: DeleteBidItemModalProps) {
+    const { delete: destroy, processing } = useForm();
+    const { document } = useDocument();
 
     const deleteBidItem: FormEventHandler = (e) => {
         e.preventDefault();

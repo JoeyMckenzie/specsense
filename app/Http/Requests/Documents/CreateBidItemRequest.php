@@ -6,7 +6,6 @@ namespace App\Http\Requests\Documents;
 
 use App\Http\Concerns\HasVerifiedUser;
 use App\Models\Document;
-use App\Models\DocumentAnalysis;
 use Illuminate\Foundation\Http\FormRequest;
 
 final class CreateBidItemRequest extends FormRequest
@@ -18,10 +17,7 @@ final class CreateBidItemRequest extends FormRequest
         /** @var Document $document */
         $document = $this->route('document');
 
-        /** @var DocumentAnalysis $documentAnalysis */
-        $documentAnalysis = $this->route('documentAnalysis');
-
-        return $document !== null && $documentAnalysis !== null && $document->user_id === $this->verifiedUser()->id;
+        return $document->user_id === $this->verifiedUser()->id;
     }
 
     /**

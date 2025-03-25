@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import AppLayout from "@/layouts/app-layout";
 import { formatBytes, formatDate } from "@/lib/utils";
 import { AddBidItemFormModal } from "@/pages/documents/partials/add-bid-item-form-modal";
@@ -11,7 +17,15 @@ import { DeleteFormModal } from "@/pages/documents/partials/delete-form-modal";
 import { DocumentProvider } from "@/pages/documents/partials/document-provider";
 import type { BreadcrumbItem, SharedData } from "@/types";
 import { Head, Link, usePage } from "@inertiajs/react";
-import { Activity, FileText, FileType, HardDrive, Text, Upload, User, } from "lucide-react";
+import {
+    Activity,
+    FileText,
+    FileType,
+    HardDrive,
+    Text,
+    Upload,
+    User,
+} from "lucide-react";
 
 const breadcrumbs = (title: string): BreadcrumbItem[] => [
     {
@@ -25,13 +39,13 @@ const breadcrumbs = (title: string): BreadcrumbItem[] => [
 ];
 
 export default function Show({
-                                 document,
-                             }: { document: App.Data.DocumentSummaryData }) {
-    const {user} = usePage<SharedData>().props.auth;
+    document,
+}: { document: App.Data.DocumentSummaryData }) {
+    const { user } = usePage<SharedData>().props.auth;
 
     return (
         <AppLayout breadcrumbs={breadcrumbs(document.name)}>
-            <Head title={`${document.name} | Document Details`}/>
+            <Head title={`${document.name} | Document Details`} />
             <DocumentProvider currentDocument={document}>
                 <div className="container mx-auto p-4">
                     <div className="mb-8 flex flex-col justify-between sm:flex-row sm:items-center">
@@ -51,8 +65,8 @@ export default function Show({
                                     Edit
                                 </Link>
                             </Button>
-                            <DeleteFormModal/>
-                            {!document.analysis && <AnalysisFormModal/>}
+                            <DeleteFormModal />
+                            {!document.analysis && <AnalysisFormModal />}
                         </div>
                     </div>
 
@@ -66,7 +80,7 @@ export default function Show({
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <div className="flex items-center gap-4">
-                                    <FileText className="h-5 w-5 text-muted-foreground"/>
+                                    <FileText className="h-5 w-5 text-muted-foreground" />
                                     <div>
                                         <p className="font-medium text-sm">
                                             Filename
@@ -77,7 +91,7 @@ export default function Show({
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <FileType className="h-5 w-5 text-muted-foreground"/>
+                                    <FileType className="h-5 w-5 text-muted-foreground" />
                                     <div>
                                         <p className="font-medium text-sm">
                                             Document Type
@@ -88,7 +102,7 @@ export default function Show({
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <HardDrive className="h-5 w-5 text-muted-foreground"/>
+                                    <HardDrive className="h-5 w-5 text-muted-foreground" />
                                     <div>
                                         <p className="font-medium text-sm">
                                             File Size
@@ -99,7 +113,7 @@ export default function Show({
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <Text className="h-5 w-5 text-muted-foreground"/>
+                                    <Text className="h-5 w-5 text-muted-foreground" />
                                     <div>
                                         <p className="font-medium text-sm">
                                             Description
@@ -122,7 +136,7 @@ export default function Show({
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <div className="flex items-center gap-4">
-                                    <User className="h-5 w-5 text-muted-foreground"/>
+                                    <User className="h-5 w-5 text-muted-foreground" />
                                     <div>
                                         <p className="font-medium text-sm">
                                             Uploaded By
@@ -133,7 +147,7 @@ export default function Show({
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <Upload className="h-5 w-5 text-muted-foreground"/>
+                                    <Upload className="h-5 w-5 text-muted-foreground" />
                                     <div>
                                         <p className="font-medium text-sm">
                                             Upload Date
@@ -144,7 +158,7 @@ export default function Show({
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <FileText className="h-5 w-5 text-muted-foreground"/>
+                                    <FileText className="h-5 w-5 text-muted-foreground" />
                                     <div>
                                         <p className="font-medium text-sm">
                                             Last Updated
@@ -155,20 +169,20 @@ export default function Show({
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <Activity className="h-5 w-5 text-muted-foreground"/>
+                                    <Activity className="h-5 w-5 text-muted-foreground" />
                                     <div>
                                         <p className="font-medium text-sm">
                                             Analysis Status
                                         </p>
                                         <p className="text-muted-foreground text-sm">
-                                            <AnalysisStatusBadge/>
+                                            <AnalysisStatusBadge />
                                         </p>
                                     </div>
                                 </div>
                             </CardContent>
                         </Card>
 
-                        {document.analysis && <AnalysisDetailsCard/>}
+                        {document.analysis && <AnalysisDetailsCard />}
 
                         {document.analysis?.bidItems && (
                             <Card className="md:col-span-2">
@@ -180,10 +194,10 @@ export default function Show({
                                             document
                                         </CardDescription>
                                     </div>
-                                    <AddBidItemFormModal/>
+                                    <AddBidItemFormModal />
                                 </CardHeader>
                                 <CardContent>
-                                    <BidItemsTable/>
+                                    <BidItemsTable />
                                 </CardContent>
                             </Card>
                         )}

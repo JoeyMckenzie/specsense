@@ -1,5 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 import { useDocument } from "@/pages/documents/partials/document-provider";
 import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -11,7 +18,7 @@ export function BidItemsTable() {
         useState<App.Data.BidItemSummaryData | null>(null);
     const [deletingItem, setDeletingItem] =
         useState<App.Data.BidItemSummaryData | null>(null);
-    const {document} = useDocument();
+    const { document } = useDocument();
     const bidItems = document?.analysis?.bidItems ?? [];
 
     if (bidItems.length === 0) {
@@ -57,14 +64,14 @@ export function BidItemsTable() {
                                         size="icon"
                                         onClick={() => setEditingItem(item)}
                                     >
-                                        <Pencil className="h-4 w-4"/>
+                                        <Pencil className="h-4 w-4" />
                                     </Button>
                                     <Button
                                         variant="ghost"
                                         size="icon"
                                         onClick={() => setDeletingItem(item)}
                                     >
-                                        <Trash2 className="text-destructive"/>
+                                        <Trash2 className="text-destructive" />
                                     </Button>
                                 </div>
                             </TableCell>

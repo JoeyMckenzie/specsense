@@ -4,34 +4,20 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Documents;
 
+use App\Http\Concerns\HasVerifiedUser;
 use App\Models\Document;
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 final class UpdateBidItemRequest extends FormRequest
 {
+    use HasVerifiedUser;
+
     public function authorize(): bool
     {
-        $documentId = $this->route('document');
+        /** @var Document $document */
+        $document = $this->route('document');
 
-        if (!is_string($documentId) || $this->user() === null) {
-            return false;
-        }
-
-        /** @var User $user */
-        $user = $this->user();
-
-        $document = Document::query()
-            ->firstWhere([
-                'id' => $documentId,
-                'user_id' => $user->id,
-            ])->get(['id']);
-
-        if ($document === null) {
-            return false;
-        }
-
-        return true;
+        return $document->user_id === $this->verifiedUser()->id;
     }
 
     /**
