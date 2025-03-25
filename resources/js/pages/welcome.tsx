@@ -4,31 +4,36 @@ import { InteractiveGridPattern } from "@/components/magicui/interactive-grid-pa
 import { WordRotate } from "@/components/magicui/word-rotate";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type { SharedData } from "@/types";
 import { Head, Link, usePage } from "@inertiajs/react";
 
 export default function Welcome() {
-    const {auth} = usePage<SharedData>().props;
+    const { auth } = usePage<SharedData>().props;
 
     return (
         <>
             <Head title="Specsense - Intelligent Construction Document Analysis">
-                <link rel="preconnect" href="https://fonts.bunny.net"/>
+                <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link
                     href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
                     rel="stylesheet"
                 />
             </Head>
-            <div
-                className="min-h-screen bg-gradient-to-b from-background to-muted/30 px-4 dark:from-background dark:to-background/80">
+            <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 px-4 dark:from-background dark:to-background/80">
                 {/* Navigation */}
                 <header className="container mx-auto py-4">
                     <nav className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <div className="flex h-10 w-10 items-center justify-center rounded-md">
-                                <AppLogoIcon className="h-6 w-6"/>
+                                <AppLogoIcon className="h-6 w-6" />
                             </div>
                             <span className="font-bold text-xl">Specsense</span>
                         </div>
@@ -128,8 +133,7 @@ export default function Welcome() {
                             </BoxReveal>
                         </div>
 
-                        <div
-                            className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
+                        <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
                             <InteractiveGridPattern
                                 className={cn(
                                     "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
@@ -154,8 +158,7 @@ export default function Welcome() {
                     <div className="mt-16 grid gap-8 md:grid-cols-3">
                         <Card>
                             <CardHeader>
-                                <div
-                                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                                     <svg
                                         width="24"
                                         height="24"
@@ -189,8 +192,7 @@ export default function Welcome() {
                         </Card>
                         <Card>
                             <CardHeader>
-                                <div
-                                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                                     <svg
                                         width="24"
                                         height="24"
@@ -225,8 +227,7 @@ export default function Welcome() {
                         </Card>
                         <Card>
                             <CardHeader>
-                                <div
-                                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                                     <svg
                                         width="24"
                                         height="24"
@@ -289,7 +290,7 @@ export default function Welcome() {
                         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
                             <div className="flex items-center gap-2">
                                 <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
-                                    <AppLogoIcon className="h-5 w-5 text-primary-foreground"/>
+                                    <AppLogoIcon className="h-5 w-5 text-primary-foreground" />
                                 </div>
                                 <span className="font-semibold text-sm">
                                     Specsense
