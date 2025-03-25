@@ -13,6 +13,7 @@ composer audit
 echo "Running frontend CI checks..."
 
 npm run check
+npm run build:ssr
 
 echo "Auditing npm dependencies..."
 
