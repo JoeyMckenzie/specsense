@@ -60,4 +60,5 @@ declare namespace App.Enums {
         | "Cancelled"
         | "Failed";
     export type DocumentType = "Special Provisions" | "Other";
+    export type FlashMessageStatus = "success" | "error" | "warning" | "info";
 }
