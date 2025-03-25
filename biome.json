@@ -9,6 +9,7 @@
         "ignoreUnknown": false,
         "ignore": [
             "resources/js/components/ui/*.tsx",
+            "resources/js/components/magicui/*.tsx",
             "resources/js/ssr.tsx"
         ]
     },

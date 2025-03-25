@@ -1,35 +1,34 @@
 import AppLogoIcon from "@/components/app-logo-icon";
+import { BoxReveal } from "@/components/magicui/box-reveal";
+import { InteractiveGridPattern } from "@/components/magicui/interactive-grid-pattern";
+import { WordRotate } from "@/components/magicui/word-rotate";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import type { SharedData } from "@/types";
 import { Head, Link, usePage } from "@inertiajs/react";
 
 export default function Welcome() {
-    const { auth } = usePage<SharedData>().props;
+    const {auth} = usePage<SharedData>().props;
 
     return (
         <>
             <Head title="Specsense - Intelligent Construction Document Analysis">
-                <link rel="preconnect" href="https://fonts.bunny.net" />
+                <link rel="preconnect" href="https://fonts.bunny.net"/>
                 <link
                     href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
                     rel="stylesheet"
                 />
             </Head>
-            <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 px-4 dark:from-background dark:to-background/80">
+            <div
+                className="min-h-screen bg-gradient-to-b from-background to-muted/30 px-4 dark:from-background dark:to-background/80">
                 {/* Navigation */}
                 <header className="container mx-auto py-4">
                     <nav className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             <div className="flex h-10 w-10 items-center justify-center rounded-md">
-                                <AppLogoIcon className="h-6 w-6" />
+                                <AppLogoIcon className="h-6 w-6"/>
                             </div>
                             <span className="font-bold text-xl">Specsense</span>
                         </div>
@@ -63,125 +62,80 @@ export default function Welcome() {
                     <div className="grid gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
                         <div className="flex flex-col justify-center space-y-6">
                             <div>
-                                <Badge
-                                    className="mb-4 px-3 py-1 text-sm"
-                                    variant="secondary"
+                                <BoxReveal
+                                    boxColor="var(--primary)"
+                                    duration={0.5}
                                 >
-                                    Intelligent Analysis
-                                </Badge>
-                                <h1 className="font-bold text-4xl tracking-tight sm:text-5xl md:text-6xl">
-                                    Analyze Construction Documents Faster
-                                </h1>
-                                <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-                                    Specsense intelligently analyzes special
-                                    provisions in construction documents,
-                                    helping contractors make informed decisions
-                                    on bidding jobs faster than ever.
-                                </p>
-                            </div>
-                            <div className="flex flex-col gap-4 sm:flex-row">
-                                <Button size="lg" className="gap-2">
-                                    Get Started
-                                    <svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 16 16"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
+                                    <Badge
+                                        className="mb-4 px-3 py-1 text-sm"
+                                        variant="secondary"
                                     >
-                                        <title>Arrow Right</title>
-                                        <path
-                                            d="M6.66675 3.33325L10.6667 7.99992L6.66675 12.6666"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
+                                        Intelligent Construction Analysis
+                                    </Badge>
+                                </BoxReveal>
+                                <BoxReveal
+                                    boxColor="var(--primary)"
+                                    duration={0.5}
+                                >
+                                    <h1 className="font-bold text-4xl tracking-tight sm:text-5xl md:text-6xl">
+                                        <WordRotate
+                                            words={[
+                                                "Analyze.",
+                                                "Insight.",
+                                                "Bid.",
+                                            ]}
                                         />
-                                    </svg>
-                                </Button>
-                                <Button size="lg" variant="outline">
-                                    Learn More
-                                </Button>
+                                    </h1>
+                                </BoxReveal>
+                                <BoxReveal
+                                    boxColor="var(--primary)"
+                                    duration={0.25}
+                                >
+                                    <p className="mt-6 text-lg text-muted-foreground md:text-xl">
+                                        Specsense intelligently analyzes special
+                                        provisions in construction documents,
+                                        helping contractors make informed
+                                        decisions on bidding jobs faster than
+                                        ever.
+                                    </p>
+                                </BoxReveal>
                             </div>
+                            <BoxReveal boxColor="var(--primary)" duration={0.5}>
+                                <div className="flex flex-col gap-4 sm:flex-row">
+                                    <Button size="lg" className="gap-2">
+                                        Get Started
+                                        <svg
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 16 16"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <title>Arrow Right</title>
+                                            <path
+                                                d="M6.66675 3.33325L10.6667 7.99992L6.66675 12.6666"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                        </svg>
+                                    </Button>
+                                    <Button size="lg" variant="outline">
+                                        Learn More
+                                    </Button>
+                                </div>
+                            </BoxReveal>
                         </div>
-                        <div className="relative flex items-center justify-center rounded-lg bg-muted/50 p-8 dark:bg-muted/20">
-                            <div className="relative z-10 rounded-lg border bg-background/80 p-6 shadow-lg backdrop-blur-sm">
-                                <div className="space-y-2">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-2">
-                                            <div className="h-3 w-3 rounded-full bg-green-500" />
-                                            <span className="font-medium text-sm">
-                                                Document Analysis
-                                            </span>
-                                        </div>
-                                        <Badge variant="outline">
-                                            In Progress
-                                        </Badge>
-                                    </div>
-                                    <div className="h-2 w-full rounded-full bg-muted">
-                                        <div className="h-full w-2/3 rounded-full bg-primary" />
-                                    </div>
-                                </div>
-                                <div className="mt-6 space-y-4">
-                                    <div className="flex items-center gap-3 rounded-md border p-3">
-                                        <div className="flex h-8 w-8 items-center justify-center rounded bg-primary/10 text-primary">
-                                            <svg
-                                                width="16"
-                                                height="16"
-                                                viewBox="0 0 16 16"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <title>Checkmark</title>
-                                                <path
-                                                    d="M13.3334 4L6.00008 11.3333L2.66675 8"
-                                                    stroke="currentColor"
-                                                    strokeWidth="2"
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <p className="font-medium text-sm">
-                                                Special Provision Identified
-                                            </p>
-                                            <p className="text-muted-foreground text-xs">
-                                                Section 3.2.1 - Material
-                                                Requirements
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-3 rounded-md border p-3">
-                                        <div className="flex h-8 w-8 items-center justify-center rounded bg-primary/10 text-primary">
-                                            <svg
-                                                width="16"
-                                                height="16"
-                                                viewBox="0 0 16 16"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <title>Checkmark</title>
-                                                <path
-                                                    d="M13.3334 4L6.00008 11.3333L2.66675 8"
-                                                    stroke="currentColor"
-                                                    strokeWidth="2"
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <p className="font-medium text-sm">
-                                                Cost Impact Calculated
-                                            </p>
-                                            <p className="text-muted-foreground text-xs">
-                                                Estimated +12% to base bid
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                        <div
+                            className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
+                            <InteractiveGridPattern
+                                className={cn(
+                                    "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
+                                    "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
+                                )}
+                            />
                         </div>
                     </div>
                 </section>
@@ -200,7 +154,8 @@ export default function Welcome() {
                     <div className="mt-16 grid gap-8 md:grid-cols-3">
                         <Card>
                             <CardHeader>
-                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                                <div
+                                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                                     <svg
                                         width="24"
                                         height="24"
@@ -234,7 +189,8 @@ export default function Welcome() {
                         </Card>
                         <Card>
                             <CardHeader>
-                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                                <div
+                                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                                     <svg
                                         width="24"
                                         height="24"
@@ -269,7 +225,8 @@ export default function Welcome() {
                         </Card>
                         <Card>
                             <CardHeader>
-                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                                <div
+                                    className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                                     <svg
                                         width="24"
                                         height="24"
@@ -332,7 +289,7 @@ export default function Welcome() {
                         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
                             <div className="flex items-center gap-2">
                                 <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
-                                    <AppLogoIcon className="h-5 w-5 text-primary-foreground" />
+                                    <AppLogoIcon className="h-5 w-5 text-primary-foreground"/>
                                 </div>
                                 <span className="font-semibold text-sm">
                                     Specsense
