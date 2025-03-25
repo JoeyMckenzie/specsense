@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
@@ -8,15 +8,17 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { useForm } from "@inertiajs/react";
-import { useState } from "react";
+import {useDocument} from "@/pages/documents/partials/document-provider";
+import {useForm} from "@inertiajs/react";
+import {useState} from "react";
 
-export function DeleteFormModal({ documentId }: { documentId: number }) {
+export function DeleteFormModal() {
+    const {document} = useDocument();
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const { delete: destroy, processing } = useForm();
+    const {delete: destroy, processing} = useForm();
 
     const handleDelete = () => {
-        destroy(route("documents.destroy", documentId), {
+        destroy(route("documents.destroy", document?.id), {
             preserveScroll: true,
             onSuccess: () => {
                 setIsDeleteDialogOpen(false);

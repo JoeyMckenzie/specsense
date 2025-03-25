@@ -11,24 +11,22 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useDocument } from "@/pages/documents/partials/document-provider";
 import { useForm } from "@inertiajs/react";
 import { X } from "lucide-react";
-import { type KeyboardEvent, useEffect, useState } from "react";
+import { type ChangeEvent, type FormEvent, type KeyboardEvent, useEffect, useState, } from "react";
 
-interface AnalysisFormModalProps {
-    documentId: number;
-}
-
-export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
+export function AnalysisFormModal() {
     const [isOpen, setIsOpen] = useState(false);
+    const {document} = useDocument();
     const [workScopes, setWorkScopes] = useState<string[]>([]);
     const [currentScope, setCurrentScope] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    const { data, setData, post, processing, reset } = useForm({
+    const {data, setData, post, processing, reset} = useForm({
         context: "",
         work_scopes: [] as string[],
-        document_id: documentId,
+        document_id: document?.id,
     });
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -55,7 +53,7 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
         }
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         if (value.length <= 30) {
             setCurrentScope(value);
@@ -66,14 +64,14 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
         setWorkScopes(workScopes.filter((_, i) => i !== index));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
 
         if (workScopes.length > 0) {
             data.work_scopes = [...workScopes];
         }
 
-        post(route("document-analysis.store", documentId), {
+        post(route("document-analysis.store", document?.id), {
             onSuccess: () => {
                 setIsOpen(false);
                 reset();
@@ -156,7 +154,7 @@ export function AnalysisFormModal({ documentId }: AnalysisFormModalProps) {
                                             onClick={() => removeScope(index)}
                                             className="ml-1 hover:text-destructive"
                                         >
-                                            <X className="h-3 w-3" />
+                                            <X className="h-3 w-3"/>
                                         </button>
                                     </Badge>
                                 ))}

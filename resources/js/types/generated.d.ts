@@ -8,6 +8,7 @@ declare namespace App.Data {
         estimatedQuantity: string | null;
     };
     export type DocumentAnalysisSummaryData = {
+        id: number;
         status: App.Enums.DocumentAnalysisStatus;
         documentSummary: string | null;
         contractNumber: string | null;

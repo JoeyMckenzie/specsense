@@ -1,11 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/components/ui/tooltip";
+import { useDocument } from "@/pages/documents/partials/document-provider";
 import {
     Calendar,
     ClipboardList,
@@ -19,9 +15,11 @@ import {
     TextSearch,
 } from "lucide-react";
 
-export function AnalysisDetailsCard({
-    analysis,
-}: { analysis: App.Data.DocumentAnalysisSummaryData }) {
+export function AnalysisDetailsCard() {
+    const {document} = useDocument();
+
+    // biome-ignore lint/style/noNonNullAssertion: analysis is not displayed if none is available
+    const analysis = document!.analysis!;
     const details = [
         {
             icon: FileText,
@@ -88,7 +86,7 @@ export function AnalysisDetailsCard({
                     <CardTitle className="font-medium text-sm">
                         Summary
                     </CardTitle>
-                    <TextSearch className="h-4 w-4 text-muted-foreground" />
+                    <TextSearch className="h-4 w-4 text-muted-foreground"/>
                 </CardHeader>
                 <CardContent>
                     <p className="text-muted-foreground text-sm">
@@ -106,7 +104,7 @@ export function AnalysisDetailsCard({
                                 <Tooltip>
                                     <TooltipTrigger asChild>
                                         <Button variant="outline">
-                                            <detail.icon className="h-4 w-4 text-muted-foreground" />
+                                            <detail.icon className="h-4 w-4 text-muted-foreground"/>
                                         </Button>
                                     </TooltipTrigger>
                                     <TooltipContent>
@@ -140,7 +138,7 @@ export function AnalysisDetailsCard({
                                     <CardTitle className="font-medium text-sm">
                                         {workScope.name}
                                     </CardTitle>
-                                    <ClipboardList className="h-4 w-4 text-muted-foreground" />
+                                    <ClipboardList className="h-4 w-4 text-muted-foreground"/>
                                 </CardHeader>
                                 <CardContent>
                                     <p className="whitespace-pre-wrap text-muted-foreground text-sm">
