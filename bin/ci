@@ -1,9 +1,0 @@
-#!/bin/sh
-
-set -x
-
-composer run ci
-composer audit
-
-npm run check
-npm audit

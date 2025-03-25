@@ -2,20 +2,4 @@
 
 set -x
 
-project_root=$(git rev-parse --show-toplevel)
-ci_script="$project_root/bin/ci"
-
-if [ ! -f "$ci_script" ]; then
-    echo "Error: CI script not found at: $ci_script" >&2
-    exit 1
-fi
-
-if [ ! -x "$ci_script" ]; then
-    echo "Error: CI script is not executable: $ci_script" >&2
-    echo "Try running: chmod +x $ci_script" >&2
-    exit 1
-fi
-
-exec $ci_script
-
-exit 0
+php artisan app:run-ci
