@@ -26,7 +26,7 @@ export function DocumentCard({
                     <h3 className="line-clamp-1 flex-1 font-semibold text-base">
                         {document.name}
                     </h3>
-                    <AnalysisStatusBadge status={document.analysis?.status} />
+                    <AnalysisStatusBadge />
                 </div>
                 <div className="mt-2 flex items-center justify-between text-muted-foreground text-xs">
                     <span>{formatBytes(document.size)}</span>
