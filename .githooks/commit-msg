@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -x
+set -ex
 
 # Get the git project root directory
 project_root=$(git rev-parse --show-toplevel)
