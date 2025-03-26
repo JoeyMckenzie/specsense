@@ -1,6 +1,7 @@
 import AppLogoIcon from "@/components/app-logo-icon";
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import { InteractiveGridPattern } from "@/components/magicui/interactive-grid-pattern";
+import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { WordRotate } from "@/components/magicui/word-rotate";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,11 +40,13 @@ export default function Welcome() {
                         </div>
                         <div className="flex items-center gap-4">
                             {auth.user ? (
-                                <Button asChild variant="default">
-                                    <Link href={route("documents.index")}>
-                                        Dashboard
-                                    </Link>
-                                </Button>
+                                <Link href={route("documents.index")}>
+                                    <ShimmerButton className="shadow-2xl">
+                                        <span className="whitespace-pre-wrap text-center font-medium text-sm text-white leading-none tracking-tight dark:from-white dark:to-slate-900/10">
+                                            Dashboard
+                                        </span>
+                                    </ShimmerButton>
+                                </Link>
                             ) : (
                                 <>
                                     <Button asChild variant="ghost">
