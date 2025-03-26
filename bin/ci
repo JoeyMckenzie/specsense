@@ -15,6 +15,16 @@ env_file="$project_root/.env"
 vendor="$project_root/vendor/"
 node_modules="$project_root/node_modules/"
 
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  RUNNER_OS="Linux"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  RUNNER_OS="macOS"
+else
+  RUNNER_OS="Unsupported"
+fi
+
+info "Detected OS: $RUNNER_OS"
+
 if [ ! -d "$vendor" ]; then
     info "Installing composer dependencies..."
     composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -29,6 +39,35 @@ if [ ! -f "$env_file" ]; then
     info ".env file not found, initializing environment"
     cp .env.example .env
     php artisan key:generate
+fi
+
+if command -v aspell &> /dev/null; then
+  success "Aspell is already installed"
+  aspell_version=$(aspell --version | head -n 1)
+  info "Detected $aspell_version"
+else
+  if [[ "$RUNNER_OS" == "Linux" ]]; then
+    info "Installing Aspell on Linux..."
+    sudo apt-get update && sudo apt-get install -y aspell aspell-en
+    if [ $? -eq 0 ]; then
+      success "Aspell installed successfully"
+    else
+      error "Failed to install Aspell"
+      exit 1
+    fi
+  elif [[ "$RUNNER_OS" == "macOS" ]]; then
+    info "Installing Aspell on macOS..."
+    brew install aspell
+    if [ $? -eq 0 ]; then
+      success "Aspell installed successfully"
+    else
+      error "Failed to install Aspell"
+      exit 1
+    fi
+  else
+    error "Unsupported OS: $RUNNER_OS"
+    exit 1
+  fi
 fi
 
 info "Building assets..."
