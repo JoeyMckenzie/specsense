@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -xe
+set -e
 
 project_root=$(git rev-parse --show-toplevel)
 validate_script="$project_root/bin/validate"
@@ -17,5 +17,3 @@ if [ ! -x "$validate_script" ]; then
 fi
 
 exec "$validate_script" "$1"
-
-exit 0

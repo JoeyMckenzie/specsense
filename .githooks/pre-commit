@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -xe
+set -e
 
 composer run fix
 npm run check
@@ -8,5 +8,3 @@ npm run check
 if [ -n "$(git diff --name-only)" ]; then
     git add .
 fi
-
-exit 0
