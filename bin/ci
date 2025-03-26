@@ -15,12 +15,6 @@ env_file="$project_root/.env"
 vendor="$project_root/vendor/"
 node_modules="$project_root/node_modules/"
 
-if [ ! -f "$env_file" ]; then
-    info ".env file not found, initializing environment"
-    cp .env.example .env
-    php artisan key:generate
-fi
-
 if [ ! -d "$vendor" ]; then
     info "Installing composer dependencies..."
     composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -29,6 +23,12 @@ fi
 if [ ! -d "$node_modules" ]; then
     info "Installing npm dependencies..."
     npm ci
+fi
+
+if [ ! -f "$env_file" ]; then
+    info ".env file not found, initializing environment"
+    cp .env.example .env
+    php artisan key:generate
 fi
 
 info "Building assets..."
