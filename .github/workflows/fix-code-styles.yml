@@ -30,7 +30,7 @@ jobs:
           version: latest
 
       - name: Run Biome
-        run: biome ci .
+        run: biome ci resources/js
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
