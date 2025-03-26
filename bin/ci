@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -10,19 +10,28 @@ info() {
   echo -e "\033[0;34mi $1\033[0m"
 }
 
+error() {
+  echo -e "\033[0;31m✗ $1\033[0m"
+}
+
 project_root=$(git rev-parse --show-toplevel)
 env_file="$project_root/.env"
-vendor="$project_root/vendor/"
-node_modules="$project_root/node_modules/"
+vendor="$project_root/vendor"
+node_modules="$project_root/node_modules"
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  OS_RUNNER="Linux"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  OS_RUNNER="macOS"
-else
-  error "OS runner could not be detected!"
-  exit 1
-fi
+# Use POSIX-compatible test syntax or ensure bash is used
+case "$OSTYPE" in
+  linux*)
+    OS_RUNNER="Linux"
+    ;;
+  darwin*)
+    OS_RUNNER="macOS"
+    ;;
+  *)
+    error "OS runner could not be detected!"
+    exit 1
+    ;;
+esac
 
 info "Detected OS: $OS_RUNNER"
 
@@ -42,12 +51,13 @@ if [ ! -f "$env_file" ]; then
     php artisan key:generate
 fi
 
-if command -v aspell &> /dev/null; then
+# Use POSIX-compatible redirection
+if command -v aspell > /dev/null 2>&1; then
   success "Aspell is already installed"
   aspell_version=$(aspell --version | head -n 1)
   info "Detected $aspell_version"
 else
-  if [[ "$RUNNER_OS" == "Linux" ]]; then
+  if [ "$OS_RUNNER" = "Linux" ]; then
     info "Installing Aspell on Linux..."
     sudo apt-get update && sudo apt-get install -y aspell aspell-en
     if [ $? -eq 0 ]; then
@@ -56,7 +66,7 @@ else
       error "Failed to install Aspell"
       exit 1
     fi
-  elif [[ "$RUNNER_OS" == "macOS" ]]; then
+  elif [ "$OS_RUNNER" = "macOS" ]; then
     info "Installing Aspell on macOS..."
     brew install aspell
     if [ $? -eq 0 ]; then
