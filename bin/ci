@@ -2,23 +2,56 @@
 
 set -e
 
-echo "Running backend CI checks..."
+success() {
+  echo -e "\033[0;32m✓ $1\033[0m"
+}
+
+info() {
+  echo -e "\033[0;34mi $1\033[0m"
+}
+
+project_root=$(git rev-parse --show-toplevel)
+env_file="$project_root/.env"
+vendor="$project_root/vendor/"
+node_modules="$project_root/node_modules/"
+
+if [ ! -f "$env_file" ]; then
+    info ".env file not found, initializing environment"
+    cp .env.example .env
+    php artisan key:generate
+fi
+
+if [ ! -d "$vendor" ]; then
+    info "Installing composer dependencies..."
+    composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+fi
+
+if [ ! -d "$node_modules" ]; then
+    info "Installing npm dependencies..."
+    npm ci
+fi
+
+info "Building assets..."
+
+npm run build:ssr
+
+info "Running backend CI checks..."
 
 composer run ci
 
-echo "Auditing composer dependencies..."
+info "Auditing composer dependencies..."
 
 composer audit
 
-echo "Running frontend CI checks..."
+info "Running frontend CI checks..."
 
 npm run check
 npm run build:ssr
 
-echo "Auditing npm dependencies..."
+info "Auditing npm dependencies..."
 
 npm audit
 
-echo "CI successful!"
+success "CI successful!"
 
 exit 0
