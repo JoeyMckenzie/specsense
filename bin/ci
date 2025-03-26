@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eo pipefail
+set -e
 
 echo "Running backend CI checks..."
 
@@ -11,7 +11,7 @@ echo "Auditing composer dependencies..."
 composer audit
 
 echo "Running frontend CI checks..."
-
+wl
 npm run check
 npm run build:ssr
 

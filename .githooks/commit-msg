@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -x
+set -e
 
 project_root=$(git rev-parse --show-toplevel)
 validate_script="$project_root/bin/validate"
