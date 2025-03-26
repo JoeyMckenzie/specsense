@@ -85,9 +85,9 @@ export default function Welcome() {
                                     <h1 className="font-bold text-4xl tracking-tight sm:text-5xl md:text-6xl">
                                         <WordRotate
                                             words={[
-                                                "Analyze.",
-                                                "Insight.",
-                                                "Bid.",
+                                                "Intelligently analyze.",
+                                                "Insightfully decide.",
+                                                "Bid confidently.",
                                             ]}
                                         />
                                     </h1>
