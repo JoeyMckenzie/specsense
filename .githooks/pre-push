@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+set -xe
 
 project_root=$(git rev-parse --show-toplevel)
 ci_script="$project_root/bin/ci"

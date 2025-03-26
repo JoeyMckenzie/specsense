@@ -87,7 +87,7 @@ export default function Welcome() {
                                             words={[
                                                 "Intelligently analyze.",
                                                 "Insightfully decide.",
-                                                "Bid confidently.",
+                                                "Confidently bid.",
                                             ]}
                                         />
                                     </h1>
