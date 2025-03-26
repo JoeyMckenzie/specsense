@@ -1,9 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 import { useDocument } from "@/pages/documents/partials/document-provider";
 
-export function AnalysisStatusBadge() {
+export function AnalysisStatusBadge({
+    defaultStatus,
+}: { defaultStatus?: App.Enums.DocumentAnalysisStatus }) {
     const { document } = useDocument();
-    const status = document?.analysis?.status;
+    const status = defaultStatus ?? document?.analysis?.status;
 
     return (
         <Badge
