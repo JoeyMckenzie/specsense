@@ -23,56 +23,56 @@ import {
 export function AnalysisDetailsCard() {
     const { document } = useDocument();
 
-    // biome-ignore lint/style/noNonNullAssertion: analysis is not displayed if none is available
-    const analysis = document!.analysis!;
+    const analysis = document?.analysis;
+
     const details = [
         {
             icon: FileText,
             label: "Contract Number",
-            value: analysis.contractNumber,
+            value: analysis?.contractNumber,
             description: "The unique identifier for the contract",
         },
         {
             icon: Hash,
             label: "Project ID",
-            value: analysis.projectId,
+            value: analysis?.projectId,
             description: "The project's unique identifier",
         },
         {
             icon: DollarSign,
             label: "Engineer's Estimate",
-            value: analysis.engineersEstimate,
+            value: analysis?.engineersEstimate,
             description: "The estimated cost of the project",
         },
         {
             icon: Calendar,
             label: "Bid Due Date",
-            value: analysis.bidDueDate,
+            value: analysis?.bidDueDate,
             description: "The deadline for bid submission",
         },
         {
             icon: Clock,
             label: "Working Days",
-            value: analysis.numberOfWorkingDays,
+            value: analysis?.numberOfWorkingDays,
             description: "The number of working days for the project",
         },
         {
             icon: Target,
             label: "DBE Goal",
-            value: analysis.dbeGoal,
+            value: analysis?.dbeGoal,
             description:
                 "The Disadvantaged Business Enterprise participation goal",
         },
         {
             icon: FileCheck,
             label: "DIR Number",
-            value: analysis.dirNumber,
+            value: analysis?.dirNumber,
             description: "The Department of Industrial Relations number",
         },
         {
             icon: MapPin,
             label: "Job Location",
-            value: analysis.jobLocation,
+            value: analysis?.jobLocation,
             description: "The physical location of the project",
         },
     ];
@@ -95,7 +95,7 @@ export function AnalysisDetailsCard() {
                 </CardHeader>
                 <CardContent>
                     <p className="text-muted-foreground text-sm">
-                        {analysis.documentSummary || "Not specified"}
+                        {analysis?.documentSummary || "Not specified"}
                     </p>
                 </CardContent>
             </Card>
@@ -127,7 +127,7 @@ export function AnalysisDetailsCard() {
                 ))}
             </div>
 
-            {analysis.workScopes && analysis.workScopes.length > 0 && (
+            {analysis?.workScopes && analysis?.workScopes.length > 0 && (
                 <div className="space-y-4">
                     <div>
                         <h2 className="font-semibold text-lg">Work Scopes</h2>
@@ -137,7 +137,7 @@ export function AnalysisDetailsCard() {
                     </div>
 
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                        {analysis.workScopes.map((workScope) => (
+                        {analysis?.workScopes.map((workScope) => (
                             <Card key={workScope.id}>
                                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                     <CardTitle className="font-medium text-sm">
