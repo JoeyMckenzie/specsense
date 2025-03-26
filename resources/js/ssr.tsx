@@ -1,11 +1,11 @@
-import {createInertiaApp} from '@inertiajs/react';
+import { createInertiaApp } from '@inertiajs/react';
 import createServer from '@inertiajs/react/server';
-import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import ReactDOMServer from 'react-dom/server';
-import {route, type RouteName} from 'ziggy-js';
-import {ThemeProvider} from "@/components/theme-provider";
+import { route, type RouteName } from 'ziggy-js';
+import { ThemeProvider } from "@/components/theme-provider";
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Specsense';
 
 createServer((page) =>
     createInertiaApp({
