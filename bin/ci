@@ -15,15 +15,16 @@ env_file="$project_root/.env"
 vendor="$project_root/vendor/"
 node_modules="$project_root/node_modules/"
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  RUNNER_OS="Linux"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  RUNNER_OS="macOS"
+if [ "$OSTYPE" == "linux-gnu"* ]; then
+  OS_RUNNER="Linux"
+elif [ "$OSTYPE" == "darwin"* ]; then
+  OS_RUNNER="macOS"
 else
-  RUNNER_OS="Unsupported"
+  error "OS runner could not be detected!"
+  exit 1
 fi
 
-info "Detected OS: $RUNNER_OS"
+info "Detected OS: $OS_RUNNER"
 
 if [ ! -d "$vendor" ]; then
     info "Installing composer dependencies..."
@@ -46,7 +47,7 @@ if command -v aspell &> /dev/null; then
   aspell_version=$(aspell --version | head -n 1)
   info "Detected $aspell_version"
 else
-  if [[ "$RUNNER_OS" == "Linux" ]]; then
+  if [ "$RUNNER_OS" == "Linux" ]; then
     info "Installing Aspell on Linux..."
     sudo apt-get update && sudo apt-get install -y aspell aspell-en
     if [ $? -eq 0 ]; then
@@ -55,7 +56,7 @@ else
       error "Failed to install Aspell"
       exit 1
     fi
-  elif [[ "$RUNNER_OS" == "macOS" ]]; then
+  elif [ "$RUNNER_OS" == "macOS" ]; then
     info "Installing Aspell on macOS..."
     brew install aspell
     if [ $? -eq 0 ]; then
@@ -64,9 +65,6 @@ else
       error "Failed to install Aspell"
       exit 1
     fi
-  else
-    error "Unsupported OS: $RUNNER_OS"
-    exit 1
   fi
 fi
 
