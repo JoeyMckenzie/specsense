@@ -26,7 +26,7 @@ final class DocumentFactory extends Factory
         $filename = fake()->uuid().'.pdf';
 
         /** @var string $contents */
-        $contents = file_get_contents(base_path('tests/Fixtures/Files/test_spec_list_1.pdf'));
+        $contents = file_get_contents(base_path('tests/Fixtures/Files/04-0K8004sp.pdf'));
         $fs->put($filename, $contents);
 
         return [

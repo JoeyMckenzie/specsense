@@ -15,12 +15,15 @@
         "laravel/framework": "^12.0",
         "laravel/prompts": "^0.3.5",
         "laravel/tinker": "^2.10.1",
+        "openai-php/laravel": "^0.11.0",
+        "pgvector/pgvector": "^0.2.2",
         "resend/resend-laravel": "^0.17.0",
         "spatie/laravel-data": "^4.14",
         "spatie/laravel-typescript-transformer": "^2.5",
         "spatie/pdf-to-image": "^3.1",
         "spatie/pdf-to-text": "^1.54",
         "spatie/typescript-transformer": "^2.4",
+        "thiagoalessio/tesseract_ocr": "^2.13",
         "tightenco/ziggy": "^2.4"
     },
     "require-dev": {

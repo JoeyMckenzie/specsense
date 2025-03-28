@@ -1,3 +1,4 @@
+import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -22,6 +23,7 @@ import {
     FileText,
     FileType,
     HardDrive,
+    RefreshCw,
     Text,
     Upload,
     User,
@@ -182,7 +184,34 @@ export default function Show({
                             </CardContent>
                         </Card>
 
-                        {document.analysis && <AnalysisDetailsCard />}
+                        {document.analysis ? (
+                            <AnalysisDetailsCard />
+                        ) : (
+                            <Card className="md:col-start-2">
+                                <CardHeader>
+                                    <CardTitle>Analysis in Progress</CardTitle>
+                                    <CardDescription>
+                                        Your document is being analyzed. This
+                                        process typically takes about a minute.
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent className="flex flex-col items-center gap-4">
+                                    <div className="w-full max-w-2xl animate-pulse space-y-4">
+                                        <div className="h-4 w-3/4 rounded bg-muted" />
+                                        <div className="h-4 w-1/2 rounded bg-muted" />
+                                        <div className="h-4 w-2/3 rounded bg-muted" />
+                                        <div className="h-4 w-1/3 rounded bg-muted" />
+                                    </div>
+                                    <ShimmerButton
+                                        onClick={() => window.location.reload()}
+                                        className="mt-4"
+                                    >
+                                        <RefreshCw className="mr-2 h-4 w-4" />
+                                        Check Analysis Status
+                                    </ShimmerButton>
+                                </CardContent>
+                            </Card>
+                        )}
 
                         {document.analysis?.bidItems && (
                             <Card className="md:col-span-2">

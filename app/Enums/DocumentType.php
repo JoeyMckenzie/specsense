@@ -12,6 +12,8 @@ enum DocumentType: string implements StaticallyArrayable
 {
     case SPECIAL_PROVISIONS = 'Special Provisions';
 
+    case PLAN_DOCUMENT = 'Plan Document';
+
     case OTHER = 'Other';
 
     public static function toArray(): array

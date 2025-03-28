@@ -8,8 +8,10 @@ use App\Actions\GenerateThumbnailAction;
 use App\Contracts\Actions\GeneratesThumbnailAction;
 use App\Contracts\Services\DocumentAnalyzerContract;
 use App\Contracts\Services\LlmConnectorContract;
+use App\Contracts\Services\OcrAnalyzerContract;
 use App\Services\OpenAIConnector;
 use App\Services\OpenAIDocumentAnalyzer;
+use App\Services\TesseractAnalyzer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
@@ -24,8 +26,7 @@ final class AppServiceProvider extends ServiceProvider
     #[Override]
     public function register(): void
     {
-        $this->app->bind(DocumentAnalyzerContract::class, OpenAIDocumentAnalyzer::class);
-        $this->app->bind(LlmConnectorContract::class, OpenAIConnector::class);
+        self::configureServices();
     }
 
     /**
@@ -37,6 +38,13 @@ final class AppServiceProvider extends ServiceProvider
         self::configureVite();
         self::configureSchema();
         self::configureActions();
+    }
+
+    private function configureServices(): void
+    {
+        $this->app->bind(LlmConnectorContract::class, OpenAIConnector::class);
+        $this->app->bind(DocumentAnalyzerContract::class, OpenAIDocumentAnalyzer::class);
+        $this->app->bind(OcrAnalyzerContract::class, TesseractAnalyzer::class);
     }
 
     private function configureModels(): void

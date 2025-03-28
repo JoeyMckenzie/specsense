@@ -8,5 +8,10 @@ use App\ValueObjects\DocumentMetadata;
 
 interface LlmConnectorContract
 {
+    /**
+     * @return int[]
+     */
+    public function getEmbeddings(string $content): array;
+
     public function getParsedDocumentMetadata(string $pdfContent, string $userPrompt): DocumentMetadata;
 }

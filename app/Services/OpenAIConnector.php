@@ -112,4 +112,12 @@ final class OpenAIConnector implements LlmConnectorContract
 
         return DocumentMetadata::from($response);
     }
+
+    /**
+     * @return int[]
+     */
+    public function getEmbeddings(string $content): array
+    {
+        return [];
+    }
 }
