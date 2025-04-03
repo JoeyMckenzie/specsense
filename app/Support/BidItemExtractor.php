@@ -45,6 +45,7 @@ final readonly class BidItemExtractor
      *
      * Leverages regular expressions to identify bid items based on their structured format,
      * including item number, item code, description, unit of measure, and estimated quantity.
+     *
      * @return array{item_number: (non-falsy-string & numeric-string), item_code: (non-falsy-string & numeric-string), item_description: string, unit_of_measure: non-empty-string, estimated_quantity: non-empty-string}[]
      */
     private function extractItemsFromSection(string $section): array
