@@ -56,7 +56,7 @@ final class ProcessDocumentForAnalysisWithOcr implements ShouldQueue
                 $contents = [];
 
                 foreach ($paths as $path) {
-                    $contents[] = $ocrAnalyzer->analyzeDocument($path);
+                    $contents[] = $ocrAnalyzer->getImageText($path);
                 }
 
                 if (count($contents) > 0) {

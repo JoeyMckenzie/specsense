@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Enums\DocumentAnalysisStatus;
-use App\Jobs\ProcessDocumentForAnalysis;
+use App\Jobs\ExtractJobDetailsFromDocument;
 use App\Models\Document;
 use App\Models\DocumentAnalysis;
 use App\Models\User;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Queue;
 
 // covers(ProcessDocumentForAnalysis::class);
 
-describe(ProcessDocumentForAnalysis::class, function (): void {
+describe(ExtractJobDetailsFromDocument::class, function (): void {
     beforeEach(function (): void {
         // Setup data
         $user = User::factory()->create();
@@ -65,13 +65,13 @@ describe(ProcessDocumentForAnalysis::class, function (): void {
         //     ->withArgs(fn ($message): bool => $message === 'Skipping document analysis for document, confidence score is below threshold');
 
         // Act
-        ProcessDocumentForAnalysis::dispatch($this->documentAnalysis);
+        ExtractJobDetailsFromDocument::dispatch($this->documentAnalysis);
 
         // Assert job was dispatched
-        Queue::assertPushed(ProcessDocumentForAnalysis::class, fn (ProcessDocumentForAnalysis $job): bool => $job->documentAnalysis->id === $this->documentAnalysis->id);
+        Queue::assertPushed(ExtractJobDetailsFromDocument::class, fn (ExtractJobDetailsFromDocument $job): bool => $job->documentAnalysis->id === $this->documentAnalysis->id);
 
         // Test actual job execution
-        $job = new ProcessDocumentForAnalysis($this->documentAnalysis);
+        $job = new ExtractJobDetailsFromDocument($this->documentAnalysis);
         $job->handle(new OpenAIDocumentAnalyzer(new OpenAIConnector));
         // $job->handle(new GeminiDocumentAnalyzer(new GeminiConnector));
 
@@ -82,7 +82,7 @@ describe(ProcessDocumentForAnalysis::class, function (): void {
 
     it('updates document analysis status to failed when job fails', function (): void {
         // Arrange
-        $job = new ProcessDocumentForAnalysis($this->documentAnalysis);
+        $job = new ExtractJobDetailsFromDocument($this->documentAnalysis);
 
         // Act
         $job->failed();

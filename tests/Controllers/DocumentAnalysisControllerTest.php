@@ -6,7 +6,7 @@ namespace Tests\Controllers;
 
 use App\Enums\DocumentAnalysisStatus;
 use App\Http\Controllers\Documents\DocumentAnalysisController;
-use App\Jobs\ProcessDocumentForAnalysis;
+use App\Jobs\ExtractJobDetailsFromDocument;
 use App\Models\Document;
 use App\Models\User;
 use Illuminate\Support\Facades\Queue;
@@ -49,7 +49,7 @@ describe(DocumentAnalysisController::class, function (): void {
             ->and($document->analysis->context)->toBe('Test context')
             ->and($document->analysis->document_id)->toBe($document->id);
 
-        Queue::assertPushed(ProcessDocumentForAnalysis::class);
+        Queue::assertPushed(ExtractJobDetailsFromDocument::class);
     });
 
     it('creates a document analysis with work scopes', function (): void {
@@ -85,7 +85,7 @@ describe(DocumentAnalysisController::class, function (): void {
         $scopeNames = $analysis->workScopes->pluck('name')->all();
         expect($scopeNames)->toEqualCanonicalizing($workScopes);
 
-        Queue::assertPushed(ProcessDocumentForAnalysis::class);
+        Queue::assertPushed(ExtractJobDetailsFromDocument::class);
     });
 
     it('prevents users from creating analysis for other users documents', function (): void {
@@ -102,7 +102,7 @@ describe(DocumentAnalysisController::class, function (): void {
 
         // Assert
         $response->assertForbidden();
-        Queue::assertNotPushed(ProcessDocumentForAnalysis::class);
+        Queue::assertNotPushed(ExtractJobDetailsFromDocument::class);
     });
 
     it('validates work scopes array size', function (): void {
@@ -120,7 +120,7 @@ describe(DocumentAnalysisController::class, function (): void {
 
         // Assert
         $response->assertSessionHasErrors(['work_scopes' => 'The work scopes field must not have more than 5 items.']);
-        Queue::assertNotPushed(ProcessDocumentForAnalysis::class);
+        Queue::assertNotPushed(ExtractJobDetailsFromDocument::class);
     });
 
     it('validates work scope string length', function (): void {
@@ -138,7 +138,7 @@ describe(DocumentAnalysisController::class, function (): void {
 
         // Assert
         $response->assertSessionHasErrors(['work_scopes.0' => 'The work_scopes.0 field must not be greater than 30 characters.']);
-        Queue::assertNotPushed(ProcessDocumentForAnalysis::class);
+        Queue::assertNotPushed(ExtractJobDetailsFromDocument::class);
     });
 
     it('validates unique work scopes', function (): void {
@@ -158,6 +158,6 @@ describe(DocumentAnalysisController::class, function (): void {
         // Assert
         $response->assertSessionHasErrors(['work_scopes.0' => 'The work_scopes.0 field has a duplicate value.']);
         $response->assertSessionHasErrors(['work_scopes.1' => 'The work_scopes.1 field has a duplicate value.']);
-        Queue::assertNotPushed(ProcessDocumentForAnalysis::class);
+        Queue::assertNotPushed(ExtractJobDetailsFromDocument::class);
     });
 });

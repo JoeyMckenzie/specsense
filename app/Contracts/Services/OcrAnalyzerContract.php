@@ -6,5 +6,5 @@ namespace App\Contracts\Services;
 
 interface OcrAnalyzerContract
 {
-    public function analyzeDocument(string $filepath): string;
+    public function getImageText(string $filepath): string;
 }

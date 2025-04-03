@@ -29,10 +29,19 @@ final class GenerateDocumentThumbnail implements ShouldQueue
      */
     public function handle(GeneratesThumbnailAction $action): void
     {
+        Log::withContext([
+            'document_id' => $this->document->id,
+        ]);
+
         $path = $this->document->path;
         $filename = $this->document->filename;
+
+        Log::info('Generating document thumbnail...');
+
         $this->document->thumbnail = $action->handle($path, $filename);
         $this->document->save();
+
+        Log::info('Thumbnail generated successfully!');
     }
 
     public function fail(?Throwable $exception = null): void

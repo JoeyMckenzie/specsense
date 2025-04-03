@@ -10,14 +10,15 @@ use App\Models\DocumentAnalysis;
 use App\Models\WorkScope;
 use App\Support\PromptParser;
 use App\ValueObjects\DocumentMetadata;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Str;
 use Spatie\PdfToText\Pdf;
 
 final readonly class OpenAIDocumentAnalyzer implements DocumentAnalyzerContract
 {
     public function __construct(
-        private LlmConnectorContract $connector
+        private LlmConnectorContract $connector,
+        private Repository $config
     ) {
         //
     }
@@ -31,7 +32,7 @@ final readonly class OpenAIDocumentAnalyzer implements DocumentAnalyzerContract
                 ->map(fn (WorkScope $workScope): string => "- $workScope->name")
                 ->reduce(fn (string $acc, string $scope): string => sprintf("%s\n%s", $acc, $scope), '');
             $workScopesPrompt = <<<PROMPT
-I would like you to provide summaries as well for the following scopes of work for the job:
+I would like you to provide detailed summaries as well for the following scopes of work for the job you are able to find within the special provisions document:
 {$scopesOfWork}
 
 If a scope of work cannot be identified within the document, please use "Scope of work could not be identified." as the
@@ -49,7 +50,8 @@ PROMPT;
 
     public function parsePdfContent(string $filePath): string
     {
-        $pdfToTextPath = Config::string('app.pdf_to_text_path');
+        /** @var string $pdfToTextPath */
+        $pdfToTextPath = $this->config->get('app.pdf_to_text_path');
 
         return Pdf::getText($filePath, $pdfToTextPath);
     }

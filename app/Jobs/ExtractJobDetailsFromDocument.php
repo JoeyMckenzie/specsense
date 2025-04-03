@@ -20,45 +20,47 @@ use Throwable;
  * @phpstan-import-type WorkScopeSchema from DocumentMetadata
  * @phpstan-import-type BidItemSchema from DocumentMetadata
  */
-final class ProcessDocumentForAnalysis implements ShouldQueue
+final class ExtractJobDetailsFromDocument implements ShouldQueue
 {
     use Queueable;
 
-    public int $timeout = 120;
+    public int $timeout = 360;
 
     public function __construct(
         public readonly DocumentAnalysis $documentAnalysis,
-    ) {}
+    ) {
+        //
+    }
 
     public function handle(DocumentAnalyzerContract $documentAnalyzer): void
     {
         $document = $this->documentAnalysis->document;
 
-        // // Log::withContext([
-        //     'document_analysis_id' => $this->documentAnalysis->id,
-        //     'document_id' => $document->id,
-        // ]);
+        Log::withContext([
+            'document_analysis_id' => $this->documentAnalysis->id,
+            'document_id' => $document->id,
+        ]);
 
         DB::transaction(function () use ($document, $documentAnalyzer): void {
             try {
-                // // Log::info('Starting document analysis');
+                Log::info('Starting document analysis');
 
                 $this->markAsInProgress();
                 $documentPath = Storage::disk('local')->path($document->path);
                 $pdfContent = $documentAnalyzer->parsePdfContent($documentPath);
 
-                // Log::info('Document content parsed successfully');
+                Log::info('Document content parsed successfully');
 
                 $this->updateDocumentWithParsedContent($pdfContent);
                 $documentMetadata = $documentAnalyzer->analyzeDocument($pdfContent, $this->documentAnalysis);
 
-                // Log::info('Document results received', [
-                //     'metadata' => $documentMetadata,
-                // ]);
+                Log::info('Document results received', [
+                    'metadata' => $documentMetadata,
+                ]);
 
                 $this->updateDocumentAnalysis($documentMetadata);
 
-                // Log::info('Successfully processed document');
+                Log::info('Successfully processed document');
             } catch (Throwable $e) {
                 $this->handleError($e);
 
@@ -168,10 +170,10 @@ final class ProcessDocumentForAnalysis implements ShouldQueue
 
     private function handleError(Throwable $e): void
     {
-        // Log::error("Failed to process document {$this->documentAnalysis->id}", [
-        //     'error' => $e->getMessage(),
-        //     'trace' => $e->getTraceAsString(),
-        // ]);
+        Log::error("Failed to process document {$this->documentAnalysis->id}", [
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+        ]);
 
         $this->documentAnalysis->update([
             'status' => DocumentAnalysisStatus::FAILED->value,

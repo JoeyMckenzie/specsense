@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Database\Factories\DocumentFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -22,31 +26,31 @@ use Illuminate\Support\Facades\Storage;
  * @property string|null $thumbnail
  * @property int $size
  * @property string $type
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property int $user_id
  * @property-read DocumentAnalysis|null $analysis
  * @property-read string|null $preview_image
  * @property-read User $user
  *
- * @method static \Database\Factories\DocumentFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereFilename($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereOriginalFilename($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document wherePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereThumbnail($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Document whereUserId($value)
+ * @method static DocumentFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Document newModelQuery()
+ * @method static Builder<static>|Document newQuery()
+ * @method static Builder<static>|Document query()
+ * @method static Builder<static>|Document whereCreatedAt($value)
+ * @method static Builder<static>|Document whereDescription($value)
+ * @method static Builder<static>|Document whereFilename($value)
+ * @method static Builder<static>|Document whereId($value)
+ * @method static Builder<static>|Document whereName($value)
+ * @method static Builder<static>|Document whereOriginalFilename($value)
+ * @method static Builder<static>|Document wherePath($value)
+ * @method static Builder<static>|Document whereSize($value)
+ * @method static Builder<static>|Document whereThumbnail($value)
+ * @method static Builder<static>|Document whereType($value)
+ * @method static Builder<static>|Document whereUpdatedAt($value)
+ * @method static Builder<static>|Document whereUserId($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 final class Document extends Model
 {
@@ -74,6 +78,14 @@ final class Document extends Model
     public function analysis(): HasOne
     {
         return $this->hasOne(DocumentAnalysis::class);
+    }
+
+    /**
+     * @return HasMany<DocumentEmbedding, $this>
+     */
+    public function embeddings(): HasMany
+    {
+        return $this->hasMany(DocumentEmbedding::class);
     }
 
     /**

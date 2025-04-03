@@ -23,7 +23,7 @@ final class CreateDocumentRequest extends FormRequest
                 'required',
                 'file',
                 'mimes:pdf',
-                'max:10240', // 10MB max
+                'max:50000', // 50MB max
             ],
         ];
     }

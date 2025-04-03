@@ -8,5 +8,7 @@ parameters:
         - bootstrap/providers.php
     reportUnmatchedIgnoredErrors: true
     ignoreErrors:
-        - message: '#Dynamic call to static method Illuminate\\Http\\Request::validate\(\).#'
-          path: app/Http/Controllers/**/*.php
+        - '#Dynamic call to static method Illuminate\\Http\\Client\\PendingRequest::withHeaders\(\).#'
+        -
+            message: '#Dynamic call to static method Illuminate\\Http\\Request::validate\(\).#'
+            path: app/Http/Controllers/**/*.php

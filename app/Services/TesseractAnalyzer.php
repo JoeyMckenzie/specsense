@@ -17,10 +17,10 @@ final readonly class TesseractAnalyzer implements OcrAnalyzerContract
         $this->ocr = new TesseractOCR;
     }
 
-    public function analyzeDocument(string $filepath): string
+    public function getImageText(string $filepath): string
     {
         try {
-            $image = $this->ocr->image($filepath);
+            $this->ocr->image($filepath);
 
             return $this->ocr->run();
         } catch (Exception) {

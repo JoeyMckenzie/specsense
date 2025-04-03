@@ -7,7 +7,9 @@ namespace App\Http\Controllers\Documents;
 use App\Enums\DocumentAnalysisStatus;
 use App\Http\Concerns\HasVerifiedUser;
 use App\Http\Requests\Documents\CreateDocumentAnalysisRequest;
-use App\Jobs\ProcessDocumentForAnalysis;
+use App\Jobs\ExtractBidItemsFromDocument;
+use App\Jobs\ExtractJobDetailsFromDocument;
+use App\Jobs\GenerateDocumentEmbeddings;
 use App\Models\Document;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
@@ -37,7 +39,9 @@ final class DocumentAnalysisController
             }
         }
 
-        ProcessDocumentForAnalysis::dispatch($analysis);
+        ExtractJobDetailsFromDocument::dispatch($analysis);
+        ExtractBidItemsFromDocument::dispatch($analysis);
+        GenerateDocumentEmbeddings::dispatch($document);
 
         return redirect()
             ->back()

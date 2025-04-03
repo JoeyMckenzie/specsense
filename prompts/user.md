@@ -1,6 +1,141 @@
-You are analyzing a special provisions document for a construction project. The document likely contains specific
-details about required work, materials, and project parameters. Please analyze the document and extract key information
-in a structured format.
+You are analyzing a special provisions document for a construction project. Your MOST CRITICAL TASK is to extract the
+COMPLETE bid item list, along with other key project information.
+
+The bid item list will typically be labeled "BID ITEM LIST" and formatted as a table with these columns:
+
+- Item No. (usually 4-digit format like "0001")
+- Item Code (usually 6-digit format like "070030")
+- Item Description (may span multiple lines)
+- Unit of Measure (LS, LUMP SUM, EA, HR, SQYD, LF, etc.)
+- Estimated Quantity
+
+Example format: of a bid item list
+
+```
+Item Code
+
+BID ITEM LIST
+
+Item Description
+
+Unit of Measure
+
+Estimated Quantity
+
+070030
+
+LEAD COMPLIANCE PLAN
+
+LS
+
+LUMP SUM
+
+090100
+
+TIME-RELATED OVERHEAD (WDAY)
+
+120
+
+090214
+
+SAFETY QUALITY CONTROL MANAGER
+
+LUMP SUM
+
+120090
+
+CONSTRUCTION AREA SIGNS
+
+LUMP SUM
+
+120100
+
+TRAFFIC CONTROL SYSTEM
+
+LUMP SUM
+
+120120
+
+TYPE III BARRICADE
+
+74
+
+120149
+
+TEMPORARY PAVEMENT MARKING (PAINT)
+
+120159
+
+TEMPORARY TRAFFIC STRIPE (PAINT)
+
+120165
+
+CHANNELIZER (SURFACE MOUNTED)
+
+120300
+
+TEMPORARY PAVEMENT MARKER
+
+120320
+
+TEMPORARY BARRIER SYSTEM
+
+128651
+
+PORTABLE CHANGEABLE MESSAGE SIGN (EA)
+
+129105
+
+TEMPORARY CRASH CUSHION TL-2
+
+26
+
+130100
+
+JOB SITE MANAGEMENT
+
+LUMP SUM
+
+130201
+
+WATER POLLUTION CONTROL PROGRAM
+
+LUMP SUM
+
+130620
+
+TEMPORARY DRAINAGE INLET PROTECTION
+
+33
+
+130640
+
+TEMPORARY FIBER ROLL
+
+4,960
+
+130900
+
+TEMPORARY CONCRETE WASHOUT
+
+LUMP SUM
+
+141103
+
+REMOVE YELLOW THERMOPLASTIC TRAFFIC
+STRIPE (HAZARDOUS WASTE)
+
+4,430
+
+141120
+
+TREATED WOOD WASTE
+
+Contract No. 04-0K8004
+3
+
+1,920
+```
 
 ##scopes_of_work##
 
@@ -18,13 +153,13 @@ Format your response as a JSON object following this schema EXACTLY:
     "dbe_goal": string | null, // Disadvantaged Business Enterprise (DBE) participation goal
     "dir_number": string | null, // Department of Industrial Relations (DIR) number
     "job_location": string | null, // Physical location/address of the project
-    "bid_items": [ // Array of materials and items from bid table, if present
+    "bid_items": [ // Array of materials and items from bid table, if present (EXTRACT EVERY SINGLE ITEM, DO NOT TRUNCATE OR SUMMARIZE)
         {   
-            "item_number": string | null, // Item reference number
-            "item_code": string | null, // Item identification code
-            "item_description": string | null, // Detailed description of item
-            "unit_of_measure": string | null, // Unit type (e.g., LF, SF, EA)
-            "estimated_quantity": string | null // Required quantity
+            "item_number": string | null, // Item number (e.g., "0001", "0002")
+            "item_code": string | null, // Item code (e.g., "070030", "080060")
+            "item_description": string | null, // Full description of item
+            "unit_of_measure": string | null, // Unit type (e.g., "LS", "LUMP SUM", "EA", "HR", "SQYD", "LF")
+            "estimated_quantity": string | null // Required quantity (e.g., "LUMP SUM", "12", "20", "10,500")
         }
     ],
     "work_scopes": [ // Array of identified work categories and their requirements
@@ -38,12 +173,12 @@ Format your response as a JSON object following this schema EXACTLY:
 
 Special Instructions:
 
-1. All numeric values should be preserved exactly as written in the document
-2. Dates should be extracted in their original format
-3. Keep descriptions concise but include all critical requirements
-4. If a field's information isn't found, use null rather than making assumptions
-5. Include material quantities and measurements exactly as specified
-6. Extract ALL relevant work scopes mentioned in the document
+1. Extracting the COMPLETE bid item list is your HIGHEST PRIORITY - every single item must be included
+2. Search for the phrase "BID ITEM LIST" to locate the bid item section
+3. Pay attention to the sequential item numbers (0001, 0002, etc.) to identify all items in the list
+4. The bid item section may appear many pages into the document - search thoroughly
+5. Extract ALL items in the bid list, including their item numbers, codes, descriptions, units, and quantities
+6. Some descriptions may continue across multiple lines in the text - ensure you capture the complete description
 7. If the document isn't a special provisions document, return only:
 
 ```json

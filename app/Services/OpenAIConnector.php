@@ -10,8 +10,10 @@ use App\ValueObjects\DocumentMetadata;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
-final class OpenAIConnector implements LlmConnectorContract
+final readonly class OpenAIConnector implements LlmConnectorContract
 {
+    public $apiKey;
+    public $baseUri;
     public function getParsedDocumentMetadata(string $pdfContent, string $userPrompt): DocumentMetadata
     {
         $systemPrompt = PromptParser::getPrompt(base_path('prompts/system.md'));
@@ -114,10 +116,27 @@ final class OpenAIConnector implements LlmConnectorContract
     }
 
     /**
-     * @return int[]
+     * Makes a request to an embedding service and retrieves embeddings for the given content.
+     *
+     * @return float[] The list of embeddings as an array of floats.
      */
     public function getEmbeddings(string $content): array
     {
-        return [];
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$this->apiKey,
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ])->post($this->baseUri.'/embeddings', [
+            'model' => 'text-embedding-3-small',
+            'input' => $content,
+        ]);
+
+        /** @var array{data: array<int, array{embedding: float[]}>} $json */
+        $json = $response->json();
+
+        /** @var float[] $embeddings */
+        $embeddings = $json['data'][0]['embedding'];
+
+        return $embeddings;
     }
 }

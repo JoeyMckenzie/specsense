@@ -9,7 +9,7 @@ use App\ValueObjects\DocumentMetadata;
 interface LlmConnectorContract
 {
     /**
-     * @return int[]
+     * @return float[]
      */
     public function getEmbeddings(string $content): array;
 

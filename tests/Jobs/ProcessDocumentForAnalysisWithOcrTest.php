@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Enums\DocumentAnalysisStatus;
-use App\Jobs\ProcessDocumentForAnalysis;
+use App\Jobs\ExtractJobDetailsFromDocument;
 use App\Jobs\ProcessDocumentForAnalysisWithOcr;
 use App\Models\Document;
 use App\Models\DocumentAnalysis;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Queue;
 
 // covers(ProcessDocumentForAnalysis::class);
 
-describe(ProcessDocumentForAnalysis::class, function (): void {
+describe(ExtractJobDetailsFromDocument::class, function (): void {
     beforeEach(function (): void {
         // Setup data
         $user = User::factory()->create();
@@ -82,7 +82,7 @@ describe(ProcessDocumentForAnalysis::class, function (): void {
 
     it('updates document analysis status to failed when job fails', function (): void {
         // Arrange
-        $job = new ProcessDocumentForAnalysis($this->documentAnalysis);
+        $job = new ExtractJobDetailsFromDocument($this->documentAnalysis);
 
         // Act
         $job->failed();
@@ -92,4 +92,4 @@ describe(ProcessDocumentForAnalysis::class, function (): void {
         expect($updatedAnalysis)->toBeInstanceOf(DocumentAnalysis::class)
             ->analysis_status->toBe(DocumentAnalysisStatus::FAILED->value);
     });
-})->skip();
+});
