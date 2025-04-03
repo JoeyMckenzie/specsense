@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Http;
 final readonly class OpenAIConnector implements LlmConnectorContract
 {
     public $apiKey;
+
     public $baseUri;
+
     public function getParsedDocumentMetadata(string $pdfContent, string $userPrompt): DocumentMetadata
     {
         $systemPrompt = PromptParser::getPrompt(base_path('prompts/system.md'));
