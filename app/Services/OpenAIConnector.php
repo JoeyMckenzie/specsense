@@ -22,10 +22,10 @@ final readonly class OpenAIConnector implements LlmConnectorContract
         );
 
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . Config::string('openai.api_key'),
+            'Authorization' => 'Bearer '.Config::string('openai.api_key'),
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-        ])->post(Config::string('openai.base_uri') . '/chat/completions', [
+        ])->post(Config::string('openai.base_uri').'/chat/completions', [
             'model' => Config::string('openai.model'),
             'messages' => [
                 [
@@ -121,10 +121,10 @@ final readonly class OpenAIConnector implements LlmConnectorContract
     public function getEmbeddings(string $content): array
     {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->apiKey,
+            'Authorization' => 'Bearer '.$this->apiKey,
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-        ])->post($this->baseUri . '/embeddings', [
+        ])->post($this->baseUri.'/embeddings', [
             'model' => 'text-embedding-3-small',
             'input' => $content,
         ]);

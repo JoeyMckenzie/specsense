@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions;
 
 use App\Contracts\Actions\ParsesDocumentContent;
@@ -8,7 +10,7 @@ use App\ValueObjects\DocumentMetadata;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
-class ParseDocumentContent implements ParsesDocumentContent
+final class ParseDocumentContent implements ParsesDocumentContent
 {
     public function handle(string $pdfContent, string $userPrompt): DocumentMetadata
     {
@@ -20,10 +22,10 @@ class ParseDocumentContent implements ParsesDocumentContent
         );
 
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . Config::string('openai.api_key'),
+            'Authorization' => 'Bearer '.Config::string('openai.api_key'),
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-        ])->post(Config::string('openai.base_uri') . '/chat/completions', [
+        ])->post(Config::string('openai.base_uri').'/chat/completions', [
             'model' => Config::string('openai.model'),
             'messages' => [
                 [
