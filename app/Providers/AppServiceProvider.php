@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Actions\GenerateThumbnailAction;
+use App\Actions\ParseDocumentContent;
 use App\Contracts\Actions\GeneratesThumbnailAction;
+use App\Contracts\Actions\ParsesDocumentContent;
 use App\Contracts\Services\DocumentAnalyzerContract;
 use App\Contracts\Services\LlmConnectorContract;
 use App\Contracts\Services\OcrAnalyzerContract;
@@ -29,6 +31,13 @@ final class AppServiceProvider extends ServiceProvider
         self::configureServices();
     }
 
+    private function configureServices(): void
+    {
+        $this->app->bind(LlmConnectorContract::class, OpenAIConnector::class);
+        $this->app->bind(DocumentAnalyzerContract::class, OpenAIDocumentAnalyzer::class);
+        $this->app->bind(OcrAnalyzerContract::class, TesseractAnalyzer::class);
+    }
+
     /**
      * Bootstrap any application services.
      */
@@ -38,13 +47,6 @@ final class AppServiceProvider extends ServiceProvider
         self::configureVite();
         self::configureSchema();
         self::configureActions();
-    }
-
-    private function configureServices(): void
-    {
-        $this->app->bind(LlmConnectorContract::class, OpenAIConnector::class);
-        $this->app->bind(DocumentAnalyzerContract::class, OpenAIDocumentAnalyzer::class);
-        $this->app->bind(OcrAnalyzerContract::class, TesseractAnalyzer::class);
     }
 
     private function configureModels(): void
@@ -68,5 +70,6 @@ final class AppServiceProvider extends ServiceProvider
     private function configureActions(): void
     {
         $this->app->bind(GeneratesThumbnailAction::class, GenerateThumbnailAction::class);
+        $this->app->bind(ParsesDocumentContent::class, ParseDocumentContent::class);
     }
 }

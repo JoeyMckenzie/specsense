@@ -1,18 +1,16 @@
 <?php
 
-declare(strict_types=1);
+namespace App\Actions;
 
-namespace App\Services;
-
-use App\Contracts\Services\LlmConnectorContract;
+use App\Contracts\Actions\ParsesDocumentContent;
 use App\Support\PromptParser;
 use App\ValueObjects\DocumentMetadata;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
-final readonly class OpenAIConnector implements LlmConnectorContract
+class ParseDocumentContent implements ParsesDocumentContent
 {
-    public function getParsedDocumentMetadata(string $pdfContent, string $userPrompt): DocumentMetadata
+    public function handle(string $pdfContent, string $userPrompt): DocumentMetadata
     {
         $systemPrompt = PromptParser::getPrompt(base_path('prompts/system.md'));
         $content = sprintf(
@@ -111,30 +109,5 @@ final readonly class OpenAIConnector implements LlmConnectorContract
         ]);
 
         return DocumentMetadata::from($response);
-    }
-
-    /**
-     * Makes a request to an embedding service and retrieves embeddings for the given content.
-     *
-     * @return float[] The list of embeddings as an array of floats.
-     */
-    public function getEmbeddings(string $content): array
-    {
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->apiKey,
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-        ])->post($this->baseUri . '/embeddings', [
-            'model' => 'text-embedding-3-small',
-            'input' => $content,
-        ]);
-
-        /** @var array{data: array<int, array{embedding: float[]}>} $json */
-        $json = $response->json();
-
-        /** @var float[] $embeddings */
-        $embeddings = $json['data'][0]['embedding'];
-
-        return $embeddings;
     }
 }
