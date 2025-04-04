@@ -31,13 +31,6 @@ final class AppServiceProvider extends ServiceProvider
         self::configureServices();
     }
 
-    private function configureServices(): void
-    {
-        $this->app->bind(LlmConnectorContract::class, OpenAIConnector::class);
-        $this->app->bind(DocumentAnalyzerContract::class, OpenAIDocumentAnalyzer::class);
-        $this->app->bind(OcrAnalyzerContract::class, TesseractAnalyzer::class);
-    }
-
     /**
      * Bootstrap any application services.
      */
@@ -47,6 +40,13 @@ final class AppServiceProvider extends ServiceProvider
         self::configureVite();
         self::configureSchema();
         self::configureActions();
+    }
+
+    private function configureServices(): void
+    {
+        $this->app->bind(LlmConnectorContract::class, OpenAIConnector::class);
+        $this->app->bind(DocumentAnalyzerContract::class, OpenAIDocumentAnalyzer::class);
+        $this->app->bind(OcrAnalyzerContract::class, TesseractAnalyzer::class);
     }
 
     private function configureModels(): void

@@ -45,6 +45,42 @@ describe(GenerateDocumentThumbnail::class, function (): void {
         expect($document->thumbnail)->toBe('thumbnails/test-file_thumb.jpg');
     });
 
+    it('sets logging context with document_id', function (): void {
+        // Arrange
+        $document = Document::factory()->create();
+        $actionMock = Mockery::mock(GeneratesThumbnailAction::class);
+        $actionMock->shouldReceive('handle')
+            ->once()
+            ->andReturn('thumbnails/test.jpg');
+
+        Log::shouldReceive('withContext')
+            ->once()
+            ->with(['document_id' => $document->id]);
+
+        // Act
+        new GenerateDocumentThumbnail($document)->handle($actionMock);
+    });
+
+    it('logs success messages', function (): void {
+        // Arrange
+        $document = Document::factory()->create();
+        $actionMock = Mockery::mock(GeneratesThumbnailAction::class);
+        $actionMock->shouldReceive('handle')
+            ->once()
+            ->andReturn('thumbnails/test.jpg');
+
+        Log::shouldReceive('info')
+            ->once()
+            ->with('Generating document thumbnail...');
+
+        Log::shouldReceive('info')
+            ->once()
+            ->with('Thumbnail generated successfully!');
+
+        // Act
+        new GenerateDocumentThumbnail($document)->handle($actionMock);
+    });
+
     it('logs an error when thumbnail generation fails', function (): void {
         // Arrange
         $document = Document::factory()->create();

@@ -5,17 +5,26 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Contracts\Actions\GeneratesThumbnailAction;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Filesystem\Factory as FactoryContract;
 use Spatie\PdfToImage\Pdf;
 
-final class GenerateThumbnailAction implements GeneratesThumbnailAction
+final readonly class GenerateThumbnailAction implements GeneratesThumbnailAction
 {
+    public function __construct(
+        private FactoryContract $storage
+    ) {
+        //
+    }
+
     public function handle(string $path, string $filename): string
     {
         // Ensure the thumbnails directory exists
-        Storage::disk('public')->makeDirectory('thumbnails');
+        $this->storage->disk('public')->makeDirectory('thumbnails');
 
-        $pdf = new Pdf(Storage::path($path));
+        // Create PDF instance from the file
+        $pdf = new Pdf($this->storage->disk('local')->path($path));
+
+        // Generate thumbnail filename and path
         $thumbnailFilename = pathinfo($filename, PATHINFO_FILENAME).'_thumb.jpg';
         $thumbnailPath = 'thumbnails/'.$thumbnailFilename;
 
@@ -23,7 +32,7 @@ final class GenerateThumbnailAction implements GeneratesThumbnailAction
         $pdf->selectPage(1)
             ->resolution(300)
             ->thumbnailSize(300, 300)
-            ->save(Storage::disk('public')->path($thumbnailPath));
+            ->save($this->storage->disk('public')->path($thumbnailPath));
 
         return $thumbnailPath;
     }
