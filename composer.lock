@@ -5633,16 +5633,16 @@
         },
         {
             "name": "spatie/laravel-typescript-transformer",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-typescript-transformer.git",
-                "reference": "8b91230e4b0aa568b798822a8ff66fd936134a40"
+                "reference": "a268a08341f5a5d8f80a79493642a43275d219a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-typescript-transformer/zipball/8b91230e4b0aa568b798822a8ff66fd936134a40",
-                "reference": "8b91230e4b0aa568b798822a8ff66fd936134a40",
+                "url": "https://api.github.com/repos/spatie/laravel-typescript-transformer/zipball/a268a08341f5a5d8f80a79493642a43275d219a5",
+                "reference": "a268a08341f5a5d8f80a79493642a43275d219a5",
                 "shasum": ""
             },
             "require": {
@@ -5698,7 +5698,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-typescript-transformer/issues",
-                "source": "https://github.com/spatie/laravel-typescript-transformer/tree/2.5.1"
+                "source": "https://github.com/spatie/laravel-typescript-transformer/tree/2.5.2"
             },
             "funding": [
                 {
@@ -5710,7 +5710,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-14T14:18:08+00:00"
+            "time": "2025-04-25T14:09:28+00:00"
         },
         {
             "name": "spatie/pdf-to-image",
@@ -5921,21 +5921,21 @@
         },
         {
             "name": "spatie/typescript-transformer",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/typescript-transformer.git",
-                "reference": "130c2447e0aa83f8d8d0ff590bc5bc402b17d641"
+                "reference": "dd7cbb90b6b8c34f2aee68701cf39c5432400c0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/typescript-transformer/zipball/130c2447e0aa83f8d8d0ff590bc5bc402b17d641",
-                "reference": "130c2447e0aa83f8d8d0ff590bc5bc402b17d641",
+                "url": "https://api.github.com/repos/spatie/typescript-transformer/zipball/dd7cbb90b6b8c34f2aee68701cf39c5432400c0d",
+                "reference": "dd7cbb90b6b8c34f2aee68701cf39c5432400c0d",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^4.18|^5.0",
-                "php": "^8.0",
+                "php": "^8.1",
                 "phpdocumentor/type-resolver": "^1.6.2",
                 "symfony/process": "^5.2|^6.0|^7.0"
             },
@@ -5977,7 +5977,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/typescript-transformer/issues",
-                "source": "https://github.com/spatie/typescript-transformer/tree/2.4.0"
+                "source": "https://github.com/spatie/typescript-transformer/tree/2.5.0"
             },
             "funding": [
                 {
@@ -5989,7 +5989,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-04T13:13:08+00:00"
+            "time": "2025-04-25T13:53:57+00:00"
         },
         {
             "name": "symfony/clock",
@@ -9435,20 +9435,20 @@
         },
         {
             "name": "hamcrest/hamcrest-php",
-            "version": "v2.0.1",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hamcrest/hamcrest-php.git",
-                "reference": "8c3d0a3f6af734494ad8f6fbbee0ba92422859f3"
+                "reference": "f8b1c0173b22fa6ec77a81fe63e5b01eba7e6487"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/8c3d0a3f6af734494ad8f6fbbee0ba92422859f3",
-                "reference": "8c3d0a3f6af734494ad8f6fbbee0ba92422859f3",
+                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/f8b1c0173b22fa6ec77a81fe63e5b01eba7e6487",
+                "reference": "f8b1c0173b22fa6ec77a81fe63e5b01eba7e6487",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3|^7.0|^8.0"
+                "php": "^7.4|^8.0"
             },
             "replace": {
                 "cordoval/hamcrest-php": "*",
@@ -9456,8 +9456,8 @@
                 "kodova/hamcrest-php": "*"
             },
             "require-dev": {
-                "phpunit/php-file-iterator": "^1.4 || ^2.0",
-                "phpunit/phpunit": "^4.8.36 || ^5.7 || ^6.5 || ^7.0"
+                "phpunit/php-file-iterator": "^1.4 || ^2.0 || ^3.0",
+                "phpunit/phpunit": "^4.8.36 || ^5.7 || ^6.5 || ^7.0 || ^8.0 || ^9.0"
             },
             "type": "library",
             "extra": {
@@ -9480,9 +9480,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hamcrest/hamcrest-php/issues",
-                "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
+                "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.1.1"
             },
-            "time": "2020-07-09T08:09:16+00:00"
+            "time": "2025-04-30T06:54:44+00:00"
         },
         {
             "name": "iamcal/sql-parser",
