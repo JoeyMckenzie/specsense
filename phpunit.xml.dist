@@ -14,6 +14,9 @@
         <testsuite name="Jobs">
             <directory>tests/Jobs</directory>
         </testsuite>
+        <testsuite name="Actions">
+            <directory>tests/Actions</directory>
+        </testsuite>
         <testsuite name="Controllers">
             <directory>tests/Controllers</directory>
         </testsuite>

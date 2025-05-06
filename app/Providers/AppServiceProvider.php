@@ -14,7 +14,10 @@ use App\Contracts\Services\OcrAnalyzerContract;
 use App\Services\OpenAIConnector;
 use App\Services\OpenAIDocumentAnalyzer;
 use App\Services\TesseractAnalyzer;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -31,15 +34,14 @@ final class AppServiceProvider extends ServiceProvider
         self::configureServices();
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         self::configureModels();
         self::configureVite();
         self::configureSchema();
         self::configureActions();
+        self::configureCommands();
+        self::configureDates();
     }
 
     private function configureServices(): void
@@ -51,6 +53,7 @@ final class AppServiceProvider extends ServiceProvider
 
     private function configureModels(): void
     {
+        Model::automaticallyEagerLoadRelationships();
         Model::unguard();
         Model::shouldBeStrict();
     }
@@ -62,14 +65,24 @@ final class AppServiceProvider extends ServiceProvider
 
     private function configureSchema(): void
     {
-        if (app()->isProduction()) {
-            URL::forceScheme('https');
-        }
+        URL::forceScheme('https');
     }
 
     private function configureActions(): void
     {
         $this->app->bind(GeneratesThumbnailAction::class, GenerateThumbnailAction::class);
         $this->app->bind(ParsesDocumentContent::class, ParseDocumentContent::class);
+    }
+
+    private function configureCommands(): void
+    {
+        DB::prohibitDestructiveCommands(
+            $this->app->isProduction(),
+        );
+    }
+
+    private function configureDates(): void
+    {
+        Date::use(CarbonImmutable::class);
     }
 }

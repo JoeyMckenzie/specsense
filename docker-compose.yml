@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    container_name: specsense-db
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=forge
+    volumes:
+      - pgvectordata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    restart: unless-stopped
+
+  redis:
+    image: redis:latest
+    container_name: specsense-redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    restart: unless-stopped
+
+volumes:
+  pgvectordata:
+    driver: local
