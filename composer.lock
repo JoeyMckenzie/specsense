@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ff3194bff250c444fa773e197d92649",
+    "content-hash": "ee9e53942f23e65ecf3ad76ac507e004",
     "packages": [
         {
             "name": "amphp/amp",
@@ -3676,16 +3676,16 @@
         },
         {
             "name": "openai-php/client",
-            "version": "v0.14.0",
+            "version": "v0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openai-php/client.git",
-                "reference": "c176c964902272649c10f092e2513bc12179161f"
+                "reference": "4db080738104be6a1144fa9f203c428ea4e58128"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openai-php/client/zipball/c176c964902272649c10f092e2513bc12179161f",
-                "reference": "c176c964902272649c10f092e2513bc12179161f",
+                "url": "https://api.github.com/repos/openai-php/client/zipball/4db080738104be6a1144fa9f203c428ea4e58128",
+                "reference": "4db080738104be6a1144fa9f203c428ea4e58128",
                 "shasum": ""
             },
             "require": {
@@ -3700,7 +3700,7 @@
             "require-dev": {
                 "guzzlehttp/guzzle": "^7.9.3",
                 "guzzlehttp/psr7": "^2.7.1",
-                "laravel/pint": "^1.22.0",
+                "laravel/pint": "^1.24.0",
                 "mockery/mockery": "^1.6.12",
                 "nunomaduro/collision": "^8.8.0",
                 "pestphp/pest": "^3.8.2|^4.0.0",
@@ -3747,7 +3747,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openai-php/client/issues",
-                "source": "https://github.com/openai-php/client/tree/v0.14.0"
+                "source": "https://github.com/openai-php/client/tree/v0.15.0"
             },
             "funding": [
                 {
@@ -3763,26 +3763,26 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-24T10:49:48+00:00"
+            "time": "2025-08-04T17:44:21+00:00"
         },
         {
             "name": "openai-php/laravel",
-            "version": "v0.14.0",
+            "version": "v0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openai-php/laravel.git",
-                "reference": "cee51d2502c1ff50580269db5a773cd84be76066"
+                "reference": "399f6f4cc1cb218d175128a456857e878f91117d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openai-php/laravel/zipball/cee51d2502c1ff50580269db5a773cd84be76066",
-                "reference": "cee51d2502c1ff50580269db5a773cd84be76066",
+                "url": "https://api.github.com/repos/openai-php/laravel/zipball/399f6f4cc1cb218d175128a456857e878f91117d",
+                "reference": "399f6f4cc1cb218d175128a456857e878f91117d",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.9.3",
                 "laravel/framework": "^11.29|^12.12",
-                "openai-php/client": "^0.14.0",
+                "openai-php/client": "^0.15.0",
                 "php": "^8.2.0"
             },
             "require-dev": {
@@ -3832,7 +3832,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openai-php/laravel/issues",
-                "source": "https://github.com/openai-php/laravel/tree/v0.14.0"
+                "source": "https://github.com/openai-php/laravel/tree/v0.15.0"
             },
             "funding": [
                 {
@@ -3852,7 +3852,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-06-24T10:56:22+00:00"
+            "time": "2025-08-04T17:56:40+00:00"
         },
         {
             "name": "pgvector/pgvector",
