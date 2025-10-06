@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00c019c2ae5820c3a84795962edf5ee3",
+    "content-hash": "c56ea1d977ac750157ebfa5fd9c54a8f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2143,16 +2143,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.31.1",
+            "version": "v12.32.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "281b711710c245dd8275d73132e92635be3094df"
+                "reference": "77b2740391cd2a825ba59d6fada45e9b8b9bcc5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/281b711710c245dd8275d73132e92635be3094df",
-                "reference": "281b711710c245dd8275d73132e92635be3094df",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/77b2740391cd2a825ba59d6fada45e9b8b9bcc5a",
+                "reference": "77b2740391cd2a825ba59d6fada45e9b8b9bcc5a",
                 "shasum": ""
             },
             "require": {
@@ -2180,7 +2180,6 @@
                 "monolog/monolog": "^3.0",
                 "nesbot/carbon": "^3.8.4",
                 "nunomaduro/termwind": "^2.0",
-                "phiki/phiki": "^2.0.0",
                 "php": "^8.2",
                 "psr/container": "^1.1.1|^2.0.1",
                 "psr/log": "^1.0|^2.0|^3.0",
@@ -2359,7 +2358,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-09-23T15:33:04+00:00"
+            "time": "2025-09-30T17:39:22+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -3682,16 +3681,16 @@
         },
         {
             "name": "openai-php/client",
-            "version": "v0.16.0",
+            "version": "v0.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openai-php/client.git",
-                "reference": "d857954cb96731e183adc5e51e5f79d16717ab2a"
+                "reference": "e79ab01f1237b9b8e69fdcacdaaabf81b1a2a6f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openai-php/client/zipball/d857954cb96731e183adc5e51e5f79d16717ab2a",
-                "reference": "d857954cb96731e183adc5e51e5f79d16717ab2a",
+                "url": "https://api.github.com/repos/openai-php/client/zipball/e79ab01f1237b9b8e69fdcacdaaabf81b1a2a6f3",
+                "reference": "e79ab01f1237b9b8e69fdcacdaaabf81b1a2a6f3",
                 "shasum": ""
             },
             "require": {
@@ -3753,7 +3752,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openai-php/client/issues",
-                "source": "https://github.com/openai-php/client/tree/v0.16.0"
+                "source": "https://github.com/openai-php/client/tree/v0.17.0"
             },
             "funding": [
                 {
@@ -3769,33 +3768,33 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-26T12:28:37+00:00"
+            "time": "2025-10-02T10:29:48+00:00"
         },
         {
             "name": "openai-php/laravel",
-            "version": "v0.16.0",
+            "version": "v0.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openai-php/laravel.git",
-                "reference": "0af3c787af03f1aaac02f7c8cd6a917dbfd3fd32"
+                "reference": "ddbc58348ca7b3fbf7f67f70477dd22163ce6b35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openai-php/laravel/zipball/0af3c787af03f1aaac02f7c8cd6a917dbfd3fd32",
-                "reference": "0af3c787af03f1aaac02f7c8cd6a917dbfd3fd32",
+                "url": "https://api.github.com/repos/openai-php/laravel/zipball/ddbc58348ca7b3fbf7f67f70477dd22163ce6b35",
+                "reference": "ddbc58348ca7b3fbf7f67f70477dd22163ce6b35",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.9.3",
                 "laravel/framework": "^11.29|^12.12",
-                "openai-php/client": "^0.16.0",
+                "openai-php/client": "^0.17.0",
                 "php": "^8.2.0"
             },
             "require-dev": {
                 "laravel/pint": "^1.22.0",
                 "pestphp/pest": "^3.8.2|^4.0.0",
                 "pestphp/pest-plugin-arch": "^3.1.1|^4.0.0",
-                "phpstan/phpstan": "^1.12.25",
+                "phpstan/phpstan": "^2.1",
                 "symfony/var-dumper": "^7.2.6"
             },
             "type": "library",
@@ -3838,7 +3837,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openai-php/laravel/issues",
-                "source": "https://github.com/openai-php/laravel/tree/v0.16.0"
+                "source": "https://github.com/openai-php/laravel/tree/v0.17.1"
             },
             "funding": [
                 {
@@ -3858,7 +3857,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-08-26T12:38:12+00:00"
+            "time": "2025-10-02T20:45:56+00:00"
         },
         {
             "name": "pgvector/pgvector",
@@ -3916,77 +3915,6 @@
                 "source": "https://github.com/pgvector/pgvector-php"
             },
             "time": "2025-02-15T23:27:08+00:00"
-        },
-        {
-            "name": "phiki/phiki",
-            "version": "v2.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phikiphp/phiki.git",
-                "reference": "160785c50c01077780ab217e5808f00ab8f05a13"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phikiphp/phiki/zipball/160785c50c01077780ab217e5808f00ab8f05a13",
-                "reference": "160785c50c01077780ab217e5808f00ab8f05a13",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "league/commonmark": "^2.5.3",
-                "php": "^8.2",
-                "psr/simple-cache": "^3.0"
-            },
-            "require-dev": {
-                "illuminate/support": "^11.45",
-                "laravel/pint": "^1.18.1",
-                "orchestra/testbench": "^9.15",
-                "pestphp/pest": "^3.5.1",
-                "phpstan/extension-installer": "^1.4.3",
-                "phpstan/phpstan": "^2.0",
-                "symfony/var-dumper": "^7.1.6"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Phiki\\Adapters\\Laravel\\PhikiServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Phiki\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ryan Chandler",
-                    "email": "support@ryangjchandler.co.uk",
-                    "homepage": "https://ryangjchandler.co.uk",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Syntax highlighting using TextMate grammars in PHP.",
-            "support": {
-                "issues": "https://github.com/phikiphp/phiki/issues",
-                "source": "https://github.com/phikiphp/phiki/tree/v2.0.4"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/ryangjchandler",
-                    "type": "github"
-                },
-                {
-                    "url": "https://buymeacoffee.com/ryangjchandler",
-                    "type": "other"
-                }
-            ],
-            "time": "2025-09-20T17:21:02+00:00"
         },
         {
             "name": "php-http/discovery",
