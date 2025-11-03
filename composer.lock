@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20d0991f5fe5222331d84571135f8091",
+    "content-hash": "3238e471327a7fcdc8c58894128954ec",
     "packages": [
         {
             "name": "brick/math",
@@ -2773,16 +2773,16 @@
         },
         {
             "name": "openai-php/client",
-            "version": "v0.17.0",
+            "version": "v0.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openai-php/client.git",
-                "reference": "e79ab01f1237b9b8e69fdcacdaaabf81b1a2a6f3"
+                "reference": "3362ab004fcfc9d77df3aff7671fbcbe70177cae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openai-php/client/zipball/e79ab01f1237b9b8e69fdcacdaaabf81b1a2a6f3",
-                "reference": "e79ab01f1237b9b8e69fdcacdaaabf81b1a2a6f3",
+                "url": "https://api.github.com/repos/openai-php/client/zipball/3362ab004fcfc9d77df3aff7671fbcbe70177cae",
+                "reference": "3362ab004fcfc9d77df3aff7671fbcbe70177cae",
                 "shasum": ""
             },
             "require": {
@@ -2844,7 +2844,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openai-php/client/issues",
-                "source": "https://github.com/openai-php/client/tree/v0.17.0"
+                "source": "https://github.com/openai-php/client/tree/v0.18.0"
             },
             "funding": [
                 {
@@ -2860,26 +2860,26 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-02T10:29:48+00:00"
+            "time": "2025-10-31T18:58:57+00:00"
         },
         {
             "name": "openai-php/laravel",
-            "version": "v0.17.1",
+            "version": "v0.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openai-php/laravel.git",
-                "reference": "ddbc58348ca7b3fbf7f67f70477dd22163ce6b35"
+                "reference": "ca7714bd20333ae4dbae8dbedcfa20f4384f9b19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openai-php/laravel/zipball/ddbc58348ca7b3fbf7f67f70477dd22163ce6b35",
-                "reference": "ddbc58348ca7b3fbf7f67f70477dd22163ce6b35",
+                "url": "https://api.github.com/repos/openai-php/laravel/zipball/ca7714bd20333ae4dbae8dbedcfa20f4384f9b19",
+                "reference": "ca7714bd20333ae4dbae8dbedcfa20f4384f9b19",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.9.3",
                 "laravel/framework": "^11.29|^12.12",
-                "openai-php/client": "^0.17.0",
+                "openai-php/client": "^0.18.0",
                 "php": "^8.2.0"
             },
             "require-dev": {
@@ -2929,7 +2929,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openai-php/laravel/issues",
-                "source": "https://github.com/openai-php/laravel/tree/v0.17.1"
+                "source": "https://github.com/openai-php/laravel/tree/v0.18.0"
             },
             "funding": [
                 {
@@ -2949,7 +2949,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-10-02T20:45:56+00:00"
+            "time": "2025-10-31T19:08:58+00:00"
         },
         {
             "name": "pgvector/pgvector",
