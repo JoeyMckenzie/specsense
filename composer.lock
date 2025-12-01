@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3238e471327a7fcdc8c58894128954ec",
+    "content-hash": "fd49b253032a06992d77047629ec68bf",
     "packages": [
         {
             "name": "brick/math",
@@ -4211,23 +4211,23 @@
         },
         {
             "name": "resend/resend-laravel",
-            "version": "v0.23.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/resend/resend-laravel.git",
-                "reference": "a40ee95d5976eaf79e594a1f793d3e7c8648c66c"
+                "reference": "b1341bf386746766c8b3c3e5a36fa5ccd4a39ced"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/resend/resend-laravel/zipball/a40ee95d5976eaf79e594a1f793d3e7c8648c66c",
-                "reference": "a40ee95d5976eaf79e594a1f793d3e7c8648c66c",
+                "url": "https://api.github.com/repos/resend/resend-laravel/zipball/b1341bf386746766c8b3c3e5a36fa5ccd4a39ced",
+                "reference": "b1341bf386746766c8b3c3e5a36fa5ccd4a39ced",
                 "shasum": ""
             },
             "require": {
                 "illuminate/http": "^10.0|^11.0|^12.0",
                 "illuminate/support": "^10.0|^11.0|^12.0",
                 "php": "^8.1",
-                "resend/resend-php": "^0.21.0",
+                "resend/resend-php": "^1.0.0",
                 "symfony/mailer": "^6.2|^7.0"
             },
             "require-dev": {
@@ -4274,22 +4274,22 @@
             ],
             "support": {
                 "issues": "https://github.com/resend/resend-laravel/issues",
-                "source": "https://github.com/resend/resend-laravel/tree/v0.23.0"
+                "source": "https://github.com/resend/resend-laravel/tree/v1.0.0"
             },
-            "time": "2025-10-11T04:19:52+00:00"
+            "time": "2025-11-11T03:07:39+00:00"
         },
         {
             "name": "resend/resend-php",
-            "version": "v0.21.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/resend/resend-php.git",
-                "reference": "16d481c8347d2b2aa9910ca0ae7f252b2f7d8b8c"
+                "reference": "c1ce4ee5dc8ca90a5e6a2dc6d772a06abbe7c9d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/resend/resend-php/zipball/16d481c8347d2b2aa9910ca0ae7f252b2f7d8b8c",
-                "reference": "16d481c8347d2b2aa9910ca0ae7f252b2f7d8b8c",
+                "url": "https://api.github.com/repos/resend/resend-php/zipball/c1ce4ee5dc8ca90a5e6a2dc6d772a06abbe7c9d3",
+                "reference": "c1ce4ee5dc8ca90a5e6a2dc6d772a06abbe7c9d3",
                 "shasum": ""
             },
             "require": {
@@ -4299,7 +4299,7 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.13",
                 "mockery/mockery": "^1.6",
-                "pestphp/pest": "^2.0"
+                "pestphp/pest": "^2.0|^3.0|^4.0"
             },
             "type": "library",
             "autoload": {
@@ -4331,9 +4331,9 @@
             ],
             "support": {
                 "issues": "https://github.com/resend/resend-php/issues",
-                "source": "https://github.com/resend/resend-php/tree/v0.21.0"
+                "source": "https://github.com/resend/resend-php/tree/v1.1.0"
             },
-            "time": "2025-09-24T05:02:03+00:00"
+            "time": "2025-11-26T08:41:40+00:00"
         },
         {
             "name": "sentry/sentry",
